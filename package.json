@@ -1,0 +1,15 @@
+{
+  "name": "osofficialbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "os.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "GatotKaca",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.3.1",
+    "ms": "^2.1.2"
+  }
+}
