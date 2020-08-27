@@ -58,7 +58,7 @@ client.on('message', async (message) => {
                     - All of BBG2 clan
                     - Most of BFB clan
                     - Most of -GK- clan
-                    - Most of *\*\*\* clan
+                    - Most of \*\*\*\* clan
                      `
                     },
                     {
