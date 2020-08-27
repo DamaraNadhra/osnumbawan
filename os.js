@@ -58,7 +58,7 @@ client.on('message', async (message) => {
                     - All of BBG2 clan
                     - Most of BFB clan
                     - Most of -GK- clan
-                    - Most of **** clan
+                    - Most of *\*\*\* clan
                      `
                     },
                     {
@@ -82,7 +82,7 @@ client.on('message', async (message) => {
                     - ooMINATOoo (BBG2)
                     - LIPER (sSs)
                     - ibss (BFB)
-                    - Aelin (BFB9
+                    - Aelin (BFB)
                     - arrow000acenova (BBG2)
                     - Zuhaer (Ivy)
                     
@@ -624,6 +624,11 @@ client.on('message', async (message) => {
                     - IcyNipples
                     - Triplebaka101
                     - Jabberwocky (Ivy) --> suggested by <@${uhd.user.id}>
+                    - SOCCERGOD --> suggested by <@${misteree.user.id}>
+                    - Dest (-GK-) --> suggested by <@${misteree.user.id}>
+                    - gangstercat --> suggested by <@${misteree.user.id}>
+                    - 69dot --> suggested by <@${misteree.user.id}>
+                    
                      `
                     },
                     
