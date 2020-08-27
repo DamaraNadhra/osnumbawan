@@ -19,7 +19,7 @@ client.on('message', async (message) => {
     let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346899209781338')
     let uhd = message.guild.members.cache.find(uh => uh.id === '559479208007696395')
 
-    if (message.content.toLowerCase().startsWith(`${prefix}help os`)) {
+    if (message.content.toLowerCase().startsWith(`${prefix}help`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
        const helpEmbed = new Discord.MessageEmbed()
         .setColor('#06F6DD')
@@ -29,7 +29,7 @@ client.on('message', async (message) => {
         .setThumbnail('https://i.imgur.com/OCHoFgH.png')
         .setAuthor( 'OS Official Bot', 'https://i.imgur.com/OCHoFgH.png')
         .addFields(
-            { name: '__Member commands:__', value: "```kos \nhelp os \nunkos \nlibrary \nwarrior library \nshaman library \narcher library \nmage library \nrank``` ", inline: true},
+            { name: '__Member commands:__', value: "```kos \nhelp  \nunkos \nlibrary \nwarrior library \nshaman library \narcher library \nmage library \nrank``` ", inline: true},
             { name: '__Admin commands:__', value: "```kick \nban \ntempmute \nunmute```", inline: true}
         )
         .setFooter('OS NUMBA WANN ')
