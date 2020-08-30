@@ -46,7 +46,7 @@ client.on('message', async (message) => {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
             let gato = message.guild.members.cache.find(gato => gato.id === '694488949980135444')
             const kosList = new Discord.MessageEmbed()
-            .setColor('15158332')
+            .setColor('#FF000F ')
             .setTitle('KOS List')
             .setDescription('This is OS clan\'s KOS list')
             .addFields(
