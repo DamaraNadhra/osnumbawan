@@ -18,6 +18,43 @@ client.on('message', async (message) => {
     let shamanMaster  = message.guild.roles.cache.find(master => master.id === '712346843849424926')
     let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346899209781338')
     let uhd = message.guild.members.cache.find(uh => uh.id === '559479208007696395')
+    let gato = message.guild.members.cache.find(gato => gato.id === '694488949980135444')
+    const kosList = new Discord.MessageEmbed()
+    .setColor('#FF000F ')
+    .setTitle('KOS List')
+    .setDescription('This is OS clan\'s KOS list')
+    .addFields(
+        { name: 'Clan KOS:', value: `- All of TaCo clan
+        - All of REAL clan
+        - All of BBG2 clan
+        - Most of BFB clan
+        - Most of -GK- clan
+        - Most of * * * * clan`},
+        { name: 'Player KOS:', value: `- Neptune aka Galatea(-GK-)
+        - Jupiter (-GK-)
+        - NateFreezes (****)
+        - KidFlash (TaCo)
+        - Hiddeinnn (TaCo)| but he spares bossers
+        - 69Dot (VC)
+        - Asta (BFB)
+        - asui (-GK-)
+        - MAGEOfJUSTICE (TaCo)
+        - LegendsNeverDie4
+        - Gronun
+        - LXV (BBG2)
+        - Scrizen (BBG2)
+        - Kayan (BBG2)
+        - ooMINATOoo (BBG2)
+        - LIPER (sSs)
+        - ibss (BFB)
+        - Aelin (BFB)
+        - arrow000acenova (BBG2)
+        - Zuhaer (Ivy)
+        
+        Dm <@${gato.user.id}> to update the list
+        Type \`${prefix}kos 2\` to open second page`}
+    )
+
 
     if (message.content.toLowerCase().startsWith(`${prefix}help`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
@@ -44,43 +81,7 @@ client.on('message', async (message) => {
     if (message.content.toLowerCase() === (`${prefix}kos`)) {
 
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-            let gato = message.guild.members.cache.find(gato => gato.id === '694488949980135444')
-            const kosList = new Discord.MessageEmbed()
-            .setColor('#FF000F ')
-            .setTitle('KOS List')
-            .setDescription('This is OS clan\'s KOS list')
-            .addFields(
-                { name: 'Clan KOS:', value: `- All of TaCo clan
-                - All of REAL clan
-                - All of BBG2 clan
-                - Most of BFB clan
-                - Most of -GK- clan
-                - Most of * * * * clan`},
-                { name: 'Player KOS:', value: `- Neptune aka Galatea(-GK-)
-                - Jupiter (-GK-)
-                - NateFreezes (****)
-                - KidFlash (TaCo)
-                - Hiddeinnn (TaCo)| but he spares bossers
-                - 69Dot (VC)
-                - Asta (BFB)
-                - asui (-GK-)
-                - MAGEOfJUSTICE (TaCo)
-                - LegendsNeverDie4
-                - Gronun
-                - LXV (BBG2)
-                - Scrizen (BBG2)
-                - Kayan (BBG2)
-                - ooMINATOoo (BBG2)
-                - LIPER (sSs)
-                - ibss (BFB)
-                - Aelin (BFB)
-                - arrow000acenova (BBG2)
-                - Zuhaer (Ivy)
-                
-                Dm <@${gato.user.id}> to update the list
-                Type \`${prefix}kos 2\` to open second page`}
-            )
-
+           
             message.channel.send(kosList)
         
            
@@ -1232,13 +1233,21 @@ client.on('message', async (message) => {
 }
     } else
     if (message.content.toLowerCase() === `${prefix}edit kos`) {
+
+        const receivedEmbed = kosList;
         let filter = m => m.author.id === message.author.id
         const collector = message.channel.createMessageCollector(filter, {max: 1})
 
         collector.on('collect', msg => {
             let newKos = msg.content;
 
-            message.em
+            const edittedEmbed = new Discord.MessageEmbed(receivedEmbed).setTitle(newKos)
+
+            message.edit(edittedEmbed).then(() => message.channel.send('Editted!'))
+        })
+
+        collector.on('end', m => {
+            console.log(m.size)
         })
     }
 
