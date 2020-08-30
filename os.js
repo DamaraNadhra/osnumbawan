@@ -45,52 +45,43 @@ client.on('message', async (message) => {
 
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
             let gato = message.guild.members.cache.find(gato => gato.id === '694488949980135444')
-            message.channel.send({embed: {
-                color: 15158332,
-                title: 'KOS List',
-                description: 'This is the OS clan KOS!',
-                fields: [
-                    {
-                    name: 'Clan KOS:',
-                    value: `
-                    - All of TaCo clan
-                    - All of REAL clan
-                    - All of BBG2 clan
-                    - Most of BFB clan
-                    - Most of -GK- clan
-                    - Most of * * * * clan
-                     `
-                    },
-                    {
-                    name: 'Player KOS:',
-                    value: `
-                    
-                    - Neptune aka Galatea(-GK-)
-                    - Jupiter (-GK-)
-                    - NateFreezes (****)
-                    - KidFlash (TaCo)
-                    - Hiddeinnn (TaCo)| but he spares bossers
-                    - 69Dot (VC)
-                    - Asta (BFB)
-                    - asui (-GK-)
-                    - MAGEOfJUSTICE (TaCo)
-                    - LegendsNeverDie4
-                    - Gronun
-                    - LXV (BBG2)
-                    - Scrizen (BBG2)
-                    - Kayan (BBG2)
-                    - ooMINATOoo (BBG2)
-                    - LIPER (sSs)
-                    - ibss (BFB)
-                    - Aelin (BFB)
-                    - arrow000acenova (BBG2)
-                    - Zuhaer (Ivy)
-                    
-                    Dm <@${gato.user.id}> to update the list
-                    Type \`${prefix}kos 2\` to open second page`
-                    }
-                ]
-            }})
+            const kosList = new Discord.MessageEmbed()
+            .setColor('15158332')
+            .setTitle('KOS List')
+            .setDescription('This is OS clan\'s KOS list')
+            .addFields(
+                { name: 'Clan KOS:', value: `- All of TaCo clan
+                - All of REAL clan
+                - All of BBG2 clan
+                - Most of BFB clan
+                - Most of -GK- clan
+                - Most of * * * * clan`},
+                { name: 'Player KOS:', value: `- Neptune aka Galatea(-GK-)
+                - Jupiter (-GK-)
+                - NateFreezes (****)
+                - KidFlash (TaCo)
+                - Hiddeinnn (TaCo)| but he spares bossers
+                - 69Dot (VC)
+                - Asta (BFB)
+                - asui (-GK-)
+                - MAGEOfJUSTICE (TaCo)
+                - LegendsNeverDie4
+                - Gronun
+                - LXV (BBG2)
+                - Scrizen (BBG2)
+                - Kayan (BBG2)
+                - ooMINATOoo (BBG2)
+                - LIPER (sSs)
+                - ibss (BFB)
+                - Aelin (BFB)
+                - arrow000acenova (BBG2)
+                - Zuhaer (Ivy)
+                
+                Dm <@${gato.user.id}> to update the list
+                Type \`${prefix}kos 2\` to open second page`}
+            )
+        
+           
         } else {
             message.reply('You don\'t have permission U PEPEGA <:Yikes:718741173035859999>')
         }
@@ -248,7 +239,6 @@ client.on('message', async (message) => {
             const userKick = message.mentions.users.first() || args.slice(1).join(' ');
             let reason = args.slice(1).join(' ');
             const modLog = client.channels.cache.find(channel => channel.id === '747499541812478054');
-            let user = message.guild.member(message.mentions.users.first());
 
             if (user.hasPermission('KICK_MEMBERS')) return message.channel.send({embed: {
                 color: 15158332,
@@ -1238,7 +1228,17 @@ client.on('message', async (message) => {
 } else {
     message.reply(`You're not even in OS clan lmaoo`)
 }
-    } 
+    } else
+    if (message.content.toLowerCase() === `${prefix}edit kos`) {
+        let filter = m => m.author.id === message.author.id
+        const collector = message.channel.createMessageCollector(filter, {max: 1})
+
+        collector.on('collect', msg => {
+            let newKos = msg.content;
+
+            message.em
+        })
+    }
 
     
 
