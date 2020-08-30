@@ -1240,10 +1240,7 @@ client.on('message', async (message) => {
 
         collector.on('collect', msg => {
             let newKos = msg.content;
-
-            const edittedEmbed = new Discord.MessageEmbed(receivedEmbed).setTitle(newKos)
-
-            message.edit(edittedEmbed).then(() => message.channel.send('Editted!'))
+            receivedEmbed.setTitle(newKos)
         })
 
         collector.on('end', m => {
