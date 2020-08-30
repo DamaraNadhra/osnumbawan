@@ -80,6 +80,8 @@ client.on('message', async (message) => {
                 Dm <@${gato.user.id}> to update the list
                 Type \`${prefix}kos 2\` to open second page`}
             )
+
+            message.channel.send(kosList)
         
            
         } else {
