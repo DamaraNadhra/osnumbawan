@@ -55,6 +55,24 @@ client.on('message', async (message) => {
         Type \`${prefix}kos 2\` to open second page`}
     )
 
+    const kos2 = new Discord.MessageEmbed()
+    .setTitle("KOS list")
+    .setColor('#FF000F ')
+    .setDescription("This is OS clan's kos")
+    .addFields(
+        {name : 'Player KOS 2', value: `- Arvis (Amit)
+        - Hexraerdaz (TaCo)
+        - IcyNipples
+        - Triplebaka101
+        - Jabberwocky (Ivy) --> suggested by <@${uhd.user.id}>
+        - SOCCERGOD --> suggested by <@${misteree.user.id}>
+        - Dest (-GK-) --> suggested by <@${misteree.user.id}>
+        - gangstercat --> suggested by <@${misteree.user.id}>
+        - 69dot --> suggested by <@${misteree.user.id}>
+        `}
+    )
+
+
 
     if (message.content.toLowerCase().startsWith(`${prefix}help`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
@@ -604,29 +622,7 @@ client.on('message', async (message) => {
     if (message.content.toLowerCase().startsWith(`${prefix}kos 2`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
             let gato = message.guild.members.cache.find(gato => gato.id === '694488949980135444')
-            message.channel.send({embed: {
-                color: 15158332,
-                title: 'KOS List',
-                description: 'This is the OS clan KOS!',
-                fields: [
-                    {
-                    name: 'Player KOS page 2:',
-                    value: `
-                    - Arvis (Amit)
-                    - Hexraerdaz (TaCo)
-                    - IcyNipples
-                    - Triplebaka101
-                    - Jabberwocky (Ivy) --> suggested by <@${uhd.user.id}>
-                    - SOCCERGOD --> suggested by <@${misteree.user.id}>
-                    - Dest (-GK-) --> suggested by <@${misteree.user.id}>
-                    - gangstercat --> suggested by <@${misteree.user.id}>
-                    - 69dot --> suggested by <@${misteree.user.id}>
-                    
-                     `
-                    },
-                    
-                ]
-            }})
+            message.channel.send(kos2)
         } else {
             message.reply(`You don't have permission to use this command`)
         }
@@ -773,7 +769,7 @@ client.on('message', async (message) => {
                 { name: `Type : Warrior <:warrior:713701040519905330> \nName: Armor Reinforcement <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
                 <:warriorbook:747473472145326163> Level 3 = \:white_check_mark: 
                 <:warriorbook:747473472145326163> Level 4 = \:white_check_mark: 
-                <:warriorbook:747473472145326163> Level 5 = \:x:
+                <:warriorbook:747473472145326163> Level 5 = \:white_check_mark:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
             )
             message.channel.send(centrifugal)
@@ -790,7 +786,7 @@ client.on('message', async (message) => {
                 { name: `Type : Mage <:mage:713701096966717471> \nName: Icicle Orb <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:x:
                 <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
                 <:magebook:747473707932582042> Level 4 = \:white_check_mark: 
-                <:magebook:747473707932582042> Level 5 = \:x:
+                <:magebook:747473707932582042> Level 5 = \:white_check_mark:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
             )
             message.channel.send(Icicle)
@@ -807,7 +803,7 @@ client.on('message', async (message) => {
                 { name: `Type : Mage <:mage:713701096966717471> \nName: Chilling Radiance <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:white_check_mark:
                 <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
                 <:magebook:747473707932582042> Level 4 = \:white_check_mark: 
-                <:magebook:747473707932582042> Level 5 = \:x:
+                <:magebook:747473707932582042> Level 5 = \:white_check_mark:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
             )
             message.channel.send(radiance)
@@ -823,7 +819,7 @@ client.on('message', async (message) => {
             .addFields(
                 { name: `Type : Mage <:mage:713701096966717471> \nName: Ice Shield <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:x:
                 <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
-                <:magebook:747473707932582042> Level 4 = \:x: 
+                <:magebook:747473707932582042> Level 4 = \:white_check_mark: 
                 <:magebook:747473707932582042> Level 5 = \:white_check_mark:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
             )
@@ -840,8 +836,8 @@ client.on('message', async (message) => {
             .addFields(
                 { name: `Type : Mage <:mage:713701096966717471> \nName: Hypothermic Frenzy <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:x:
                 <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
-                <:magebook:747473707932582042> Level 4 = \:x: 
-                <:magebook:747473707932582042> Level 5 = \:x:
+                <:magebook:747473707932582042> Level 4 = \:white_check_mark: 
+                <:magebook:747473707932582042> Level 5 = \:white_check_mark:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
             )
             message.channel.send(hypothermic)
@@ -856,9 +852,8 @@ client.on('message', async (message) => {
             .setColor('00f2ff ') 
             .addFields(
                 { name: `Type : Mage <:mage:713701096966717471> \nName: Enchantments <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:x:
-                <:magebook:747473707932582042> Level 3 = \:x: 
-                <:magebook:747473707932582042> Level 4 = \:x: 
-                oof unfortunately this books seems empty, but u can fix this by donating books!
+                <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
+                <:magebook:747473707932582042> Level 4 = \:white_check_mark: 
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
             )
             message.channel.send(enchant)
