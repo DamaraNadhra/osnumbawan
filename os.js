@@ -1231,7 +1231,7 @@ client.on('message', (message) => {
         let team1 = message.guild.roles.cache.get('712346176220954664').members.map((member) => `<@${member.id}>`).join('\n');
         message.channel.send({embed: {
             title: `List of the ${shamanApprentice}!`,
-            color: `3066993`,
+            color: `#00FF0C `,
             description: `${team1}`,
             footer: {
                 text: 'You can type `&shaman [tier] to more` '
