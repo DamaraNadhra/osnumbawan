@@ -1227,20 +1227,16 @@ client.on('message', async (message) => {
     message.reply(`You're not even in OS clan lmaoo`)
 }
     } else
-    if (message.content.toLowerCase() === `${prefix}edit kos`) {
-
-        const receivedEmbed = kosList;
-        let filter = m => m.author.id === message.author.id
-        const collector = message.channel.createMessageCollector(filter, {max: 1})
-
-        collector.on('collect', msg => {
-            let newKos = msg.content;
-            receivedEmbed.setTitle(newKos)
-        })
-
-        collector.on('end', m => {
-            console.log(m.size)
-        })
+    if (message.content.toLowerCase() == `${prefix}shaman apprentice`) {
+        let team1 = message.guild.roles.cache.get('712346176220954664').members.map((member) => `<@${member.id}>`).join('\n');
+        message.channel.send({embed: {
+            title: `List of the ${shamanApprentice}!`,
+            color: `3066993`,
+            description: `${team1}`,
+            footer: {
+                text: 'You can type `&shaman [tier] to more` '
+            }
+        }})
     }
 
     
