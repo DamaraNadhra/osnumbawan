@@ -72,7 +72,9 @@ client.on('message', (message) => {
         `}
     )
 
-
+    if(message.content == 'OSNAMBAWAN'){
+        message.reply("OSNAMBAWAN!!!!");
+    }
 
     if (message.content.toLowerCase().startsWith(`${prefix}help`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
@@ -332,93 +334,134 @@ client.on('message', (message) => {
         }
     } else
     if (command === 'tempmute') {
-            if (message.member.hasPermission('MUTE_MEMBERS')) {
-            
-                let person = message.guild.member(message.mentions.users.first() || message.guild.member(args[1]) || args.slice(2).join(' '));
-    
-                if (!person) return message.reply('Bruh, what\'s wrong with you, or do you want me to mute a ghost? That\'s funny though');
-                if (person.hasPermission('MUTE_MEMBERS')) return message.channel.send({embed: {
+        if (message.member.hasPermission('MUTE_MEMBERS')) {
+        
+            let person = message.guild.member(message.mentions.users.first() || message.guild.member(args[1]) || args.slice(2).join(' '));
+
+            if (!person) return message.reply('Bruh, what\'s wrong with you, or do you want me to mute a ghost? That\'s funny though');
+            if (person.hasPermission('MUTE_MEMBERS')) return message.channel.send({embed: {
+                color: 15158332,
+                author: {
+                    name: 'OS Official Bot'
+                },
+                description: 'You can\'t mute an admin lmao',
+                image: {
+                    url: 'https://media.giphy.com/media/3oEdv07JVXwhImYGWc/giphy.gif'
+                }
+            }})
+
+            let mainrole = message.guild.roles.cache.find(role => role.name === 'VG');
+            let muterole = message.guild.roles.cache.find(role => role.name === 'Muted');
+            let time = args[1];
+            let reason = args.slice(2).join(' ');
+            const tempmuteLog = message.guild.channels.cache.find(channel => channel.id === '747499541812478054');
+
+
+            if (!muterole) {
+                message.channel.send('this channel does not include a mute role...I will create one!');
+                
+            } else 
+            if (!time) {
+                return message.reply('please enter a time to mute the user for!')
+            } else 
+            if (!reason) {
+                return message.reply('please enter the reason why u mute him/her/it')
+            }
+
+            person.roles.remove(mainrole.id);
+            person.roles.add(muterole.id);
+
+            message.channel.send({embed: {
+                color: 0x0099ff,
+                author: {
+                    name: 'OS Official Bot'
+                },
+                description: `\:hammer: Bippity Boppity! <@${person.user.id}> has been muted for ${ms(ms(time))}`,
+                fields: [{
+                    name: 'Reason:',
+                    value: reason,
+                    inline: false
+                }] 
+            }});
+
+                tempmuteLog.send({embed: {
                     color: 15158332,
                     author: {
-                        name: 'OS Official Bot'
+                        name: 'OS Official Bot',
+                        icon_url: 'https://i.imgur.com/OCHoFgH.png'
                     },
-                    description: 'You can\'t mute an admin lmao',
-                    image: {
-                        url: 'https://media.giphy.com/media/3oEdv07JVXwhImYGWc/giphy.gif'
-                    }
+                    fields: [
+                        {
+                        name: `Temporarly muted!`,
+                        value: `${person.user.tag}`,
+                        },
+                        {
+                        name: 'Reason:',
+                        value: reason,
+                        },
+                        {
+                        name: 'Duration',
+                        value: `${ms(ms(time))}`
+                        },
+                        {
+                        name: 'Responsible moderator:',
+                        value: `<@${message.author.id}>`
+                        }
+                    ]
                 }})
-    
-                let mainrole = message.guild.roles.cache.find(role => role.name === 'VG');
-                let muterole = message.guild.roles.cache.find(role => role.name === 'Muted');
-                let time = args[1];
-                let reason = args.slice(2).join(' ');
-                const tempmuteLog = message.guild.channels.cache.find(channel => channel.id === '747499541812478054');
-    
-    
-                if (!muterole) {
-                    message.channel.send('this channel does not include a mute role...I will create one!');
-                    
-                } else 
-                if (!time) {
-                    return message.reply('please enter a time to mute the user for!')
-                } else 
-                if (!reason) {
-                    return message.reply('please enter the reason why u mute him/her/it')
-                }
-    
-                person.roles.remove(mainrole.id);
-                person.roles.add(muterole.id);
-    
-                message.channel.send({embed: {
-                    color: 0x0099ff,
+
+                person.send({embed: {
+                    color: 15158332,
                     author: {
-                        name: 'OS Official Bot'
+                        name: 'OS Official Bot',
+                        icon_url: 'https://i.imgur.com/OCHoFgH.png'
                     },
-                    description: `\:hammer: Bippity Boppity! <@${person.user.id}> has been muted for ${ms(ms(time))}`,
-                    fields: [{
+                    title: '\:lock: You have been temporarly muted from OS Server! \:mute:',
+                    fields: [
+                        {
                         name: 'Reason:',
                         value: reason,
                         inline: false
-                    }] 
-                }});
-
-                    tempmuteLog.send({embed: {
-                        color: 15158332,
-                        author: {
-                            name: 'OS Official Bot',
-                            icon_url: 'https://i.imgur.com/OCHoFgH.png'
                         },
-                        fields: [
-                            {
-                            name: `Temporarly muted!`,
-                            value: `${person.user.tag}`,
-                            },
-                            {
+                        {
+                        name: 'Duration:',
+                        value: time,
+                        inline: false
+                        },
+                        {
+                        name: 'Responsible Moderator',
+                        value: `<@${message.author.id}>`
+                        }
+                    ],
+                }})
+            
+                setTimeout(function () {
+                    person.roles.add(mainrole.id);
+                    person.roles.remove(muterole.id);
+                    if (person.roles.cache.has(mainrole.id)) return;
+                    message.channel.send({embed: {
+                        color: 0x0099ff,
+                        author: {
+                            name: 'OS Official Bot'
+                        },
+                        description: `Hup! Hup! ${ms(ms(time))} has passed! <@${person.user.id}> is now unmuted!`,
+                        fields: [{
                             name: 'Reason:',
-                            value: reason,
-                            },
-                            {
-                            name: 'Duration',
-                            value: `${ms(ms(time))}`
-                            },
-                            {
-                            name: 'Responsible moderator:',
-                            value: `<@${message.author.id}>`
-                            }
-                        ]
+                            value: 'Mute time expired!',
+                            inline: false
+                        }]
                     }})
-    
                     person.send({embed: {
                         color: 15158332,
                         author: {
                             name: 'OS Official Bot',
-                            icon_url: 'https://i.imgur.com/OCHoFgH.png'
+                            icon_url: 'https://i.imgur.com/kUi20Yz.png'
                         },
-                        title: '\:lock: You have been temporarly muted from OS Server! \:mute:',
+                        description: '\:unlock: You have been unmuted! \:loud_sound: ',
                         fields: [
                             {
                             name: 'Reason:',
-                            value: reason,
+                            value: 'Mute time expired',
                             inline: false
                             },
                             {
@@ -426,50 +469,9 @@ client.on('message', (message) => {
                             value: time,
                             inline: false
                             },
-                            {
-                            name: 'Responsible Moderator',
-                            value: `<@${message.author.id}>`
-                            }
                         ],
                     }})
-                
-                    setTimeout(function () {
-                        person.roles.add(mainrole.id);
-                        person.roles.remove(muterole.id);
-                        if (person.roles.cache.has(mainrole.id)) return;
-                        message.channel.send({embed: {
-                            color: 0x0099ff,
-                            author: {
-                                name: 'OS Official Bot'
-                            },
-                            description: `Hup! Hup! ${ms(ms(time))} has passed! <@${person.user.id}> is now unmuted!`,
-                            fields: [{
-                                name: 'Reason:',
-                                value: 'Mute time expired!',
-                                inline: false
-                            }]
-                        }})
-                        person.send({embed: {
-                            color: 15158332,
-                            author: {
-                                name: 'OS Official Bot',
-                                icon_url: 'https://i.imgur.com/kUi20Yz.png'
-                            },
-                            description: '\:unlock: You have been unmuted! \:loud_sound: ',
-                            fields: [
-                                {
-                                name: 'Reason:',
-                                value: 'Mute time expired',
-                                inline: false
-                                },
-                                {
-                                name: 'Duration:',
-                                value: time,
-                                inline: false
-                                },
-                            ],
-                        }})
-                    }, ms(time));
+                }, ms(time));
         } else {
             message.reply(`You don't have permission to use this command pepega`)
         }
@@ -896,336 +898,336 @@ client.on('message', (message) => {
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}agonize`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-        const Bolt = new Discord.MessageEmbed()
-        .setAuthor('Agonize', 'https://i.imgur.com/mx3MmuN.png')
-        .setColor('0000ff ') 
-        .addFields(
-            { name: `Type : Shaman <:shaman:713463624450179212> \nName: Agonize <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-            <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
-            This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-            donating books is very allowed `}
-        )
-        message.channel.send(Bolt)
-    } else {
-        message.reply(`You're not even in OS clan lmaoo`)
-    }
+            const Bolt = new Discord.MessageEmbed()
+            .setAuthor('Agonize', 'https://i.imgur.com/mx3MmuN.png')
+            .setColor('0000ff ') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Agonize <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}revitalize`) || message.content.toLowerCase().startsWith(`${prefix}rev`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-        const Bolt = new Discord.MessageEmbed()
-        .setAuthor('Revitalize', 'https://i.imgur.com/N23myft.png')
-        .setColor('0000ff ') 
-        .addFields(
-            { name: `Type : Shaman <:shaman:713463624450179212> \nName: Revitalize <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-            <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
-            This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-            donating books is very allowed `}
-        )
-        message.channel.send(Bolt)
-    } else {
-        message.reply(`You're not even in OS clan lmaoo`)
-    }
+            const Bolt = new Discord.MessageEmbed()
+            .setAuthor('Revitalize', 'https://i.imgur.com/N23myft.png')
+            .setColor('0000ff ') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Revitalize <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}healing totem`) || message.content.toLowerCase().startsWith(`${prefix}totem`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setAuthor('Healing Totem', 'https://i.imgur.com/6bjYO0C.png')
-    .setColor('0000ff ') 
-    .addFields(
-        { name: `Type : Shaman <:shaman:713463624450179212> \nName: Healing Totem <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-        <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:  
-        This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setAuthor('Healing Totem', 'https://i.imgur.com/6bjYO0C.png')
+            .setColor('0000ff ') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Healing Totem <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}canine howl`) || message.content.toLowerCase().startsWith(`${prefix}howl`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-        const Bolt = new Discord.MessageEmbed()
-        .setAuthor('Canine Howl', 'https://i.imgur.com/kv1f5a7.png')
-        .setColor('0000ff ') 
-        .addFields(
-            { name: `Type : Shaman <:shaman:713463624450179212> \nName: Canine Howl <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-            <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
-            This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-            donating books is very allowed `}
-        )
-        message.channel.send(Bolt)
-    } else {
-        message.reply(`You're not even in OS clan lmaoo`)
-    }
+            const Bolt = new Discord.MessageEmbed()
+            .setAuthor('Canine Howl', 'https://i.imgur.com/kv1f5a7.png')
+            .setColor('0000ff ') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Canine Howl <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}spirit animal`) || message.content.toLowerCase().startsWith(`${prefix}spirit`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-        const Bolt = new Discord.MessageEmbed()
-        .setAuthor('Spirit Animal', 'https://i.imgur.com/BdgGayF.png')
-        .setColor('0000ff ') 
-        .addFields(
-            { name: `Type : Shaman <:shaman:713463624450179212> \nName: Spirit Animal <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-            <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
-            This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-            donating books is very allowed `}
-        )
-        message.channel.send(Bolt)
-    } else {
-        message.reply(`You're not even in OS clan lmaoo`)
-    }
+            const Bolt = new Discord.MessageEmbed()
+            .setAuthor('Spirit Animal', 'https://i.imgur.com/BdgGayF.png')
+            .setColor('0000ff ') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Spirit Animal <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}mend`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-        const Bolt = new Discord.MessageEmbed()
-        .setAuthor('Mend', 'https://i.imgur.com/vNZ3hNZ.png')
-        .setColor('0000ff ') 
-        .addFields(
-            { name: `Type : Shaman <:shaman:713463624450179212> \nName: Mend <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-            <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-            <:shamanbook:747474128923000993> Level 5 = \:x:  
-            This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-            donating books is very allowed `}
-        )
-        message.channel.send(Bolt)
-    } else {
-        message.reply(`You're not even in OS clan lmaoo`)
-    }
+            const Bolt = new Discord.MessageEmbed()
+            .setAuthor('Mend', 'https://i.imgur.com/vNZ3hNZ.png')
+            .setColor('0000ff ') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Mend <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:x:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}decay`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('0000ff ')
-    .setAuthor('Decay', 'https://i.imgur.com/btdXRQy.png') 
-    .addFields(
-        { name: `Type : Shaman <:shaman:713463624450179212> \nName: Decay <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-        <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
-        This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('0000ff ')
+            .setAuthor('Decay', 'https://i.imgur.com/btdXRQy.png') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Decay <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}mimir`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('0000ff ')
-    .setAuthor(`Mimir's Well`, 'https://i.imgur.com/FEzqwrW.png') 
-    .addFields(
-        { name: `Type : Shaman <:shaman:713463624450179212> \nName: Mimir's Well <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-        <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
-        This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('0000ff ')
+            .setAuthor(`Mimir's Well`, 'https://i.imgur.com/FEzqwrW.png') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Mimir's Well <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}plague spreader`) || message.content.toLowerCase().startsWith(`${prefix}plague`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('0000ff ')
-    .setAuthor(`Plague Spreader`, 'https://i.imgur.com/VSPiLia.png') 
-    .addFields(
-        { name: `Type : Shaman <:shaman:713463624450179212> \nName: Plague Spreader <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-        <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
-        This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('0000ff ')
+            .setAuthor(`Plague Spreader`, 'https://i.imgur.com/VSPiLia.png') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Plague Spreader <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}soul harvest`) || message.content.toLowerCase().startsWith(`${prefix}soul`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('0000ff ')
-    .setAuthor(`Soul Harvest`, 'https://i.imgur.com/cQThcEr.png') 
-    .addFields(
-        { name: `Type : Shaman <:shaman:713463624450179212> \nName: Soul Harvest <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
-        <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
-        <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
-        This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('0000ff ')
+            .setAuthor(`Soul Harvest`, 'https://i.imgur.com/cQThcEr.png') 
+            .addFields(
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Soul Harvest <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
+                <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
+                This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}precise shot`) || message.content.toLowerCase().startsWith(`${prefix}precise`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('00ff00 ')
-    .setAuthor(`Precise Shot`, 'https://i.imgur.com/tzh9btj.png') 
-    .addFields(
-        { name: `Type : Archers <:archer:713701070714437722> \nName: Precise Shot <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
-        <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
-        <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('00ff00 ')
+            .setAuthor(`Precise Shot`, 'https://i.imgur.com/tzh9btj.png') 
+            .addFields(
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Precise Shot <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
+                <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}poison arrow`) || message.content.toLowerCase().startsWith(`${prefix}poison`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('00ff00 ')
-    .setAuthor(`Poison Arrow`, 'https://i.imgur.com/QjzqoF2.png') 
-    .addFields(
-        { name: `Type : Archers <:archer:713701070714437722> \nName: Poison Arrow <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
-        <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
-        <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('00ff00 ')
+            .setAuthor(`Poison Arrow`, 'https://i.imgur.com/QjzqoF2.png') 
+            .addFields(
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Poison Arrow <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
+                <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}invigorate`) || message.content.toLowerCase().startsWith(`${prefix}invig`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('00ff00 ')
-    .setAuthor(`Invigorate`, 'https://i.imgur.com/EJgz9Vu.png') 
-    .addFields(
-        { name: `Type : Archers <:archer:713701070714437722> \nName: Invigorate <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
-        <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
-        <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('00ff00 ')
+            .setAuthor(`Invigorate`, 'https://i.imgur.com/EJgz9Vu.png') 
+            .addFields(
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Invigorate <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
+                <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}cranial puncture`) || message.content.toLowerCase().startsWith(`${prefix}cranial`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('00ff00 ')
-    .setAuthor(`Cranial Punctures`, 'https://i.imgur.com/LjhXEZS.png') 
-    .addFields(
-        { name: `Type : Archers <:archer:713701070714437722> \nName: Cranial Puncture <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
-        <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
-        <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('00ff00 ')
+            .setAuthor(`Cranial Punctures`, 'https://i.imgur.com/LjhXEZS.png') 
+            .addFields(
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Cranial Puncture <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
+                <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}pathfinding`) || message.content.toLowerCase().startsWith(`${prefix}path`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('00ff00 ')
-    .setAuthor(`Pathfinding`, 'https://i.imgur.com/qaQIQla.png') 
-    .addFields(
-        { name: `Type : Archers <:archer:713701070714437722> \nName: Pathfinding <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
-        <:archerbook:747473966482063420> Level 4 = \:white_check_mark:  
-        <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('00ff00 ')
+            .setAuthor(`Pathfinding`, 'https://i.imgur.com/qaQIQla.png') 
+            .addFields(
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Pathfinding <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 4 = \:white_check_mark:  
+                <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}temporal dilation`) || message.content.toLowerCase().startsWith(`${prefix}temp`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('00ff00 ')
-    .setAuthor(`Temporal Dilation`, 'https://i.imgur.com/gN4gTcQ.png') 
-    .addFields(
-        { name: `Type : Archers <:archer:713701070714437722> \nName: Temporal Dilation <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
-        <:archerbook:747473966482063420> Level 4 = \:white_check_mark: 
-        <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('00ff00 ')
+            .setAuthor(`Temporal Dilation`, 'https://i.imgur.com/gN4gTcQ.png') 
+            .addFields(
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Temporal Dilation <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 4 = \:white_check_mark: 
+                <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}serpent arrow`) || message.content.toLowerCase().startsWith(`${prefix}serpent`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('00ff00 ')
-    .setAuthor(`Serpent Arrows`, 'https://i.imgur.com/jSFx3yA.png') 
-    .addFields(
-        { name: `Type : Archers <:archer:713701070714437722> \nName: Serpent Arrows <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
-        <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
-        <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('00ff00 ')
+            .setAuthor(`Serpent Arrows`, 'https://i.imgur.com/jSFx3yA.png') 
+            .addFields(
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Serpent Arrows <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
+                <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}swift shot`) || message.content.toLowerCase().startsWith(`${prefix}swift`)) {
-    if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-    const Bolt = new Discord.MessageEmbed()
-    .setColor('00ff00 ')
-    .setAuthor(`Swift Shot`, 'https://i.imgur.com/Qon2Gk4.png') 
-    .addFields(
-        { name: `Type : Archers <:archer:713701070714437722> \nName: Swift Shot <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
-        <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
-        <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
-        <@${nihilo.user.id}> books inventory!
-        donating books is very allowed `}
-    )
-    
-    message.channel.send(Bolt)
-} else {
-    message.reply(`You're not even in OS clan lmaoo`)
-}
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const Bolt = new Discord.MessageEmbed()
+            .setColor('00ff00 ')
+            .setAuthor(`Swift Shot`, 'https://i.imgur.com/Qon2Gk4.png') 
+            .addFields(
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Swift Shot <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
+                <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
+                <@${nihilo.user.id}> books inventory!
+                donating books is very allowed `}
+            )
+            
+            message.channel.send(Bolt)
+        } else {
+            message.reply(`You're not even in OS clan lmaoo`)
+        }
     } else
     if (message.content.toLowerCase() == `${prefix}shaman apprentice`) {
         let team1 = message.guild.roles.cache.get('712346176220954664').members.map((member) => `<@${member.id}>`).join('\n');
