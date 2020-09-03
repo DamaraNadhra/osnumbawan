@@ -1253,7 +1253,7 @@ client.on('message', (message) => {
         let team1 = message.guild.roles.cache.get('712346899209781338').members.map((member) => `<@${member.id}>`).join('\n');
         message.channel.send({embed: {
             title: `List of the Shaman Highlord?`,
-            color: `#FF00F0 `,
+            color: `#FF9E00 `,
             description: `cmon dude everybody know if Shaman Highlord is only \n${team1}`,
             footer: {
                 text: 'You can type `&shaman [tier] to more` '
