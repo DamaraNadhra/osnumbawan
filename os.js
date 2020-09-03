@@ -1230,9 +1230,31 @@ client.on('message', (message) => {
     if (message.content.toLowerCase() == `${prefix}shaman apprentice`) {
         let team1 = message.guild.roles.cache.get('712346176220954664').members.map((member) => `<@${member.id}>`).join('\n');
         message.channel.send({embed: {
-            title: `List of the ${shamanApprentice}!`,
+            title: `List of the Shaman Apprentice!`,
             color: `#00FF0C `,
             description: `${team1}`,
+            footer: {
+                text: 'You can type `&shaman [tier] to more` '
+            }
+        }})
+    } else
+    if (message.content.toLowerCase() == `${prefix}shaman master`) {
+        let team1 = message.guild.roles.cache.get('712346843849424926').members.map((member) => `<@${member.id}>`).join('\n');
+        message.channel.send({embed: {
+            title: `List of the Shaman Master!`,
+            color: `#FF00F0 `,
+            description: `${team1}`,
+            footer: {
+                text: 'You can type `&shaman [tier] to more` '
+            }
+        }})
+    } else
+    if (message.content.toLowerCase() == `${prefix}shaman highlord`) {
+        let team1 = message.guild.roles.cache.get('712346899209781338').members.map((member) => `<@${member.id}>`).join('\n');
+        message.channel.send({embed: {
+            title: `List of the Shaman Highlord?`,
+            color: `#FF00F0 `,
+            description: `cmon dude everybody know if Shaman Highlord is only \n${team1}`,
             footer: {
                 text: 'You can type `&shaman [tier] to more` '
             }
