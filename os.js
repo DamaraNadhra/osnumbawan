@@ -7,7 +7,7 @@ const ms = require('ms');
 const prefix = '&'
 
 client.on('message', (message) => {
-    let sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
+let sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
 let misteree = message.guild.members.cache.find(ee => ee.id === '632506405370200084')
 let nihilo =  message.guild.members.cache.find(nihil => nihil.id === '688776325212667926')
 let uhd = message.guild.members.cache.find(uh => uh.id === '559479208007696395')
@@ -51,7 +51,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         - arrow000acenova (BBG2)
         - Zuhaer (Ivy)
         
-        Dm <@${gato.id}> to update the list
+        Dm <@${gato.user.id}> to update the list
         Type \`${prefix}kos 2\` to open second page`}
     )
 
@@ -67,7 +67,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         - Jabberwocky (Ivy) --> suggested by <@${uhd.user.id}>
         - SOCCERGOD --> suggested by <@${misteree.user.id}>
         - Dest (-GK-) --> suggested by <@${misteree.user.id}>
-        - gangstercat --> suggested by <@${misteree.username.id}>
+        - gangstercat --> suggested by <@${misteree.user.id}>
         - 69dot --> suggested by <@${misteree.user.id}>
         `}
     )
