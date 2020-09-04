@@ -7,7 +7,7 @@ const ms = require('ms');
 const prefix = '&'
 
 client.on('message', (message) => {
-let sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
+const sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
 let misteree = message.guild.members.cache.find(ee => ee.id === '632506405370200084')
 let nihilo =  message.guild.members.cache.find(nihil => nihil.id === '688776325212667926')
 let uhd = message.guild.members.cache.find(uh => uh.id === '559479208007696395')
