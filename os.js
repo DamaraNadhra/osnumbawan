@@ -256,353 +256,6 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         } else {
             message.reply(`You don't have permission to use this command`)
         }
-    } else
-    if (command === 'kick'){
-        if (message.member.hasPermission('KICK_MEMBERS')) {
-            const userKick = message.mentions.users.first() || args.slice(1).join(' ');
-            let reason = args.slice(1).join(' ');
-            const modLog = client.channels.cache.find(channel => channel.id === '747499541812478054');
-
-            if (user.hasPermission('KICK_MEMBERS')) return message.channel.send({embed: {
-                color: 15158332,
-                author: {
-                    name: 'OS Official Bot',
-                    icon_url: 'https://i.imgur.com/OCHoFgH.png'
-                },
-                description: `\:rofl: You can't kick an admin lmaoo \:rofl:`,
-                image: {
-                    url: 'https://media.giphy.com/media/3oEdv07JVXwhImYGWc/giphy.gif'
-                },
-            }})
-
-            if (!reason) return message.reply('Pls provide me a reason!')
-
-            if (userKick) {
-                var member = message.guild.member(userKick);
-    
-                if (member) {
-                    member.kick(reason).then(() => {
-                        modLog.send({embed: {
-                            color: 15158332,
-                            author: {
-                                name: 'OS Official Bot',
-                                icon_url: 'https://i.imgur.com/OCHoFgH.png'
-                            },
-                            fields: [
-                                {
-                                name: `Kicked:`,
-                                value: `${userKick.tag}`,
-                                inline: true
-                                },
-                                {
-                                name: `Reason:`,
-                                value: `${reason}`,
-                                inline: false
-                                },
-                                {
-                                name: 'Responsible moderator:',
-                                value: `<@${message.author.id}>`
-                                }
-                            ],
-                            
-                        }})
-                        message.channel.send({embed: {
-                            color: 15158332,
-                            author: {
-                                name: 'OS Official Bot',
-                                icon_url: 'https://i.imgur.com/OCHoFgH.png'
-                            },
-                            description: `kicked <@${userKick.id}> from the server!`,
-                            fields: [{
-                                name: 'Reason:',
-                                value: reason,
-                                inline: false
-                            }]
-                        }});
-                    }).catch(err => {
-                        message.reply(`I was not able to kick that user.`)
-                        console.log(err);
-                    })
-                } else {
-                    message.reply('that user is not in the server.')
-                }
-            } else {
-                message.reply('you need to state the person you want to kick')
-            }
-        } else {
-            message.reply(`You don't have permission to use this command`)
-        }
-    } else
-    if (command === 'tempmute') {
-        if (message.member.hasPermission('MUTE_MEMBERS')) {
-        
-            let person = message.guild.member(message.mentions.users.first() || message.guild.member(args[1]) || args.slice(2).join(' '));
-
-            if (!person) return message.reply('Bruh, what\'s wrong with you, or do you want me to mute a ghost? That\'s funny though');
-            if (person.hasPermission('MUTE_MEMBERS')) return message.channel.send({embed: {
-                color: 15158332,
-                author: {
-                    name: 'OS Official Bot'
-                },
-                description: 'You can\'t mute an admin lmao',
-                image: {
-                    url: 'https://media.giphy.com/media/3oEdv07JVXwhImYGWc/giphy.gif'
-                }
-            }})
-
-            let mainrole = message.guild.roles.cache.find(role => role.name === 'VG');
-            let muterole = message.guild.roles.cache.find(role => role.name === 'Muted');
-            let time = args[1];
-            let reason = args.slice(2).join(' ');
-            const tempmuteLog = message.guild.channels.cache.find(channel => channel.id === '747499541812478054');
-
-
-            if (!muterole) {
-                message.channel.send('this channel does not include a mute role...I will create one!');
-                
-            } else 
-            if (!time) {
-                return message.reply('please enter a time to mute the user for!')
-            } else 
-            if (!reason) {
-                return message.reply('please enter the reason why u mute him/her/it')
-            }
-
-            person.roles.remove(mainrole.id);
-            person.roles.add(muterole.id);
-
-            message.channel.send({embed: {
-                color: 0x0099ff,
-                author: {
-                    name: 'OS Official Bot'
-                },
-                description: `\:hammer: Bippity Boppity! <@${person.user.id}> has been muted for ${ms(ms(time))}`,
-                fields: [{
-                    name: 'Reason:',
-                    value: reason,
-                    inline: false
-                }] 
-            }});
-
-                tempmuteLog.send({embed: {
-                    color: 15158332,
-                    author: {
-                        name: 'OS Official Bot',
-                        icon_url: 'https://i.imgur.com/OCHoFgH.png'
-                    },
-                    fields: [
-                        {
-                        name: `Temporarly muted!`,
-                        value: `${person.user.tag}`,
-                        },
-                        {
-                        name: 'Reason:',
-                        value: reason,
-                        },
-                        {
-                        name: 'Duration',
-                        value: `${ms(ms(time))}`
-                        },
-                        {
-                        name: 'Responsible moderator:',
-                        value: `<@${message.author.id}>`
-                        }
-                    ]
-                }})
-
-                person.send({embed: {
-                    color: 15158332,
-                    author: {
-                        name: 'OS Official Bot',
-                        icon_url: 'https://i.imgur.com/OCHoFgH.png'
-                    },
-                    title: '\:lock: You have been temporarly muted from OS Server! \:mute:',
-                    fields: [
-                        {
-                        name: 'Reason:',
-                        value: reason,
-                        inline: false
-                        },
-                        {
-                        name: 'Duration:',
-                        value: time,
-                        inline: false
-                        },
-                        {
-                        name: 'Responsible Moderator',
-                        value: `<@${message.author.id}>`
-                        }
-                    ],
-                }})
-            
-                setTimeout(function () {
-                    person.roles.add(mainrole.id);
-                    person.roles.remove(muterole.id);
-                    if (person.roles.cache.has(mainrole.id)) return;
-                    message.channel.send({embed: {
-                        color: 0x0099ff,
-                        author: {
-                            name: 'OS Official Bot'
-                        },
-                        description: `Hup! Hup! ${ms(ms(time))} has passed! <@${person.user.id}> is now unmuted!`,
-                        fields: [{
-                            name: 'Reason:',
-                            value: 'Mute time expired!',
-                            inline: false
-                        }]
-                    }})
-                    person.send({embed: {
-                        color: 15158332,
-                        author: {
-                            name: 'OS Official Bot',
-                            icon_url: 'https://i.imgur.com/kUi20Yz.png'
-                        },
-                        description: '\:unlock: You have been unmuted! \:loud_sound: ',
-                        fields: [
-                            {
-                            name: 'Reason:',
-                            value: 'Mute time expired',
-                            inline: false
-                            },
-                            {
-                            name: 'Duration:',
-                            value: time,
-                            inline: false
-                            },
-                        ],
-                    }})
-                }, ms(time));
-        } else {
-            message.reply(`You don't have permission to use this command pepega`)
-        }
-    } else 
-    if (command === 'unmute') {
-        if (message.member.hasPermission('MUTE_MEMBERS')) {
-            let person = message.guild.member(message.mentions.users.first() || args.slice(1).join(' '));
-    
-            if (!person) return message.reply('This person is not exist');
-            if (person.hasPermission('MUTE_MEMBERS')) return message.channel.send({embed: {
-                color: 15158332,
-                author: {
-                    name: 'OS Official Bot'
-                },
-                description: '\:weary: You can\'t mute or even unmute an Admin \:triumph:',
-                image: {
-                    url: 'https://media.giphy.com/media/okrv1eWeKVM9W/giphy.gif'
-                }
-            }})
-    
-            let unmuterole = message.guild.roles.cache.find(role => role.name === 'VG');
-            let muterole = message.guild.roles.cache.find(role => role.name === 'Muted');
-            const unmuteLog = message.guild.channels.cache.find(channel => channel.id === '747499541812478054');
-            let reason = args.slice(1).join(' ');
-    
-            if (!muterole) {
-                message.reply('this server doesnt have a mute role');
-            } else 
-            if (!reason) {
-                message.reply('please provide a reason why u unmute')
-            } 
-            if (person.roles.cache.has(unmuterole.id)) return message.reply('Bruh focus! he\'s already muted before u type this command')
-                person.roles.remove(muterole.id);
-                person.roles.add(unmuterole.id);
-        
-                message.channel.send({embed: {
-                    color: 3066993,
-                    author: {
-                        name: 'OS Official Bot'
-                    },
-                    description: `<@${person.user.id}> has been unmuted by the admin`,
-                    fields: [{
-                        name: 'Reason:',
-                        value: reason,
-                        inline: false
-                    },
-                {
-                    name: 'Responsible moderator:',
-                    value: `<@${message.author.id}>`
-                }]
-                }})
-
-            unmuteLog.send({embed: {
-                color: 15158332,
-                author: {
-                    name: 'OS Official Bot',
-                    icon_url: 'https://i.imgur.com/OCHoFgH.png'
-                },
-                fields: [
-                    {
-                    name: 'Unmuted!',
-                    value: `${person.user.tag}`,
-                    },
-                    {
-                    name: 'Reason:',
-                    value: reason,
-                    },
-                    {
-                    name: 'Responsible moderator:',
-                    value: `<@${message.author.id}>`
-                    }
-                ]
-            }})
-
-            person.send({embed: {
-                    color: 15158332,
-                    author: {
-                        name: 'OS Official Bot',
-                        icon_url: 'https://i.imgur.com/OCHoFgH.png'
-                    },
-                    title: '\:unlock: You have been unmuted! \:loud_sound: ',
-                    description: '\:star_struck: Someone has decided to unmute you yay! \:star_struck: ',
-                    fields: [
-                        {
-                        name: 'Reason:',
-                        value: reason,
-                        inline: false
-                        },
-                        {
-                        name: 'Responsible moderator',
-                        value: `<@${message.author.id}>`
-                        }
-                    ],
-                }})
-            
-        }
-    } else 
-    if (command === 'war') {
-        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-            const channels = message.guild.channels.cache.find(channel => channel.name === 'war-reinforcements');
-        let warRole = message.guild.roles.cache.find(roles => roles.name === 'War');
-        let reasonz = args.slice(0).join(' ');
-
-        if (!reasonz) return message.reply('Pls provide me a description u pepega <:Pepega:718511496216313866>');
-
-        message.delete();
-
-        channels.send(`${warRole}`)
-        channels.send({embed: {
-            title: 'THIS IS A WAR PING!',
-            color: 15158332,
-            fields: [
-                {
-                name: 'Announcement!',
-                value: reasonz,
-                },
-                {
-                name: 'Announced by:',
-                value: `<@${message.author.id}>`,
-                inline: false,
-                },
-                {
-                name: 'Join this comms!',
-                value: 'https://discord.gg/BfrAhcq'
-                }
-            ],
-            timestamp: new Date(),
-        }})
-        } else {
-            message.reply(`You don't have permission to use this command`)
-        }
     } else 
     if (command === 'rank') {
         if ( message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
@@ -1263,12 +916,359 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         }})
     }
 
+})
+client.on('message', (message) => {
+
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const command = args.shift().toLowerCase();
+
+    if (command === 'kick'){
+        if (message.member.hasPermission('KICK_MEMBERS')) {
+            const userKick = message.mentions.users.first() || args.slice(1).join(' ');
+            let reason = args.slice(1).join(' ');
+            const modLog = client.channels.cache.find(channel => channel.id === '747499541812478054');
+
+            if (user.hasPermission('KICK_MEMBERS')) return message.channel.send({embed: {
+                color: 15158332,
+                author: {
+                    name: 'OS Official Bot',
+                    icon_url: 'https://i.imgur.com/OCHoFgH.png'
+                },
+                description: `\:rofl: You can't kick an admin lmaoo \:rofl:`,
+                image: {
+                    url: 'https://media.giphy.com/media/3oEdv07JVXwhImYGWc/giphy.gif'
+                },
+            }})
+
+            if (!reason) return message.reply('Pls provide me a reason!')
+
+            if (userKick) {
+                var member = message.guild.member(userKick);
     
+                if (member) {
+                    member.kick(reason).then(() => {
+                        modLog.send({embed: {
+                            color: 15158332,
+                            author: {
+                                name: 'OS Official Bot',
+                                icon_url: 'https://i.imgur.com/OCHoFgH.png'
+                            },
+                            fields: [
+                                {
+                                name: `Kicked:`,
+                                value: `${userKick.tag}`,
+                                inline: true
+                                },
+                                {
+                                name: `Reason:`,
+                                value: `${reason}`,
+                                inline: false
+                                },
+                                {
+                                name: 'Responsible moderator:',
+                                value: `<@${message.author.id}>`
+                                }
+                            ],
+                            
+                        }})
+                        message.channel.send({embed: {
+                            color: 15158332,
+                            author: {
+                                name: 'OS Official Bot',
+                                icon_url: 'https://i.imgur.com/OCHoFgH.png'
+                            },
+                            description: `kicked <@${userKick.id}> from the server!`,
+                            fields: [{
+                                name: 'Reason:',
+                                value: reason,
+                                inline: false
+                            }]
+                        }});
+                    }).catch(err => {
+                        message.reply(`I was not able to kick that user.`)
+                        console.log(err);
+                    })
+                } else {
+                    message.reply('that user is not in the server.')
+                }
+            } else {
+                message.reply('you need to state the person you want to kick')
+            }
+        } else {
+            message.reply(`You don't have permission to use this command`)
+        }
+    } else
+    if (command === 'tempmute') {
+        if (message.member.hasPermission('MUTE_MEMBERS')) {
+        
+            let person = message.guild.member(message.mentions.users.first() || message.guild.member(args[1]) || args.slice(2).join(' '));
 
+            if (!person) return message.reply('Bruh, what\'s wrong with you, or do you want me to mute a ghost? That\'s funny though');
+            if (person.hasPermission('MUTE_MEMBERS')) return message.channel.send({embed: {
+                color: 15158332,
+                author: {
+                    name: 'OS Official Bot'
+                },
+                description: 'You can\'t mute an admin lmao',
+                image: {
+                    url: 'https://media.giphy.com/media/3oEdv07JVXwhImYGWc/giphy.gif'
+                }
+            }})
+
+            let mainrole = message.guild.roles.cache.find(role => role.name === 'VG');
+            let muterole = message.guild.roles.cache.find(role => role.name === 'Muted');
+            let time = args[1];
+            let reason = args.slice(2).join(' ');
+            const tempmuteLog = message.guild.channels.cache.find(channel => channel.id === '747499541812478054');
+
+
+            if (!muterole) {
+                message.channel.send('this channel does not include a mute role...I will create one!');
+                
+            } else 
+            if (!time) {
+                return message.reply('please enter a time to mute the user for!')
+            } else 
+            if (!reason) {
+                return message.reply('please enter the reason why u mute him/her/it')
+            }
+
+            person.roles.remove(mainrole.id);
+            person.roles.add(muterole.id);
+
+            message.channel.send({embed: {
+                color: 0x0099ff,
+                author: {
+                    name: 'OS Official Bot'
+                },
+                description: `\:hammer: Bippity Boppity! <@${person.user.id}> has been muted for ${ms(ms(time))}`,
+                fields: [{
+                    name: 'Reason:',
+                    value: reason,
+                    inline: false
+                }] 
+            }});
+
+                tempmuteLog.send({embed: {
+                    color: 15158332,
+                    author: {
+                        name: 'OS Official Bot',
+                        icon_url: 'https://i.imgur.com/OCHoFgH.png'
+                    },
+                    fields: [
+                        {
+                        name: `Temporarly muted!`,
+                        value: `${person.user.tag}`,
+                        },
+                        {
+                        name: 'Reason:',
+                        value: reason,
+                        },
+                        {
+                        name: 'Duration',
+                        value: `${ms(ms(time))}`
+                        },
+                        {
+                        name: 'Responsible moderator:',
+                        value: `<@${message.author.id}>`
+                        }
+                    ]
+                }})
+
+                person.send({embed: {
+                    color: 15158332,
+                    author: {
+                        name: 'OS Official Bot',
+                        icon_url: 'https://i.imgur.com/OCHoFgH.png'
+                    },
+                    title: '\:lock: You have been temporarly muted from OS Server! \:mute:',
+                    fields: [
+                        {
+                        name: 'Reason:',
+                        value: reason,
+                        inline: false
+                        },
+                        {
+                        name: 'Duration:',
+                        value: time,
+                        inline: false
+                        },
+                        {
+                        name: 'Responsible Moderator',
+                        value: `<@${message.author.id}>`
+                        }
+                    ],
+                }})
+            
+                setTimeout(function () {
+                    person.roles.add(mainrole.id);
+                    person.roles.remove(muterole.id);
+                    if (person.roles.cache.has(mainrole.id)) return;
+                    message.channel.send({embed: {
+                        color: 0x0099ff,
+                        author: {
+                            name: 'OS Official Bot'
+                        },
+                        description: `Hup! Hup! ${ms(ms(time))} has passed! <@${person.user.id}> is now unmuted!`,
+                        fields: [{
+                            name: 'Reason:',
+                            value: 'Mute time expired!',
+                            inline: false
+                        }]
+                    }})
+                    person.send({embed: {
+                        color: 15158332,
+                        author: {
+                            name: 'OS Official Bot',
+                            icon_url: 'https://i.imgur.com/kUi20Yz.png'
+                        },
+                        description: '\:unlock: You have been unmuted! \:loud_sound: ',
+                        fields: [
+                            {
+                            name: 'Reason:',
+                            value: 'Mute time expired',
+                            inline: false
+                            },
+                            {
+                            name: 'Duration:',
+                            value: time,
+                            inline: false
+                            },
+                        ],
+                    }})
+                }, ms(time));
+        } else {
+            message.reply(`You don't have permission to use this command pepega`)
+        }
+    } else 
+    if (command === 'unmute') {
+        if (message.member.hasPermission('MUTE_MEMBERS')) {
+            let person = message.guild.member(message.mentions.users.first() || args.slice(1).join(' '));
     
+            if (!person) return message.reply('This person is not exist');
+            if (person.hasPermission('MUTE_MEMBERS')) return message.channel.send({embed: {
+                color: 15158332,
+                author: {
+                    name: 'OS Official Bot'
+                },
+                description: '\:weary: You can\'t mute or even unmute an Admin \:triumph:',
+                image: {
+                    url: 'https://media.giphy.com/media/okrv1eWeKVM9W/giphy.gif'
+                }
+            }})
+    
+            let unmuterole = message.guild.roles.cache.find(role => role.name === 'VG');
+            let muterole = message.guild.roles.cache.find(role => role.name === 'Muted');
+            const unmuteLog = message.guild.channels.cache.find(channel => channel.id === '747499541812478054');
+            let reason = args.slice(1).join(' ');
+    
+            if (!muterole) {
+                message.reply('this server doesnt have a mute role');
+            } else 
+            if (!reason) {
+                message.reply('please provide a reason why u unmute')
+            } 
+            if (person.roles.cache.has(unmuterole.id)) return message.reply('Bruh focus! he\'s already muted before u type this command')
+                person.roles.remove(muterole.id);
+                person.roles.add(unmuterole.id);
+        
+                message.channel.send({embed: {
+                    color: 3066993,
+                    author: {
+                        name: 'OS Official Bot'
+                    },
+                    description: `<@${person.user.id}> has been unmuted by the admin`,
+                    fields: [{
+                        name: 'Reason:',
+                        value: reason,
+                        inline: false
+                    },
+                {
+                    name: 'Responsible moderator:',
+                    value: `<@${message.author.id}>`
+                }]
+                }})
 
+            unmuteLog.send({embed: {
+                color: 15158332,
+                author: {
+                    name: 'OS Official Bot',
+                    icon_url: 'https://i.imgur.com/OCHoFgH.png'
+                },
+                fields: [
+                    {
+                    name: 'Unmuted!',
+                    value: `${person.user.tag}`,
+                    },
+                    {
+                    name: 'Reason:',
+                    value: reason,
+                    },
+                    {
+                    name: 'Responsible moderator:',
+                    value: `<@${message.author.id}>`
+                    }
+                ]
+            }})
 
+            person.send({embed: {
+                    color: 15158332,
+                    author: {
+                        name: 'OS Official Bot',
+                        icon_url: 'https://i.imgur.com/OCHoFgH.png'
+                    },
+                    title: '\:unlock: You have been unmuted! \:loud_sound: ',
+                    description: '\:star_struck: Someone has decided to unmute you yay! \:star_struck: ',
+                    fields: [
+                        {
+                        name: 'Reason:',
+                        value: reason,
+                        inline: false
+                        },
+                        {
+                        name: 'Responsible moderator',
+                        value: `<@${message.author.id}>`
+                        }
+                    ],
+                }})
+            
+        }
+    } else 
+    if (command === 'war') {
+        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const channels = message.guild.channels.cache.find(channel => channel.name === 'war-reinforcements');
+        let warRole = message.guild.roles.cache.find(roles => roles.name === 'War');
+        let reasonz = args.slice(0).join(' ');
 
+        if (!reasonz) return message.reply('Pls provide me a description u pepega <:Pepega:718511496216313866>');
+
+        message.delete();
+
+        channels.send(`${warRole}`)
+        channels.send({embed: {
+            title: 'THIS IS A WAR PING!',
+            color: 15158332,
+            fields: [
+                {
+                name: 'Announcement!',
+                value: reasonz,
+                },
+                {
+                name: 'Announced by:',
+                value: `<@${message.author.id}>`,
+                inline: false,
+                },
+                {
+                name: 'Join this comms!',
+                value: 'https://discord.gg/BfrAhcq'
+                }
+            ],
+            timestamp: new Date(),
+        }})
+        } else {
+            message.reply(`You don't have permission to use this command`)
+        }
+    }
 })
 
 client.once('ready', () => {
