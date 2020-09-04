@@ -51,7 +51,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         - arrow000acenova (BBG2)
         - Zuhaer (Ivy)
         
-        Dm <@${gato.user.id}> to update the list
+        Dm <@${gato.id}> to update the list
         Type \`${prefix}kos 2\` to open second page`}
     )
 
@@ -67,7 +67,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         - Jabberwocky (Ivy) --> suggested by <@${uhd.user.id}>
         - SOCCERGOD --> suggested by <@${misteree.user.id}>
         - Dest (-GK-) --> suggested by <@${misteree.user.id}>
-        - gangstercat --> suggested by <@${misteree.user.id}>
+        - gangstercat --> suggested by <@${misteree.username.id}>
         - 69dot --> suggested by <@${misteree.user.id}>
         `}
     )
