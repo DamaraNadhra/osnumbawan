@@ -7,13 +7,15 @@ const ms = require('ms');
 const prefix = '&'
 
 client.on('message', (message) => {
-const sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
+
+if (message.channel.type === 'dm') return;
+
+let sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
 let misteree = message.guild.members.cache.find(ee => ee.id === '632506405370200084')
 let nihilo =  message.guild.members.cache.find(nihil => nihil.id === '688776325212667926')
 let uhd = message.guild.members.cache.find(uh => uh.id === '559479208007696395')
 let gato = message.guild.members.cache.find(gato => gato.id === '694488949980135444')
-
-    let shamanApprentice  = message.guild.roles.cache.find(appren => appren.id === '712346176220954664')
+let shamanApprentice  = message.guild.roles.cache.find(appren => appren.id === '712346176220954664')
 let shamanMaster  = message.guild.roles.cache.find(master => master.id === '712346843849424926')
 let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346899209781338')
 
@@ -826,7 +828,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             message.reply(`You're not even in OS clan lmaoo`)
         }
     } else
-    if (message.content.toLowerCase().startsWith(`${prefix}temporal dilation`) || message.content.toLowerCase().startsWith(`${prefix}temp`)) {
+    if (message.content.toLowerCase().startsWith(`${prefix}temporal dilation`) || message.content.toLowerCase().startsWith(`${prefix}temporal`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
             const Bolt = new Discord.MessageEmbed()
             .setColor('00ff00 ')
@@ -928,7 +930,7 @@ client.on('message', (message) => {
             let reason = args.slice(1).join(' ');
             const modLog = client.channels.cache.find(channel => channel.id === '747499541812478054');
 
-            if (user.hasPermission('KICK_MEMBERS')) return message.channel.send({embed: {
+            if (userKick.hasPermission('KICK_MEMBERS')) return message.channel.send({embed: {
                 color: 15158332,
                 author: {
                     name: 'OS Official Bot',
