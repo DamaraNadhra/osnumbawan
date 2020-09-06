@@ -6,6 +6,9 @@ const ms = require('ms');
 
 const prefix = '&'
 
+const config = require('./config.json');
+client.config = config;
+
 const { GiveawaysManager } = require('discord-giveaways');
 
 client.giveawayManager = new GiveawaysManager(client, {
