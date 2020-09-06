@@ -268,7 +268,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .addFields(
                 { name: `Shaman Apprentice`, value: `${shamanApprentice} Is the rank/role that you gained after joining OS, it contains clan members and assistants`},
                 { name: `Shaman Master`, value: `${shamanMaster} Is the rank/role that you gained after you achieve Officer role in game, you must prove your existence to obtain this role`},
-                { name: `Shaman Highlord`, value: `${shamanHighlord} Is the highest rank/role that you can achieve in this discord, just fyi, ${shamanHighlord} role is \`almost impossible\` `}
+                { name: `Shaman Highlord`, value: `${shamanHighlord} Is the highest rank/role that you can achieve in this discord. Because ${shamanHighlord} = owner clan, just fyi, ${shamanHighlord} role is \`almost impossible\` `}
             )
 
             message.channel.send(rankEmbed)
