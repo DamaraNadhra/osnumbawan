@@ -266,9 +266,9 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('00ff00 ')
             .setDescription('Order Of the Shamans has their own rank at discord, the ranks shows your contribution')
             .addFields(
-                { name: `Shaman Apprentice`, value: `${shamanApprentice} Is the rank/role that you gained after joining OS, it contains clan members and assistants`},
-                { name: `Shaman Master`, value: `${shamanMaster} Is the rank/role that you gained after you achieve Officer role in game, you must prove your existence to obtain this role`},
-                { name: `Shaman Highlord`, value: `${shamanHighlord} Is the highest rank/role that you can achieve in this discord. Because ${shamanHighlord} = owner clan, just fyi, ${shamanHighlord} role is \`almost impossible\` `}
+                { name: `Shaman Apprentice`, value: `Shaman Apprentice Is the rank/role that you gained after joining OS, it contains clan members and assistants`},
+                { name: `Shaman Master`, value: `Shaman Master Is the rank/role that you gained after you achieve Officer role in game, you must prove your existence to obtain this role`},
+                { name: `Shaman Highlord`, value: `Shaman HIghlord Is the highest rank/role that you can achieve in this discord. Because Shaman Highlord = owner clan, just fyi, Shaman Highlord role is \`almost impossible\` `}
             )
 
             message.channel.send(rankEmbed)
