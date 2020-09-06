@@ -934,7 +934,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         }})
     } else
     if (command === 'osgmake') {
-        if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send('You are not allowed to start a giveaway!');
+        if (!message.member.roles.cache.has('712372685484720201')) return message.channel.send('You are not allowed to start a giveaway!');
 
         let channel = message.mentions.channels.first();
 
