@@ -9,6 +9,7 @@
   "author": "GatotKaca",
   "license": "ISC",
   "dependencies": {
+    "discord-giveaways": "^4.2.1",
     "discord.js": "^12.3.1",
     "ms": "^2.1.2"
   }
