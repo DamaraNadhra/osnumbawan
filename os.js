@@ -955,8 +955,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             hostedBy: client.config.hostedBy ? message.author : null,
 
             messages: {
-            giveaway: (client.config.everyoneMention ? "@everyone\n\n" : "") + "GIVEAWAY",
-            giveawayEnded: (client.config.everyoneMention ? "@everyone\n\n" : "") + "GIVEAWAY ENDED",
+            giveaway: (client.config.everyoneMention ? "@everyone\n\n" : "") + "🎉🎉 GIVEAWAY 🎉🎉",
+            giveawayEnded: (client.config.everyoneMention ? "@everyone\n\n" : "") + "✨✨ GIVEAWAY ENDED ✨✨",
             timeRemaining: "Time remaining: **{duration}**",
             inviteToParticipate: "React with 🎉 to enter",
             winMessage: "Congratulations! {winners}, you won the **{prize}**",
