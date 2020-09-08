@@ -958,8 +958,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             hostedBy: client.config.hostedBy ? message.author : null,
 
             messages: {
-            giveaway: (client.config.everyoneMention ? "@everyone\n\n" : "") + "<a:givekiri:752066019396288512><a:givekiri:752066019396288512> GIVEAWAY <a:givekanan:752066019496951848><a:givekanan:752066019496951848>",
-            giveawayEnded: (client.config.everyoneMention ? "@everyone\n\n" : "") + "<a:givekiri:752066019396288512><a:givekiri:752066019396288512> GIVEAWAY ENDED <a:givekanan:752066019496951848><a:givekanan:752066019496951848>",
+            giveaway: (client.config.everyoneMention ? "@everyone\n\n" : "") + "<a:givekiri:752066019396288512><a:givekiri:752066019396288512> **GIVEAWAY** <a:givekanan:752066019496951848><a:givekanan:752066019496951848>",
+            giveawayEnded: (client.config.everyoneMention ? "@everyone\n\n" : "") + "<a:givekiri:752066019396288512><a:givekiri:752066019396288512> **GIVEAWAY ENDED** <a:givekanan:752066019496951848><a:givekanan:752066019496951848>",
             timeRemaining: "Time remaining: **{duration}**",
             inviteToParticipate: "React with 🎉 to enter",
             winMessage: "Congratulations! {winners}, you won the **{prize}**",
