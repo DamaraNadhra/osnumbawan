@@ -22,7 +22,7 @@ client.giveawayManager = new GiveawaysManager(client, {
     }
 });
 
-client.on('message', (message) => {
+client.on('message', async (message) => {
 
 if (message.channel.type === 'dm') return;
 
