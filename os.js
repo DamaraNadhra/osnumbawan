@@ -1063,18 +1063,16 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         )
         
         message.delete();
-        message.channel.send(pollEmbed);
+        let msg = await message.channel.send(pollEmbed);
+        await msg.react('753654287338569778')
+        await msg.react('753654286134542447')
  
         
-        const filter = (reaction, user) =>{
-            return ['<a:verified:753654287338569778>','<:no:753654286134542447>'].includes(reaction.emoji.name) && user.id === message.author.id;
-        }
-        const collector = message.createReactionCollector(filter, {time: 5000});
+        const filter = (reaction, user) => reaction.emoji.name === '<a:verified:753654287338569778>' || reaction.emoji.name === '<:no:753654286134542447>'
 
-        collector.on('end', x => {
-            console.log(`Collected ${x.size} reactions`);
-            message.channel.send(`Voting complete! agree: ${x.size} `)
-        })
+        const result = await msg.awaitReactions(filter, {time: 5000});
+        message.channel.send(`Voting is complete! agree: ${result.get('<a:verified:753654287338569778>').count-1}`)
+
 
     }
 
