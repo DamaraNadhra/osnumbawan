@@ -1040,13 +1040,14 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else 
     if (command === 'poll') {
         let pollMessage = args.slice(0).join(' ');
-        let aggree = args.slice(1).join(' ');
-        let disagree = args.slice(2).join(' ');
+        let aggree = args.slice(1);
+        let disagree = args.slice(2);
         if (!pollMessage) return message.reply("What are you going to poll?")
         if (!aggree) return message.reply('Please insert the aggree statement')
         if (!disagree) return message.reply("Please insert the disagree statement")
         const pollEmbed = new Discord.MessageEmbed()
         .setTitle('Poll!')
+        .setColor('#00FF2A')
         .addFields(
             { name: pollMessage, value: `
             <a:verified:753654287338569778> ${aggree}
