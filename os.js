@@ -1070,7 +1070,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         
         const filter = (reaction, user) => reaction.emoji.name === '<a:verified:753654287338569778>' || reaction.emoji.name === '<:no:753654286134542447>'
 
-        const result = msg.awaitReactions(filter, {time: 5000});
+        const result = await msg.awaitReactions(filter, {time: 5000});
         message.channel.send(`Voting is complete! agree: ${result.get('<a:verified:753654287338569778>').count-1}`)
 
 
