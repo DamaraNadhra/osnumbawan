@@ -1075,9 +1075,6 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             console.log(`Collected ${x.size} reactions`);
             message.channel.send(`Voting complete! agree: ${x.size} `)
         })
-        message.channel.send(`Voting complete! 
-        Collected <a:verified:753654287338569778> = ${reactor.get('<a:verified:753654287338569778>').count-1}
-        <:no:753654286134542447> = ${reactor.get('<:no:753654286134542447>').count-1}`)
 
     }
 
