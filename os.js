@@ -1037,6 +1037,28 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
                 message.channel.send('An error occured...');
             }
         });
+    } else 
+    if (command === 'poll') {
+        let pollMessage = args.slice(0).join(' ');
+        let aggree = args.slice(1).join(' ');
+        let disagree = args.slice(2).join(' ');
+        if (!pollMessage) return message.reply("What are you going to poll?")
+        if (!aggree) return message.reply('Please insert the aggree statement')
+        if (!disagree) return message.reply("Please insert the disagree statement")
+        const pollEmbed = new Discord.MessageEmbed()
+        .setTitle('Poll!')
+        .addFields(
+            { name: pollMessage, value: `
+            <a:verified:753654287338569778> ${aggree}
+            
+            <:no:753654286134542447> ${disagree}`}
+        )
+
+        message.delete();
+        let poll = await message.channel.send(pollEmbed);
+        poll.react('753654287338569778')
+        poll.react('753654286134542447')
+
     }
 
 })
