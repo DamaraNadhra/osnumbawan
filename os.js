@@ -1040,8 +1040,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else 
     if (command === 'poll') {
         let pollMessage = args.slice(0).join(' ');
-        let aggree = args.slice(1);
-        let disagree = args.slice(2);
+        let aggree = args[1];
+        let disagree = args.[2];
         const agreeEmoji = '<a:verified:753654287338569778>'
         const disagreeEmoji = '<:no:753654286134542447>'
         if (!pollMessage) return message.reply("What are you going to poll?")
