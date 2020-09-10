@@ -1042,6 +1042,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         let pollMessage = args.slice(0).join(' ');
         let aggree = args.slice(1);
         let disagree = args.slice(2);
+        const agreeEmoji = '<a:verified:753654287338569778>'
+        const disagreeEmoji = '<:no:753654286134542447>'
         if (!pollMessage) return message.reply("What are you going to poll?")
         if (!aggree) return message.reply('Please insert the aggree statement')
         if (!disagree) return message.reply("Please insert the disagree statement")
@@ -1059,6 +1061,11 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         let poll = await message.channel.send(pollEmbed);
         poll.react('753654287338569778')
         poll.react('753654286134542447')
+
+        const reactor = await poll.awaitReactions((reaction => reaction.emoji.name === agreeEmoji || reaction.emoji.name === disagreeEmoji, {time: 10000}));
+        message.channel.send(`Voting complete! 
+        Collected <a:verified:753654287338569778> = ${reactor.get(agreeEmoji).count-1}
+        <:no:753654286134542447> = ${reactor.get(disagreeEmoji).count-1}`)
 
     }
 
