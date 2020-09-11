@@ -1042,8 +1042,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         });
     
     
-    } else 
-    if (command === 'poll') {
+    } else     
+     if (command === 'poll') {
         let pollMessage = args[0];
         let aggree = args[1];
         let disagree = args[2];
@@ -1056,7 +1056,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         .setTitle('Poll!')
         .setColor('#00FF2A')
         .addFields(
-            { name: pollMessage, value: `
+            { name: `<a:ini:753853854117920850> ${pollMessage}`, value: `
             <a:verified:753654287338569778> ${aggree}
             
             <:no:753654286134542447> ${disagree}`}
@@ -1068,10 +1068,53 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         await msg.react('753654286134542447')
  
         
-        const filter = (reaction, user) => reaction.emoji.name === '<a:verified:753654287338569778>' || reaction.emoji.name === '<:no:753654286134542447>'
+        const filter = (reaction, user) => reaction.emoji.id === '753654287338569778' || reaction.emoji.id === '753654286134542447'
 
-        const result = await msg.awaitReactions(filter, {time: 5000});
-        message.channel.send(`Voting is complete! agree: ${result.get('<a:verified:753654287338569778>').count-1}`)
+        const result = await msg.awaitReactions(filter, {time: 5000}).then((collected) => {
+            if (collected.get('753654287338569778').count-1 > collected.get('753654286134542447').count-1) {
+            let resutEmbed = new Discord.MessageEmbed()
+            .setTitle('Voting Complete!')
+            .setColor('#00FF2A')
+            .addFields( 
+                {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${collected.get('753654287338569778').count-1}
+                
+                <:no:753654286134542447> ${disagree} => ${collected.get('753654286134542447').count-1}
+                
+                **Final Answer is:** <a:verified:753654287338569778> **${aggree}** `}
+            )
+        msg.edit(resutEmbed)
+        msg.reactions.removeAll()
+            } else
+            if (collected.get('753654287338569778').count-1 < collected.get('753654286134542447').count-1) {
+                let resutEmbed = new Discord.MessageEmbed()
+                .setTitle('Voting Complete!')
+                .setColor('#00FF2A')
+                .addFields( 
+                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${collected.get('753654287338569778').count-1}
+                    
+                    <:no:753654286134542447> ${disagree} => ${collected.get('753654286134542447').count-1}
+                    
+                    **Final Answer is:** <:no:753654286134542447> **${disagree}** `}
+                )
+            msg.edit(resutEmbed)
+            msg.reactions.removeAll()
+            } lse
+            if (collected.get('753654287338569778').count-1 === collected.get('753654286134542447').count-1) {
+                let resutEmbed = new Discord.MessageEmbed()
+                .setTitle('Voting Complete!')
+                .setColor('#00FF2A')
+                .addFields( 
+                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${collected.get('753654287338569778').count-1}
+                    
+                    <:no:753654286134542447> ${disagree} => ${collected.get('753654286134542447').count-1}
+                    
+                    **Final Answer is:** <a:nitro:753855915223941122> **Draw** `}
+                )
+            msg.edit(resutEmbed)
+            msg.reactions.removeAll()
+            }
+         })
+        
 
 
     }
