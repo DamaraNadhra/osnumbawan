@@ -1044,14 +1044,19 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     
     } else     
      if (command === 'poll') {
-        let pollMessage = args[0];
-        let aggree = args[1];
-        let disagree = args[2];
-        const agreeEmoji = '<a:verified:753654287338569778>'
-        const disagreeEmoji = '<:no:753654286134542447>'
-        if (!pollMessage) return message.reply("What are you going to poll?")
-        if (!aggree) return message.reply('Please insert the aggree statement')
-        if (!disagree) return message.reply("Please insert the disagree statement")
+        if (message.content.includes('|')) {
+            const argument = message.content.slice('&poll'.length)
+            const splat = argument.split('|');
+            const pollMessage = splat[0].trim();
+            const aggree = splat[1].trim();
+            const disagree = splat[2].trim();
+        
+       const agreeEmoji = '<a:verified:753654287338569778>'
+       const disagreeEmoji = '<:no:753654286134542447>'
+       if (!pollMessage) return message.reply("What are you going to poll?")
+       if (!aggree) return message.reply('Please insert the aggree statement')
+       if (!disagree) return message.reply("Please insert the disagree statement")
+       const falter = m => m.author.id === message.author.id
         const pollEmbed = new Discord.MessageEmbed()
         .setTitle('Poll!')
         .setColor('#00FF2A')
@@ -1061,6 +1066,10 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             
             <:no:753654286134542447> ${disagree}`}
         )
+        await message.channel.send('Alright the poll has been set, how long u will gonna host the poll?');
+        message.channel.awaitMessages(falter, {max: 1, time: 30000}).then(async collect => {
+            if (collect.first().content.endsWith('s') && collect.first().content.endsWith('m') && collect.first().content.endsWith('h') && collect.first().content.endsWith('d')) return message.reply("Sorry sir, that's not a number, please restart from the beginning!")
+            let time = collect.first().content;
         
         message.delete();
         let msg = await message.channel.send(pollEmbed);
@@ -1070,7 +1079,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         
         const filter = (reaction, user) => reaction.emoji.id === '753654287338569778' || reaction.emoji.id === '753654286134542447'
 
-        const result = await msg.awaitReactions(filter, {time: 5000}).then((collected) => {
+        const result = await msg.awaitReactions(filter, {time: ms(time)}).then((collected) => {
+            if (msg.reactions.cache.get('753654287338569778').count-1 <= 0 || msg.reactions.cache.get('753654286134542447').count-1 <= 0) return message.channel.send("No one voted sorry this poll is aborted")
             if (collected.get('753654287338569778').count-1 > collected.get('753654286134542447').count-1) {
             let resutEmbed = new Discord.MessageEmbed()
             .setTitle('Voting Complete!')
@@ -1114,6 +1124,9 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             msg.reactions.removeAll()
             }
          })
+        })
+        }
+    
         
 
 
