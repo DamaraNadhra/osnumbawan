@@ -1108,7 +1108,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
                 )
             msg.edit(resutEmbed)
             msg.reactions.removeAll()
-            } lse
+            } else
             if (msg.reactions.cache.get('753654287338569778').count-1 === msg.reactions.cache.get('753654286134542447').count-1) {
                 let resutEmbed = new Discord.MessageEmbed()
                 .setTitle('Voting Complete!')
