@@ -1080,43 +1080,43 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         const filter = (reaction, user) => reaction.emoji.id === '753654287338569778' || reaction.emoji.id === '753654286134542447'
 
         const result = await msg.awaitReactions(filter, {time: ms(time)}).then((collected) => {
-            if (msg.reactions.cache.get('753654287338569778').count-1 <= 0 || msg.reactions.cache.get('753654286134542447').count-1 <= 0) return message.channel.send("No one voted sorry this poll is aborted")
-            if (collected.get('753654287338569778').count-1 > collected.get('753654286134542447').count-1) {
+            if (msg.reactions.cache.get('753654287338569778').count === 1 || msg.reactions.cache.get('753654286134542447').count === 1) return message.channel.send("No one voted sorry this poll is aborted")
+            if (msg.reactions.cache.get('753654287338569778').count-1 > msg.reactions.cache.get('753654286134542447').count-1) {
             let resutEmbed = new Discord.MessageEmbed()
             .setTitle('Voting Complete!')
             .setColor('#00FF2A')
             .addFields( 
-                {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${collected.get('753654287338569778').count-1}
+                {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
                 
-                <:no:753654286134542447> ${disagree} => ${collected.get('753654286134542447').count-1}
+                <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
                 
                 **Final Answer is:** <a:verified:753654287338569778> **${aggree}** `}
             )
         msg.edit(resutEmbed)
         msg.reactions.removeAll()
             } else
-            if (collected.get('753654287338569778').count-1 < collected.get('753654286134542447').count-1) {
+            if (msg.reactions.cache.get('753654287338569778').count-1 < msg.reactions.cache.get('753654286134542447').count-1) {
                 let resutEmbed = new Discord.MessageEmbed()
                 .setTitle('Voting Complete!')
                 .setColor('#00FF2A')
                 .addFields( 
-                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${collected.get('753654287338569778').count-1}
+                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
                     
-                    <:no:753654286134542447> ${disagree} => ${collected.get('753654286134542447').count-1}
+                    <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
                     
                     **Final Answer is:** <:no:753654286134542447> **${disagree}** `}
                 )
             msg.edit(resutEmbed)
             msg.reactions.removeAll()
             } lse
-            if (collected.get('753654287338569778').count-1 === collected.get('753654286134542447').count-1) {
+            if (msg.reactions.cache.get('753654287338569778').count-1 === msg.reactions.cache.get('753654286134542447').count-1) {
                 let resutEmbed = new Discord.MessageEmbed()
                 .setTitle('Voting Complete!')
                 .setColor('#00FF2A')
                 .addFields( 
-                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${collected.get('753654287338569778').count-1}
+                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
                     
-                    <:no:753654286134542447> ${disagree} => ${collected.get('753654286134542447').count-1}
+                    <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
                     
                     **Final Answer is:** <a:nitro:753855915223941122> **Draw** `}
                 )
