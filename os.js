@@ -1080,7 +1080,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         const filter = (reaction, user) => reaction.emoji.id === '753654287338569778' || reaction.emoji.id === '753654286134542447'
 
         const result = await msg.awaitReactions(filter, {time: ms(time)}).then((collected) => {
-            if (msg.reactions.cache.get('753654287338569778').count === 1 || msg.reactions.cache.get('753654286134542447').count === 1) return message.channel.send("No one voted sorry this poll is aborted")
+            if (msg.reactions.cache.get('753654287338569778').count === 1 && msg.reactions.cache.get('753654286134542447').count === 1) return message.channel.send("No one voted sorry this poll is aborted")
             if (msg.reactions.cache.get('753654287338569778').count-1 > msg.reactions.cache.get('753654286134542447').count-1) {
             let resutEmbed = new Discord.MessageEmbed()
             .setTitle('Voting Complete!')
