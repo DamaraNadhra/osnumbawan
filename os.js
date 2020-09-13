@@ -864,6 +864,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             const mageSkillEmbed = new Discord.MessageEmbed()
             .setTitle('<:mage:713701096966717471> Mage Skill info').setURL('https://media.discordapp.net/attachments/712370407369605132/754304464638443530/HMWNAAAAAElFTkSuQmCC.png?width=1026&height=280')
             .setImage('https://media.discordapp.net/attachments/712370407369605132/754304464638443530/HMWNAAAAAElFTkSuQmCC.png?width=1026&height=280')
+            .setColor('00f2ff ') 
             .setFooter('Find more commands with &help')
             message.channel.send(mageSkillEmbed)
          } else {
@@ -875,6 +876,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             const archerSkillEmbed = new Discord.MessageEmbed()
             .setTitle('<:archer:713701070714437722> Archer Skill info').setURL('https://media.discordapp.net/attachments/712370407369605132/754304411148222504/ALK3eqqjJUIYAAAAAElFTkSuQmCC.png')
             .setImage('https://media.discordapp.net/attachments/712370407369605132/754304411148222504/ALK3eqqjJUIYAAAAAElFTkSuQmCC.png')
+            .setColor('00ff00 ')
             .setFooter('Find more commands with &help')
             message.channel.send(archerSkillEmbed)
          } else {
@@ -886,6 +888,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             const shamanSkillEmbed = new Discord.MessageEmbed()
             .setTitle('<:shaman:713463624450179212> Shaman Skill info').setURL('https://media.discordapp.net/attachments/712370407369605132/754304322443018260/f1XrVrFLcr3Bc5cmoNAEfRx4bu6Ub8f902dPLObau1AAAAAElFTkSuQmCC.png?width=1026&height=260')
             .setImage('https://media.discordapp.net/attachments/712370407369605132/754304322443018260/f1XrVrFLcr3Bc5cmoNAEfRx4bu6Ub8f902dPLObau1AAAAAElFTkSuQmCC.png?width=1026&height=260')
+            .setColor('0000ff ') 
             .setFooter('Find more commands with &help')
             message.channel.send(shamanSkillEmbed)
          } else {
