@@ -129,64 +129,6 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
         }
 
         
-    } else
-    if (command === 'unkos') {
-        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-
-            const unKos = new Discord.MessageEmbed()
-            .setTitle('UnKOS List')
-            .setDescription('This is OS clan UnKOS list!')
-            .setColor('#F60606 ')
-            .addFields(
-                { name: 'Player UnKos:', value: `+ Most/Everyone in BOT
-                + Kormo
-                + Nikitis
-                + GllVll
-                + SkaadoosH
-                + Lasui
-                + Zake
-                + StarcHy
-                + Aphelion
-                + Silla
-                + Sixtys
-                + Halluxia (Alyxia)
-                + Zerkupal
-                + Aramis <- Not really sure who they are
-                `},
-                { name: 'Clan UnKos:', value: 'Nothing cuz BL is suck <:pepelaugh:712506193788272701>'}
-            )
-            
-            message.channel.send(unKos)
-        
-        } else {
-            message.reply(`You don't have permission <:pepelaugh:712506193788272701>`)
-        }
-
-    } else
-    if (command === 'library') {
-        if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-            const library = new Discord.MessageEmbed()
-            .setColor('#06F60A ')
-            .setTitle('Library!')
-            .setDescription('This is OS clan\'s personal `library`')
-            .addFields(
-                { name: 'Warrior Books <:warrior:713701040519905330>:', value: `dm <@${sazgr.user.id}> to obtain the books
-                dm <@${nihilo.user.id}> to obtain the books 
-                type \`${prefix}warrior library\` for more information`},
-                { name: 'Shaman Books <:shaman:713463624450179212>:', value: `dm <@${misteree.user.id}> to obtain the books
-                dm <@${nihilo.user.id}> to obtain the books
-                type \`${prefix}shaman library\` for more information`},
-                { name: 'Mage Books <:mage:713701096966717471>:', value: `dm <@${sazgr.user.id}> to obtain the books
-                dm <@${nihilo.user.id}> to obtain the books
-                type \`${prefix}mage library\` for more information`},
-                { name: 'Archer Books <:archer:713701070714437722>:', value: `dm <@${nihilo.user.id}> to obtain the books
-                type \`${prefix}archer library\` for more information`}
-            )
-
-            message.channel.send(library)
-        } else {
-            message.reply(`You don't have permission lmao <:pepelaugh:712506193788272701>`)
-        }
     } else 
     if (message.content.toLowerCase().startsWith(`${prefix}warrior library`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
@@ -274,23 +216,6 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             message.channel.send(archerLibrary)
         } else {
             message.reply(`You don't have permission to use this command`)
-        }
-    } else 
-    if (command === 'rank') {
-        if ( message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-            const rankEmbed = new Discord.MessageEmbed()
-            .setTitle('OS Discord Rank <:osnumbawan:713088262838681731>')
-            .setColor('00ff00 ')
-            .setDescription('Order Of the Shamans has their own rank at discord, the ranks shows your contribution')
-            .addFields(
-                { name: `Shaman Apprentice`, value: `Shaman Apprentice Is the rank/role that you gained after joining OS, it contains clan members and assistants`},
-                { name: `Shaman Master`, value: `Shaman Master Is the rank/role that you gained after you achieve Officer role in game, you must prove your existence to obtain this role`},
-                { name: `Shaman Highlord`, value: `Shaman HIghlord Is the highest rank/role that you can achieve in this discord. Because Shaman Highlord = owner clan, just fyi, Shaman Highlord role is \`almost impossible\` `}
-            )
-
-            message.channel.send(rankEmbed)
-        } else {
-            message.reply(`You're not even in OS clan <:Yikes:718741173035859999>`)
         }
     } else 
     if (message.content.toLowerCase().startsWith(`${prefix}kos 2`)) {
@@ -934,202 +859,320 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             }
         }})
     } else
-    if (command === 'osgmake') {
-        if (!message.member.roles.cache.has('712372685484720201')) return message.channel.send('You are not allowed to start a giveaway!');
-
-        let channel = message.mentions.channels.first();
-
-        if (!channel) return message.channel.send('Please provide me a channel mentions!');
-
-        let giveawayDuration = args[1];
-
-        if (!giveawayDuration || isNaN(ms(giveawayDuration))) return message.channel.send('You are not using the correct formatting time in ms!');
-
-        let giveawayWinners = args[2];
-
-        if (isNaN(giveawayWinners) || (parseInt(giveawayWinners) <= 0)) return message.channel.send('Please provide a valid winner number!');
-
-        let giveawayPrize = args.slice(3).join(" ");
-        if (!giveawayPrize) return message.channel.send('Okay then I will giveaway nothing')
-
-        client.giveawayManager.start(channel, {
-            time: ms(giveawayDuration),
-            prize: giveawayPrize,
-            winnerCount: giveawayWinners,
-            hostedBy: client.config.hostedBy ? message.author : null,
-
-            messages: {
-            giveaway: (client.config.everyoneMention ? "@everyone\n\n" : "") + "<a:givekiri:752066019396288512><a:givekiri:752066019396288512> **GIVEAWAY** <a:givekanan:752066019496951848><a:givekanan:752066019496951848>",
-            giveawayEnded: (client.config.everyoneMention ? "@everyone\n\n" : "") + "<a:givekiri:752066019396288512><a:givekiri:752066019396288512> **GIVEAWAY ENDED** <a:givekanan:752066019496951848><a:givekanan:752066019496951848>",
-            timeRemaining: "Time remaining: **{duration}**",
-            inviteToParticipate: "React with 🎉 to enter",
-            winMessage: "Congratulations! {winners}, you won the **{prize}**",
-            embedFooter: "Giveaway time!",
-            noWinner: "Couldn't determine a winner!",
-            hostedBy: "Hosted by {user}",
-            winners: "winners",
-            endedAt: "Ends At",
-            units: {
-                seconds: "seconds",
-                minutes: "minutes",
-                hours: "hours",
-                days: "days",
-                pluralS: false
+    if (message.content.startsWith(prefix)) {
+        if (command === 'osgmake') {
+            if (!message.member.roles.cache.has('712372685484720201')) return message.channel.send('You are not allowed to start a giveaway!');
+    
+            let channel = message.mentions.channels.first();
+    
+            if (!channel) return message.channel.send('Please provide me a channel mentions!');
+    
+            let giveawayDuration = args[1];
+    
+            if (!giveawayDuration || isNaN(ms(giveawayDuration))) return message.channel.send('You are not using the correct formatting time in ms!');
+    
+            let giveawayWinners = args[2];
+    
+            if (isNaN(giveawayWinners) || (parseInt(giveawayWinners) <= 0)) return message.channel.send('Please provide a valid winner number!');
+    
+            let giveawayPrize = args.slice(3).join(" ");
+            if (!giveawayPrize) return message.channel.send('Okay then I will giveaway nothing')
+    
+            client.giveawayManager.start(channel, {
+                time: ms(giveawayDuration),
+                prize: giveawayPrize,
+                winnerCount: giveawayWinners,
+                hostedBy: client.config.hostedBy ? message.author : null,
+    
+                messages: {
+                giveaway: (client.config.everyoneMention ? "@everyone\n\n" : "") + "<a:givekiri:752066019396288512><a:givekiri:752066019396288512> **GIVEAWAY** <a:givekanan:752066019496951848><a:givekanan:752066019496951848>",
+                giveawayEnded: (client.config.everyoneMention ? "@everyone\n\n" : "") + "<a:givekiri:752066019396288512><a:givekiri:752066019396288512> **GIVEAWAY ENDED** <a:givekanan:752066019496951848><a:givekanan:752066019496951848>",
+                timeRemaining: "Time remaining: **{duration}**",
+                inviteToParticipate: "React with 🎉 to enter",
+                winMessage: "Congratulations! {winners}, you won the **{prize}**",
+                embedFooter: "Giveaway time!",
+                noWinner: "Couldn't determine a winner!",
+                hostedBy: "Hosted by {user}",
+                winners: "winners",
+                endedAt: "Ends At",
+                units: {
+                    seconds: "seconds",
+                    minutes: "minutes",
+                    hours: "hours",
+                    days: "days",
+                    pluralS: false
+                }
             }
-        }
-        })
-        message.channel.send(`Giveaway starting in ${channel}`);
-    } else
-    if (command === 'reroll') {
-        if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("You don't have permission to reroll a giveaways");
-
-        if (!args[0]) return message.channel.send("No giveaway ID provided");
-
-        let giveaway = client.giveawayManager.giveaways.find((g) => g.prize === args.join(" ")) || client.giveawayManager.giveaways.find((g) => g.messageID === args[0]);
-
-        if (!giveaway) return message.channel.send("Cannot find an giveaway with that ID!");
-
-        client.giveawayManager.reroll(giveaway.messageID)
-        .then(() => {
-            message.channel.send('Giveaway rerolled')
-        }).catch((e) => {
-            if (e.startsWith(`Giveaway with ID ${giveaway.messageID} is not ended`)) {
-                message.channel.send("This giveaway hasn't ended yet") 
-            } else {
-                console.error(e);
-                message.channel.send('An error occured')
+            })
+            message.channel.send(`Giveaway starting in ${channel}`);
+        } else
+        if (command === 'reroll') {
+            if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.reply("You don't have permission to reroll a giveaways");
+    
+            if (!args[0]) return message.channel.send("No giveaway ID provided");
+    
+            let giveaway = client.giveawayManager.giveaways.find((g) => g.prize === args.join(" ")) || client.giveawayManager.giveaways.find((g) => g.messageID === args[0]);
+    
+            if (!giveaway) return message.channel.send("Cannot find an giveaway with that ID!");
+    
+            client.giveawayManager.reroll(giveaway.messageID)
+            .then(() => {
+                message.channel.send('Giveaway rerolled')
+            }).catch((e) => {
+                if (e.startsWith(`Giveaway with ID ${giveaway.messageID} is not ended`)) {
+                    message.channel.send("This giveaway hasn't ended yet") 
+                } else {
+                    console.error(e);
+                    message.channel.send('An error occured')
+                }
+            })
+        } else
+        if (command === 'end') {
+            if(!message.member.hasPermission('MANAGE_MESSAGES') && !message.member.roles.cache.some((r) => r.name === "Giveaways")){
+                return message.channel.send(':x: You need to have the manage messages permissions to reroll giveaways.');
             }
-        })
-    } else
-    if (command === 'end') {
-        if(!message.member.hasPermission('MANAGE_MESSAGES') && !message.member.roles.cache.some((r) => r.name === "Giveaways")){
-            return message.channel.send(':x: You need to have the manage messages permissions to reroll giveaways.');
-        }
-    
-       
-        if(!args[0]){
-            return message.channel.send(':x: You have to specify a valid message ID!');
-        }
-    
         
-        let giveaway = 
-        
-        client.giveawaysManager.giveaways.find((g) => g.prize === args.join(' ')) ||
-       
-        client.giveawaysManager.giveaways.find((g) => g.messageID === args[0]);
-    
-        
-        if(!giveaway){
-            return message.channel.send('Unable to find a giveaway for `'+ args.join(' ') + '`.');
-        }
-    
-        
-        client.giveawaysManager.edit(giveaway.messageID, {
-            setEndTimestamp: Date.now()
-        })
-     
-        .then(() => {
-     
-            message.channel.send('Giveaway will end in less than '+(client.giveawaysManager.options.updateCountdownEvery/1000)+' seconds...');
-        })
-        .catch((e) => {
-            if(e.startsWith(`Giveaway with message ID ${giveaway.messageID} is already ended.`)){
-                message.channel.send('This giveaway is already ended!');
-            } else {
-                console.error(e);
-                message.channel.send('An error occured...');
+           
+            if(!args[0]){
+                return message.channel.send(':x: You have to specify a valid message ID!');
             }
-        });
-    
-    
-    } else     
-     if (command === 'poll') {
-        if (message.content.includes('|')) {
-            const argument = message.content.slice('&poll'.length)
-            const splat = argument.split('|');
-            const pollMessage = splat[0].trim();
-            const aggree = splat[1].trim();
-            const disagree = splat[2].trim();
         
-       const agreeEmoji = '<a:verified:753654287338569778>'
-       const disagreeEmoji = '<:no:753654286134542447>'
-       if (!pollMessage) return message.reply("What are you going to poll?")
-       if (!aggree) return message.reply('Please insert the aggree statement')
-       if (!disagree) return message.reply("Please insert the disagree statement")
-       const falter = m => m.author.id === message.author.id
-        const pollEmbed = new Discord.MessageEmbed()
-        .setTitle('Poll!')
-        .setColor('#00FF2A')
-        .addFields(
-            { name: `<a:ini:753853854117920850> ${pollMessage}`, value: `
-            <a:verified:753654287338569778> ${aggree}
             
-            <:no:753654286134542447> ${disagree}`}
-        )
-        await message.channel.send('Alright the poll has been set, how long u will gonna host the poll?');
-        message.channel.awaitMessages(falter, {max: 1, time: 30000}).then(async collect => {
-            if (collect.first().content.endsWith('s') && collect.first().content.endsWith('m') && collect.first().content.endsWith('h') && collect.first().content.endsWith('d')) return message.reply("Sorry sir, that's not a number, please restart from the beginning!")
-            let time = collect.first().content;
+            let giveaway = 
+            
+            client.giveawaysManager.giveaways.find((g) => g.prize === args.join(' ')) ||
+           
+            client.giveawaysManager.giveaways.find((g) => g.messageID === args[0]);
         
-        message.delete();
-        let msg = await message.channel.send(pollEmbed);
-        await msg.react('753654287338569778')
-        await msg.react('753654286134542447')
- 
-        
-        const filter = (reaction, user) => reaction.emoji.id === '753654287338569778' || reaction.emoji.id === '753654286134542447'
-
-        const result = await msg.awaitReactions(filter, {time: ms(time)}).then((collected) => {
-            if (msg.reactions.cache.get('753654287338569778').count === 1 && msg.reactions.cache.get('753654286134542447').count === 1) return message.channel.send("No one voted sorry this poll is aborted")
-            if (msg.reactions.cache.get('753654287338569778').count-1 > msg.reactions.cache.get('753654286134542447').count-1) {
-            let resutEmbed = new Discord.MessageEmbed()
-            .setTitle('Voting Complete!')
-            .setColor('#00FF2A')
-            .addFields( 
-                {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
-                
-                <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
-                
-                **Final Answer is:** <a:verified:753654287338569778> **${aggree}** `}
-            )
-        msg.edit(resutEmbed)
-        msg.reactions.removeAll()
-            } else
-            if (msg.reactions.cache.get('753654287338569778').count-1 < msg.reactions.cache.get('753654286134542447').count-1) {
-                let resutEmbed = new Discord.MessageEmbed()
-                .setTitle('Voting Complete!')
-                .setColor('#00FF2A')
-                .addFields( 
-                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
-                    
-                    <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
-                    
-                    **Final Answer is:** <:no:753654286134542447> **${disagree}** `}
-                )
-            msg.edit(resutEmbed)
-            msg.reactions.removeAll()
-            } else
-            if (msg.reactions.cache.get('753654287338569778').count-1 === msg.reactions.cache.get('753654286134542447').count-1) {
-                let resutEmbed = new Discord.MessageEmbed()
-                .setTitle('Voting Complete!')
-                .setColor('#00FF2A')
-                .addFields( 
-                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
-                    
-                    <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
-                    
-                    **Final Answer is:** <a:nitro:753855915223941122> **Draw** `}
-                )
-            msg.edit(resutEmbed)
-            msg.reactions.removeAll()
+            
+            if(!giveaway){
+                return message.channel.send('Unable to find a giveaway for `'+ args.join(' ') + '`.');
             }
-         })
-        })
-        }
-    
         
-
-
+            
+            client.giveawaysManager.edit(giveaway.messageID, {
+                setEndTimestamp: Date.now()
+            })
+         
+            .then(() => {
+         
+                message.channel.send('Giveaway will end in less than '+(client.giveawaysManager.options.updateCountdownEvery/1000)+' seconds...');
+            })
+            .catch((e) => {
+                if(e.startsWith(`Giveaway with message ID ${giveaway.messageID} is already ended.`)){
+                    message.channel.send('This giveaway is already ended!');
+                } else {
+                    console.error(e);
+                    message.channel.send('An error occured...');
+                }
+            });
+        
+        
+        } else     
+         if (command === 'poll') {
+            if (message.content.includes('|')) {
+                const argument = message.content.slice('&poll'.length)
+                const splat = argument.split('|');
+                const pollMessage = splat[0].trim();
+                const aggree = splat[1].trim();
+                const disagree = splat[2].trim();
+            
+           const agreeEmoji = '<a:verified:753654287338569778>'
+           const disagreeEmoji = '<:no:753654286134542447>'
+           if (!pollMessage) return message.reply("What are you going to poll?")
+           if (!aggree) return message.reply('Please insert the aggree statement')
+           if (!disagree) return message.reply("Please insert the disagree statement")
+           const falter = m => m.author.id === message.author.id
+            const pollEmbed = new Discord.MessageEmbed()
+            .setTitle('Poll!')
+            .setColor('#00FF2A')
+            .addFields(
+                { name: `<a:ini:753853854117920850> ${pollMessage}`, value: `
+                <a:verified:753654287338569778> ${aggree}
+                
+                <:no:753654286134542447> ${disagree}`}
+            )
+            await message.channel.send('Alright the poll has been set, how long u will gonna host the poll?');
+            message.channel.awaitMessages(falter, {max: 1, time: 30000}).then(async collect => {
+                if (collect.first().content.endsWith('s') && collect.first().content.endsWith('m') && collect.first().content.endsWith('h') && collect.first().content.endsWith('d')) return message.reply("Sorry sir, that's not a number, please restart from the beginning!")
+                let time = collect.first().content;
+            
+            message.delete();
+            let msg = await message.channel.send(pollEmbed);
+            await msg.react('753654287338569778')
+            await msg.react('753654286134542447')
+     
+            
+            const filter = (reaction, user) => reaction.emoji.id === '753654287338569778' || reaction.emoji.id === '753654286134542447'
+    
+            const result = await msg.awaitReactions(filter, {time: ms(time)}).then((collected) => {
+                if (msg.reactions.cache.get('753654287338569778').count === 1 && msg.reactions.cache.get('753654286134542447').count === 1) return message.channel.send("No one voted sorry this poll is aborted")
+                if (msg.reactions.cache.get('753654287338569778').count-1 > msg.reactions.cache.get('753654286134542447').count-1) {
+                let resutEmbed = new Discord.MessageEmbed()
+                .setTitle('Voting Complete!')
+                .setColor('#00FF2A')
+                .addFields( 
+                    {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
+                    
+                    <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
+                    
+                    **Final Answer is:** <a:verified:753654287338569778> **${aggree}** `}
+                )
+            msg.edit(resutEmbed)
+            msg.reactions.removeAll()
+                } else
+                if (msg.reactions.cache.get('753654287338569778').count-1 < msg.reactions.cache.get('753654286134542447').count-1) {
+                    let resutEmbed = new Discord.MessageEmbed()
+                    .setTitle('Voting Complete!')
+                    .setColor('#00FF2A')
+                    .addFields( 
+                        {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
+                        
+                        <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
+                        
+                        **Final Answer is:** <:no:753654286134542447> **${disagree}** `}
+                    )
+                msg.edit(resutEmbed)
+                msg.reactions.removeAll()
+                } else
+                if (msg.reactions.cache.get('753654287338569778').count-1 === msg.reactions.cache.get('753654286134542447').count-1) {
+                    let resutEmbed = new Discord.MessageEmbed()
+                    .setTitle('Voting Complete!')
+                    .setColor('#00FF2A')
+                    .addFields( 
+                        {name: pollMessage, value: `<a:verified:753654287338569778> ${aggree} => ${msg.reactions.cache.get('753654287338569778').count-1}
+                        
+                        <:no:753654286134542447> ${disagree} => ${msg.reactions.cache.get('753654286134542447').count-1}
+                        
+                        **Final Answer is:** <a:nitro:753855915223941122> **Draw** `}
+                    )
+                msg.edit(resutEmbed)
+                msg.reactions.removeAll()
+                }
+             })
+            })
+            }
+        
+            
+    
+    
+        } else 
+        if (command === 'coinrain') {
+            message.channel.send('Coin rain has started please type `CATCH`')
+            let filter = m => m.content.toLowerCase() === 'catch' && !userVotes.has(m.author.id);
+            const collector = message.channel.createMessageCollector(filter, {max: 10, time: 5000});
+            let userVotes = new Map()
+            await pollResult(collector, userVotes);
+            let entries = [...userVotes.entries()]
+            let entrymap = entries.map(entry => entry[0]).join(', ')
+            console.log(entrymap)
+            message.channel.send({embed: {
+                color: '#00D5FF',
+                title: 'The event is over',
+                description: `Players: ${entrymap}`,
+                fields: [
+                    {
+                    name: "Everyone got 10,000 coins!",
+                    value: 'Please collect the rewards from the summoner!'
+                    }
+                ]
+            }})
+            
+            
+            function pollResult(collector, userVotes) {
+                return new Promise((resolve, rejects) => {
+                    collector.on('collect', m => {
+                        let option = m.content.toLowerCase();
+                        if (!userVotes.has(m.author.username)) {
+                            userVotes.set(m.author.username, m.content)
+                        } else {
+                            return
+                        }
+            
+                    })
+            
+                    collector.on('end', s => {
+                        console.log(`Collected ${s.size} votes!`);
+                        resolve(s);
+                    })
+                })
+            }
+        } else 
+        if (command === 'rank') {
+            if ( message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+                const rankEmbed = new Discord.MessageEmbed()
+                .setTitle('OS Discord Rank <:osnumbawan:713088262838681731>')
+                .setColor('00ff00 ')
+                .setDescription('Order Of the Shamans has their own rank at discord, the ranks shows your contribution')
+                .addFields(
+                    { name: `Shaman Apprentice`, value: `Shaman Apprentice Is the rank/role that you gained after joining OS, it contains clan members and assistants`},
+                    { name: `Shaman Master`, value: `Shaman Master Is the rank/role that you gained after you achieve Officer role in game, you must prove your existence to obtain this role`},
+                    { name: `Shaman Highlord`, value: `Shaman HIghlord Is the highest rank/role that you can achieve in this discord. Because Shaman Highlord = owner clan, just fyi, Shaman Highlord role is \`almost impossible\` `}
+                )
+    
+                message.channel.send(rankEmbed)
+            } else {
+                message.reply(`You're not even in OS clan <:Yikes:718741173035859999>`)
+            }
+        } else
+        if (command === 'unkos') {
+            if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+    
+                const unKos = new Discord.MessageEmbed()
+                .setTitle('UnKOS List')
+                .setDescription('This is OS clan UnKOS list!')
+                .setColor('#F60606 ')
+                .addFields(
+                    { name: 'Player UnKos:', value: `+ Most/Everyone in BOT
+                    + Kormo
+                    + Nikitis
+                    + GllVll
+                    + SkaadoosH
+                    + Lasui
+                    + Zake
+                    + StarcHy
+                    + Aphelion
+                    + Silla
+                    + Sixtys
+                    + Halluxia (Alyxia)
+                    + Zerkupal
+                    + Aramis <- Not really sure who they are
+                    `},
+                    { name: 'Clan UnKos:', value: 'Nothing cuz BL is suck <:pepelaugh:712506193788272701>'}
+                )
+                
+                message.channel.send(unKos)
+            
+            } else {
+                message.reply(`You don't have permission <:pepelaugh:712506193788272701>`)
+            }
+    
+        } else
+        if (command === 'library') {
+            if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+                const library = new Discord.MessageEmbed()
+                .setColor('#06F60A ')
+                .setTitle('Library!')
+                .setDescription('This is OS clan\'s personal `library`')
+                .addFields(
+                    { name: 'Warrior Books <:warrior:713701040519905330>:', value: `dm <@${sazgr.user.id}> to obtain the books
+                    dm <@${nihilo.user.id}> to obtain the books 
+                    type \`${prefix}warrior library\` for more information`},
+                    { name: 'Shaman Books <:shaman:713463624450179212>:', value: `dm <@${misteree.user.id}> to obtain the books
+                    dm <@${nihilo.user.id}> to obtain the books
+                    type \`${prefix}shaman library\` for more information`},
+                    { name: 'Mage Books <:mage:713701096966717471>:', value: `dm <@${sazgr.user.id}> to obtain the books
+                    dm <@${nihilo.user.id}> to obtain the books
+                    type \`${prefix}mage library\` for more information`},
+                    { name: 'Archer Books <:archer:713701070714437722>:', value: `dm <@${nihilo.user.id}> to obtain the books
+                    type \`${prefix}archer library\` for more information`}
+                )
+    
+                message.channel.send(library)
+            } else {
+                message.reply(`You don't have permission lmao <:pepelaugh:712506193788272701>`)
+            }
+        }
     }
 
 })
