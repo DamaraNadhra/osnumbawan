@@ -280,8 +280,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setTitle('Bulkwark')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Bulkwark <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
-                <:warriorbook:747473472145326163> Level 3 = \:white_check_mark: 
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Bulkwark <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:x:
+                <:warriorbook:747473472145326163> Level 3 = \:x: 
                 <:warriorbook:747473472145326163> Level 4 = \:white_check_mark: 
                 <:warriorbook:747473472145326163> Level 5 = \:x:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
@@ -297,8 +297,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setTitle('Slash')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Slash <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
-                <:warriorbook:747473472145326163> Level 3 = \:white_check_mark: 
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Slash <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:x:
+                <:warriorbook:747473472145326163> Level 3 = \:x: 
                 <:warriorbook:747473472145326163> Level 4 = \:white_check_mark: 
                 <:warriorbook:747473472145326163> Level 5 = \:x:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
@@ -314,8 +314,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setTitle('Crescent Swipe')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Crescent Swipe <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
-                <:warriorbook:747473472145326163> Level 3 = \:white_check_mark: 
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Crescent Swipe <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:x:
+                <:warriorbook:747473472145326163> Level 3 = \:x: 
                 <:warriorbook:747473472145326163> Level 4 = \:white_check_mark: 
                 <:warriorbook:747473472145326163> Level 5 = \:x:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
@@ -331,8 +331,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setTitle('Taunt')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Taunt <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
-                <:warriorbook:747473472145326163> Level 3 = \:white_check_mark: 
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Taunt <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:x:
+                <:warriorbook:747473472145326163> Level 3 = \:x: 
                 <:warriorbook:747473472145326163> Level 4 = \:white_check_mark: 
                 <:warriorbook:747473472145326163> Level 5 = \:white_check_mark:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
@@ -365,7 +365,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setTitle('Armor Reinforcement')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Armor Reinforcement <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Armor Reinforcement <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:x:
                 <:warriorbook:747473472145326163> Level 3 = \:white_check_mark: 
                 <:warriorbook:747473472145326163> Level 4 = \:white_check_mark: 
                 <:warriorbook:747473472145326163> Level 5 = \:white_check_mark:
@@ -400,7 +400,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('00f2ff ') 
             .addFields(
                 { name: `Type : Mage <:mage:713701096966717471> \nName: Chilling Radiance <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:white_check_mark:
-                <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
+                <:magebook:747473707932582042> Level 3 = \:x: 
                 <:magebook:747473707932582042> Level 4 = \:white_check_mark: 
                 <:magebook:747473707932582042> Level 5 = \:white_check_mark:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
@@ -436,7 +436,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
                 { name: `Type : Mage <:mage:713701096966717471> \nName: Hypothermic Frenzy <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:x:
                 <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
                 <:magebook:747473707932582042> Level 4 = \:white_check_mark: 
-                <:magebook:747473707932582042> Level 5 = \:white_check_mark:
+                <:magebook:747473707932582042> Level 5 = \:x:
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
             )
             message.channel.send(hypothermic)
@@ -467,7 +467,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('00f2ff ') 
             .addFields(
                 { name: `Type : Mage <:mage:713701096966717471> \nName: Arctic Aura <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:white_check_mark:
-                <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
+                <:magebook:747473707932582042> Level 3 = \:x: 
                 <:magebook:747473707932582042> Level 4 = \:white_check_mark: 
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
             )
@@ -482,8 +482,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setAuthor('Ice Bolt', 'https://i.imgur.com/Ix7awLF.png')
             .setColor('00f2ff ') 
             .addFields(
-                { name: `Type : Mage <:mage:713701096966717471> \nName: Ice Bolt <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:white_check_mark:
-                <:magebook:747473707932582042> Level 3 = \:white_check_mark: 
+                { name: `Type : Mage <:mage:713701096966717471> \nName: Ice Bolt <:magebook:747473707932582042>`, value: `<:magebook:747473707932582042> Level 2 = \:x:
+                <:magebook:747473707932582042> Level 3 = \:x: 
                 <:magebook:747473707932582042> Level 4 = \:white_check_mark:
                 <:magebook:747473707932582042> Level 5 = \:white_check_mark:  
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0) and <@${nihilo.user.id}> `}
@@ -517,7 +517,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setAuthor('Revitalize', 'https://i.imgur.com/N23myft.png')
             .setColor('0000ff ') 
             .addFields(
-                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Revitalize <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Revitalize <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:x:
                 <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
                 <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
                 <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
@@ -536,7 +536,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('0000ff ') 
             .addFields(
                 { name: `Type : Shaman <:shaman:713463624450179212> \nName: Healing Totem <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
-                <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
+                <:shamanbook:747474128923000993> Level 3 = \:x: 
                 <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:  
                 This data according to <@${misteree.user.id}> and <@${nihilo.user.id}> books inventory!
                 donating books is very allowed `}
@@ -570,7 +570,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setAuthor('Spirit Animal', 'https://i.imgur.com/BdgGayF.png')
             .setColor('0000ff ') 
             .addFields(
-                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Spirit Animal <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Spirit Animal <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:x:
                 <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
                 <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
                 <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
@@ -588,7 +588,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setAuthor('Mend', 'https://i.imgur.com/vNZ3hNZ.png')
             .setColor('0000ff ') 
             .addFields(
-                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Mend <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Mend <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:x:
                 <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
                 <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
                 <:shamanbook:747474128923000993> Level 5 = \:x:  
@@ -606,7 +606,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('0000ff ')
             .setAuthor('Decay', 'https://i.imgur.com/btdXRQy.png') 
             .addFields(
-                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Decay <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Decay <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:x:
                 <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
                 <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
                 <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
@@ -644,7 +644,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('0000ff ')
             .setAuthor(`Plague Spreader`, 'https://i.imgur.com/VSPiLia.png') 
             .addFields(
-                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Plague Spreader <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Plague Spreader <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:x:
                 <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
                 <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
                 <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
@@ -663,7 +663,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('0000ff ')
             .setAuthor(`Soul Harvest`, 'https://i.imgur.com/cQThcEr.png') 
             .addFields(
-                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Soul Harvest <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:white_check_mark:
+                { name: `Type : Shaman <:shaman:713463624450179212> \nName: Soul Harvest <:shamanbook:747474128923000993>`, value: `<:shamanbook:747474128923000993> Level 2 = \:x:
                 <:shamanbook:747474128923000993> Level 3 = \:white_check_mark: 
                 <:shamanbook:747474128923000993> Level 4 = \:white_check_mark:
                 <:shamanbook:747474128923000993> Level 5 = \:white_check_mark:  
@@ -682,7 +682,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('00ff00 ')
             .setAuthor(`Precise Shot`, 'https://i.imgur.com/tzh9btj.png') 
             .addFields(
-                { name: `Type : Archers <:archer:713701070714437722> \nName: Precise Shot <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Precise Shot <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:x:
                 <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
                 <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
                 <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
@@ -702,7 +702,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setAuthor(`Poison Arrow`, 'https://i.imgur.com/QjzqoF2.png') 
             .addFields(
                 { name: `Type : Archers <:archer:713701070714437722> \nName: Poison Arrow <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                <:archerbook:747473966482063420> Level 3 = \:x: 
                 <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
                 <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
                 <@${nihilo.user.id}> books inventory!
@@ -758,7 +758,7 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('00ff00 ')
             .setAuthor(`Pathfinding`, 'https://i.imgur.com/qaQIQla.png') 
             .addFields(
-                { name: `Type : Archers <:archer:713701070714437722> \nName: Pathfinding <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Pathfinding <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:x:
                 <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
                 <:archerbook:747473966482063420> Level 4 = \:white_check_mark:  
                 <@${nihilo.user.id}> books inventory!
@@ -776,8 +776,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('00ff00 ')
             .setAuthor(`Temporal Dilation`, 'https://i.imgur.com/gN4gTcQ.png') 
             .addFields(
-                { name: `Type : Archers <:archer:713701070714437722> \nName: Temporal Dilation <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Temporal Dilation <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:x:
+                <:archerbook:747473966482063420> Level 3 = \:x: 
                 <:archerbook:747473966482063420> Level 4 = \:white_check_mark: 
                 <@${nihilo.user.id}> books inventory!
                 donating books is very allowed `}
@@ -813,8 +813,8 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             .setColor('00ff00 ')
             .setAuthor(`Swift Shot`, 'https://i.imgur.com/Qon2Gk4.png') 
             .addFields(
-                { name: `Type : Archers <:archer:713701070714437722> \nName: Swift Shot <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:white_check_mark:
-                <:archerbook:747473966482063420> Level 3 = \:white_check_mark: 
+                { name: `Type : Archers <:archer:713701070714437722> \nName: Swift Shot <:archerbook:747473966482063420>`, value: `<:archerbook:747473966482063420> Level 2 = \:x:
+                <:archerbook:747473966482063420> Level 3 = \:x: 
                 <:archerbook:747473966482063420> Level 4 = \:white_check_mark:
                 <:archerbook:747473966482063420> Level 5 = \:white_check_mark:  
                 <@${nihilo.user.id}> books inventory!
