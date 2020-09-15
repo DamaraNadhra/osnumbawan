@@ -1299,7 +1299,7 @@ client.on('message', async (message) => {
     
             return message.channel.send(`**${skillName}** has been set to ${stock}`)
         } else
-        if (command.contains('&restock')) {
+        if (command === 'restock') {
             const profiles = new db.table('profiles')
 
             const reactionFilter = (reaction, user) => {
@@ -1348,7 +1348,7 @@ client.on('message', async (message) => {
             })
             
         } else 
-        if (command.includes('&stockin')){ 
+        if (command.includes('stockin')){ 
             const profiles = new db.table('profiles')
             
             content = command.split('|')
@@ -1361,7 +1361,7 @@ client.on('message', async (message) => {
                 }
             }
         }
-        if (command.includes('&stockin')){ 
+        if (command.includes('stockout')){ 
             const profiles = new db.table('profiles')
             
             content = command.split('|')
