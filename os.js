@@ -25,16 +25,16 @@ client.giveawayManager = new GiveawaysManager(client, {
 
 client.on('message', async (message) => {
 
-if (message.channel.type === 'dm') return;
+    if (message.channel.type === 'dm') return;
 
-let sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
-let misteree = message.guild.members.cache.find(ee => ee.id === '632506405370200084')
-let nihilo =  message.guild.members.cache.find(nihil => nihil.id === '688776325212667926')
-let uhd = message.guild.members.cache.find(uh => uh.id === '559479208007696395')
-let gato = message.guild.members.cache.find(gato => gato.id === '694488949980135444')
-let shamanApprentice  = message.guild.roles.cache.find(appren => appren.id === '712346176220954664')
-let shamanMaster  = message.guild.roles.cache.find(master => master.id === '712346843849424926')
-let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346899209781338')
+    let sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
+    let misteree = message.guild.members.cache.find(ee => ee.id === '632506405370200084')
+    let nihilo =  message.guild.members.cache.find(nihil => nihil.id === '688776325212667926')
+    let uhd = message.guild.members.cache.find(uh => uh.id === '559479208007696395')
+    let gato = message.guild.members.cache.find(gato => gato.id === '694488949980135444')
+    let shamanApprentice  = message.guild.roles.cache.find(appren => appren.id === '712346176220954664')
+    let shamanMaster  = message.guild.roles.cache.find(master => master.id === '712346843849424926')
+    let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346899209781338')
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
@@ -1299,9 +1299,9 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     
             return message.channel.send(`**${skillName}** has been set to ${stock}`)
         } else
-        if (command === 'restock') {
+        if (command.contains('&restock')) {
             const profiles = new db.table('profiles')
-            
+
             const reactionFilter = (reaction, user) => {
                 return (reaction.emoji.name === '✅' || reaction.emoji.name === '❌') && user.id === message.author.id 
             }
@@ -1348,6 +1348,30 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             })
             
         } else 
+        if (command == 'stockin'){
+            const profiles = new db.table('profiles')
+            
+            content = command.split('|')
+            for(i = 1; i < content.length; i++){
+                if(profiles.set(`profiles.${content}`,':white_check_mark:')){
+                    //make the bot say that it got stocked
+                }else{
+                    //make the bot say that the book is not found, please check spelling
+                }
+            }
+        }
+        if (command == 'stockout'){
+            const profiles = new db.table('profiles')
+            
+            content = command.split('|')
+            for(i = 1; i < content.length; i++){
+                if(profiles.set(`profiles.${content}`,':x:')){
+                    return message.channel.send('Yeay! the book has stocked out kek')
+                }else{
+                    //make the bot say that the book is not found, please check spelling
+                }
+            }
+        }
         if (command === 'updatelibrary') {
             const profiles = new db.table('profiles')
             const skillName = args[0]
