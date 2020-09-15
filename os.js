@@ -5,7 +5,7 @@ const client = new Discord.Client();
 const ms = require('ms');
 
 const prefix = '&'
-
+const db = require('quick.db');
 const config = require('./config.json');
 client.config = config;
 
@@ -132,20 +132,30 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else 
     if (message.content.toLowerCase().startsWith(`${prefix}warrior library`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const slash = profiles.get(`profiles.slash.library`)
+            const crescent = profiles.get(`profiles.crescentswipe.library`)
+            const bulkwark = profiles.get(`profiles.bulkwark.library`)
+            const taunt = profiles.get(`profiles.taunt.library`)
+            const unholy = profiles.get(`profiles.unholywarcry.library`)
+            const crusader = profiles.get(`profiles.crusadercourage.library`)
+            const armor = profiles.get(`profiles.armorreinforcement.library`)
+            const centrifugal = profiles.get(`profiles.centrifugallaceration.library`)
+            const colossal = profiles.get(`profiles.colossalreconstruction.library`)
             const warriorLibrary = new Discord.MessageEmbed()
             .setTitle('Warrior Library <:warrior:713701040519905330>')
             .setColor('ad3f17 ')
             .setDescription('This is ~OS~ clan\'s personal `warrior library`')
             .addFields(
-                { name: `Sazgr's warrior books:`, value: `<:warriorbook:747473472145326163> Colossal Reconstruction = :white_check_mark::negative_squared_cross_mark::white_check_mark:
-                <:warriorbook:747473472145326163> Slash = :white_check_mark: 
-                <:warriorbook:747473472145326163> Crescent Swipe = :white_check_mark: 
-                <:warriorbook:747473472145326163> Bulkwark = :white_check_mark: 
-                <:warriorbook:747473472145326163> Taunt = :white_check_mark:
-                <:warriorbook:747473472145326163> Crusader's Courage = :white_check_mark:
-                <:warriorbook:747473472145326163> Unholy Warcry = :white_check_mark:
-                <:warriorbook:747473472145326163> Centrifugal Laceration = :white_check_mark:
-                <:warriorbook:747473472145326163> Armor Reinforcement = :white_check_mark: 
+                { name: `Sazgr's warrior books:`, value: `<:warriorbook:747473472145326163> Colossal Reconstruction = ${colossal}
+                <:warriorbook:747473472145326163> Slash = ${slash} 
+                <:warriorbook:747473472145326163> Crescent Swipe = ${crescent}
+                <:warriorbook:747473472145326163> Bulkwark = ${bulkwark} 
+                <:warriorbook:747473472145326163> Taunt = ${taunt}
+                <:warriorbook:747473472145326163> Crusader's Courage = ${crusader}
+                <:warriorbook:747473472145326163> Unholy Warcry = ${unholy}
+                <:warriorbook:747473472145326163> Centrifugal Laceration = ${centrifugal}
+                <:warriorbook:747473472145326163> Armor Reinforcement = ${armor}
                 pls dm <@${sazgr.user.id}> to obtain the books
                 type \`${prefix}[name of books]\` for detailed information `}
             )
@@ -157,18 +167,26 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else 
     if (message.content.toLowerCase().startsWith(`${prefix}mage library`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const orb = profiles.get(`profiles.icicleorb.library`)
+            const chill = profiles.get(`profiles.chillingradiance.library`)
+            const bolt = profiles.get(`profiles.bolt.library`)
+            const hypo = profiles.get(`profiles.hypothermicfrenzy.library`)
+            const shield = profiles.get(`profiles.iceshield.library`)
+            const enchant = profiles.get(`profiles.enchantment.library`)
+            const arctic = profiles.get(`profiles.arcticaura.library`)
             let mageLibrary = new Discord.MessageEmbed()
             .setTitle('Mage Library <:mage:713701096966717471>')
             .setColor('00f2ff ')
             .setDescription('This is ~OS~ clan\'s personal `mage library`')
             .addFields(
-                { name: ` Sazgr's and ExNihilo's mage books:`, value : `<:magebook:747473707932582042> Icicle Orb = \:white_check_mark:
-                <:magebook:747473707932582042> Chilling Radiance = \:white_check_mark:
-                <:magebook:747473707932582042> Ice Bolt = \:white_check_mark:
-                <:magebook:747473707932582042> Hypotermic Frenzy = \:white_check_mark:
-                <:magebook:747473707932582042> Ice Shield = \:white_check_mark:
-                <:magebook:747473707932582042> Enchantments = \:white_check_mark:
-                <:magebook:747473707932582042> Arctic Aura = \:white_check_mark:
+                { name: ` Sazgr's and ExNihilo's mage books:`, value : `<:magebook:747473707932582042> Icicle Orb = ${orb}
+                <:magebook:747473707932582042> Chilling Radiance = ${chill}
+                <:magebook:747473707932582042> Ice Bolt = ${bolt}
+                <:magebook:747473707932582042> Hypotermic Frenzy = ${hypo}
+                <:magebook:747473707932582042> Ice Shield = ${shield}
+                <:magebook:747473707932582042> Enchantment = ${enchant}
+                <:magebook:747473707932582042> Arctic Aura = ${arctic}
                 pls dm <@${sazgr.user.id}> and <@${nihilo.user.id}> to obtain the books `}
             )
             message.channel.send(mageLibrary)
@@ -179,19 +197,28 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else 
     if (message.content.toLowerCase().startsWith(`${prefix}shaman library`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const decay = profiles.get(`profiles.decay.library`)
+            const revitalize = profiles.get(`profiles.revitalize.library`)
+            const mend = profiles.get(`profiles.mend.library`)
+            const spirit = profiles.get(`profiles.spiritanimal.library`)
+            const soul = profiles.get(`profiles.soulharvest.library`)
+            const plague = profiles.get(`profiles.plaguespreader.library`)
+            const agonize = profiles.get(`profiles.agonize.library`)
+            const totem = profiles.get(`profiles.healingtotem.library`)
             const shamanLibrary = new Discord.MessageEmbed()
             .setTitle('Shaman Library <:shaman:713463624450179212>')
             .setColor('0000ff ')
             .setDescription('This is ~OS~ clan\'s personal `shaman library`')
             .addFields(
-                { name: `MisterEE/UltraMarine's and ExNihilo's shaman books:`, value: `<:shamanbook:747474128923000993> Decay = \:white_check_mark:
-                <:shamanbook:747474128923000993> Revitalize = \:white_check_mark:
-                <:shamanbook:747474128923000993> Mend = \:white_check_mark:
-                <:shamanbook:747474128923000993> Spirit Animal = \:white_check_mark:
-                <:shamanbook:747474128923000993> Soul Harvest = \:white_check_mark:
-                <:shamanbook:747474128923000993> Plague Spreader = \:white_check_mark:
-                <:shamanbook:747474128923000993> Agonize = \:white_check_mark:
-                <:shamanbook:747474128923000993> Healing Totem = \:white_check_mark:
+                { name: `MisterEE/UltraMarine's and ExNihilo's shaman books:`, value: `<:shamanbook:747474128923000993> Decay = ${decay}
+                <:shamanbook:747474128923000993> Revitalize = ${revitalize}
+                <:shamanbook:747474128923000993> Mend = ${mend}
+                <:shamanbook:747474128923000993> Spirit Animal = ${spirit}
+                <:shamanbook:747474128923000993> Soul Harvest = ${soul}
+                <:shamanbook:747474128923000993> Plague Spreader = ${plague}
+                <:shamanbook:747474128923000993> Agonize = ${agonize}
+                <:shamanbook:747474128923000993> Healing Totem = ${totem}
                 pls dm <@${misteree.user.id}> or <@${nihilo.user.id}> to obtain the books  `}
             )
             message.channel.send(shamanLibrary)
@@ -201,16 +228,22 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}archer library`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const swift = profiles.get(`profiles.swiftshot.library`)
+            const preciseshot = profiles.get(`profiles.preciseshot.library`)
+            const invig = profiles.get(`profiles.invigorate.library`)
+            const temp = profiles.get(`profiles.temporaldilation.library`)
+            const path = profiles.get(`profiles.pathfinding.library`)
             const archerLibrary = new Discord.MessageEmbed()
             .setTitle('Archer Library <:archer:713701070714437722>')
             .setColor('00ff00 ')
             .setDescription('This is ~OS~ clan\'s personal `archer book`')
             .addFields(
-                { name: 'ExNihilo\'s archer books', value: `<:archerbook:747473966482063420> Swift Shot = \:white_check_mark:
-                <:archerbook:747473966482063420> Precise Shot = \:white_check_mark:
-                <:archerbook:747473966482063420> Invigorate = \:white_check_mark:
-                <:archerbook:747473966482063420> Temporal Dilation = \:white_check_mark:
-                <:archerbook:747473966482063420> Pathfinding = \:white_check_mark:
+                { name: 'ExNihilo\'s archer books', value: `<:archerbook:747473966482063420> Swift Shot = ${swift}
+                <:archerbook:747473966482063420> Precise Shot = ${preciseshot}
+                <:archerbook:747473966482063420> Invigorate = ${invig}
+                <:archerbook:747473966482063420> Temporal Dilation = ${temp}
+                <:archerbook:747473966482063420> Pathfinding = ${path}
                 pls dm <@${nihilo.user.id}> to obtain the books `}
             )
             message.channel.send(archerLibrary)
@@ -228,13 +261,19 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}colossal reconstruction`) || message.content.toLowerCase().startsWith(`${prefix}coloss`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const level1 = profiles.get(`profiles.colossalreconstruction.level1`)
+            const level2 = profiles.get(`profiles.colossalreconstruction.level2`)
+            const level3 = profiles.get(`profiles.colossalreconstruction.level3`)
+            const level4 = profiles.get(`profiles.colossalreconstruction.level4`)
+            const level5 = profiles.get(`profiles.colossalreconstruction.level5`)
             const coloss = new Discord.MessageEmbed()
             .setTitle('Colossal Reconstruction')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Colossal Reconstruction <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
-                <:warriorbook:747473472145326163> Level 3 = \:x: 
-                <:warriorbook:747473472145326163> Level 4 = \:white_check_mark:
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Colossal Reconstruction <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = ${level2}
+                <:warriorbook:747473472145326163> Level 3 = ${level3} 
+                <:warriorbook:747473472145326163> Level 4 = ${level4}
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
             )
             message.channel.send(coloss)
@@ -244,13 +283,19 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else 
     if (message.content.toLowerCase().startsWith(`${prefix}unholy warcry`) || message.content.toLowerCase().startsWith(`${prefix}warcry`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const level1 = profiles.get(`profiles.unholywarcry.level1`)
+            const level2 = profiles.get(`profiles.unholywarcry.level2`)
+            const level3 = profiles.get(`profiles.unholywarcry.level3`)
+            const level4 = profiles.get(`profiles.unholywarcry.level4`)
+            const level5 = profiles.get(`profiles.unholywarcry.level5`)
             const unholy = new Discord.MessageEmbed()
             .setTitle('Unholy Warcry')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Unholy Warcry <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
-                <:warriorbook:747473472145326163> Level 3 = \:x: 
-                <:warriorbook:747473472145326163> Level 4 = \:white_check_mark: (last stock!)
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Unholy Warcry <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = ${level2}
+                <:warriorbook:747473472145326163> Level 3 = ${level3}
+                <:warriorbook:747473472145326163> Level 4 = ${level4}
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
             )
             message.channel.send(unholy)
@@ -260,13 +305,19 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}crusader courage`) || message.content.toLowerCase().startsWith(`${prefix}crusader`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const level1 = profiles.get(`profiles.crusadercourage.level1`)
+            const level2 = profiles.get(`profiles.crusadercourage.level2`)
+            const level3 = profiles.get(`profiles.crusadercourage.level3`)
+            const level4 = profiles.get(`profiles.crusadercourage.level4`)
+            const level5 = profiles.get(`profiles.crusadercourage.level5`)
             const crusader = new Discord.MessageEmbed()
             .setTitle('Crusader Courage')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Crusader Courage <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:white_check_mark:
-                <:warriorbook:747473472145326163> Level 3 = \:x: 
-                <:warriorbook:747473472145326163> Level 4 = \:white_check_mark:
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Crusader Courage <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = ${level2}
+                <:warriorbook:747473472145326163> Level 3 = ${level3} 
+                <:warriorbook:747473472145326163> Level 4 = ${level4}
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
             )
             message.channel.send(crusader)
@@ -276,14 +327,20 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}bulkwark`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const level1 = profiles.get(`profiles.bulkwark.level1`)
+            const level2 = profiles.get(`profiles.bulkwark.level2`)
+            const level3 = profiles.get(`profiles.bulkwark.level3`)
+            const level4 = profiles.get(`profiles.bulkwark.level4`)
+            const level5 = profiles.get(`profiles.bulkwark.level5`)
             const bulkwark = new Discord.MessageEmbed()
             .setTitle('Bulkwark')
             .setColor('ad3f17 ') 
             .addFields(
-                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Bulkwark <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = \:x:
-                <:warriorbook:747473472145326163> Level 3 = \:x: 
-                <:warriorbook:747473472145326163> Level 4 = \:white_check_mark: 
-                <:warriorbook:747473472145326163> Level 5 = \:x:
+                { name: `Type : Warrior <:warrior:713701040519905330> \nName: Bulkwark <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = ${level2}
+                <:warriorbook:747473472145326163> Level 3 = ${level3}
+                <:warriorbook:747473472145326163> Level 4 = ${level4} 
+                <:warriorbook:747473472145326163> Level 5 = ${level5}
                 This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
             )
             message.channel.send(bulkwark)
@@ -293,6 +350,12 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
     } else
     if (message.content.toLowerCase().startsWith(`${prefix}slash`)) {
         if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
+            const profiles = new db.table('profiles')
+            const level1 = profiles.get(`profiles.slash.level1`)
+            const level2 = profiles.get(`profiles.slash.level2`)
+            const level3 = profiles.get(`profiles.slash.level3`)
+            const level4 = profiles.get(`profiles.slash.level4`)
+            const level5 = profiles.get(`profiles.slash.level5`)
             const slash = new Discord.MessageEmbed()
             .setTitle('Slash')
             .setColor('ad3f17 ') 
@@ -1208,6 +1271,91 @@ let shamanHighlord  = message.guild.roles.cache.find(lord => lord.id === '712346
             } else {
                 message.reply(`You don't have permission lmao <:pepelaugh:712506193788272701>`)
             }
+        } else 
+        if (command === 'update') {
+            const profiles = new db.table('profiles')
+            const skillName = args[0];
+            const level = args[1];
+            const stock = args.slice(2).join(' ')
+            if (!skillName) return message.channel.send('Please provide me a skill name! \n\n`examples: chillingradiance, temporaldilation, icebolt, etc`')
+            if (!level) return message.channel.send('Please provide me the level of that skill \n\n`examples: level1, level2, level3`')
+            if (!stock) return message.channel.send('Please provide me the conditions is it stocked? or not \n\n`Make sure you add :white_check_mark: or :x:`')
+            if (!stock === '✅' || !stock === '❌') return message.channel.send('stock must be a emoji ✅ or ❌')
+            profiles.set(`profiles.${skillName}.${level}`, stock)
+    
+            return message.channel.send(`Alright **${skillName} ${level}** has been set to ${stock}`)
+            
+        } else
+        if (command === 'updateall') {
+            const profiles = new db.table('profiles')
+            const skillName = args[0];
+            const stock = args[1]
+            if (!skillName) return message.channel.send('Please provide me a skill name \n\n`examples: chillingradiance, temporaldilation, icebolt`')
+            if (!stock === '✅' || !stock === '❌') return message.channel.send('stock must be a emoji ✅ or ❌')
+            profiles.set(`profiles.${skillName}.level2`, stock)
+            profiles.set(`profiles.${skillName}.level3`, stock)
+            profiles.set(`profiles.${skillName}.level4`, stock)
+            profiles.set(`profiles.${skillName}.level5`, stock)
+    
+            return message.channel.send(`**${skillName}** has been set to ${stock}`)
+        } else
+        if (command === 'restock') {
+            const profiles = new db.table('profiles')
+            
+            const reactionFilter = (reaction, user) => {
+                return (reaction.emoji.name === '✅' || reaction.emoji.name === '❌') && user.id === message.author.id 
+            }
+    
+            message.channel.send('What skill do you want to restock? \n\n`chillingradiance, temporaldilation, icebolt [all in lower case and no spaces!]`')
+    
+            const filter = (user) => {
+                return user.author.id === message.author.id
+            }
+            message.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})
+            .then(async collected => {
+                const skillName = collected.first().content
+                const regex = !/[^a-zA-Z0-9]+/g.test(skillName)
+    
+                if (!regex) return message.channel.send('Your name can only contain numbers and alphabets')
+                console.log(skillName)
+    
+                await message.channel.send("what level? \n\n`example: level1, level2, level3 etc`")
+                message.channel.awaitMessages(filter, {time: 60000, max: 1, errors: ['time']})
+                .then(async collects => {
+                    const name = collects.first().content;
+                    console.log(name)
+    
+                    let msr = await message.channel.send('Stocked or not?')
+                    await msr.react('✅')
+                    await msr.react('❌')
+                    msr.awaitReactions(reactionFilter, {time: 60000, max: 1, errors: ['time']})
+                    .then(collector => {
+                        if (collector.first().emoji.name === '✅') {
+                            let stocked = collector.get('✅');
+                            profiles.set(`profiles.${skillName}.${name}`, ':white_check_mark:')
+                            
+                            return message.channel.send(`Alright **${skillName} ${name}** has been set to :white_check_mark: `)
+                        } else 
+                        if (collector.first().emoji.name === '❌') {
+                            let notStocked = collector.get('❌')
+                            profiles.set(`profiles.${skillName}.${name}`, ':x:')
+
+                            return message.channel.send(`Alright **${skillName} ${name}}** has been set yo :x:`)
+                        }
+                    })
+    
+                })
+            })
+            
+        } else 
+        if (command === 'updatelibrary') {
+            const profiles = new db.table('profiles')
+            const skillName = args[0]
+            const stock = args[1];
+            if (!skillName) return message.channel.send('Please provide me a skill name to update \n\n`examples: chillingradiance, temporaldilation, icebolt`')
+            if (!stock) return message.channel.send('Please provide me the conditions is it stocked? or not \n\n`Make sure you add :white_check_mark: or :x:`')
+            if (!stock === '✅' || !stock === '❌') return message.channel.send('stock must be a emoji ✅ or ❌')
+            profiles.set(`profiles.${skillName}.library`, stock)
         }
     }
 
