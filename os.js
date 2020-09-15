@@ -1348,27 +1348,29 @@ client.on('message', async (message) => {
             })
             
         } else 
-        if (command == 'stockin'){
+        if (command.includes('&stockin')){ 
             const profiles = new db.table('profiles')
             
             content = command.split('|')
             for(i = 1; i < content.length; i++){
-                if(profiles.set(`profiles.${content}`,':white_check_mark:')){
-                    //make the bot say that it got stocked
+                if(profiles.has(`profiles.${content}`)){
+                    profiles.set(`profiles.${content}`,':white_check_mark:')
+                    return message.channel.send('Yeay! the book is back in stock')
                 }else{
-                    //make the bot say that the book is not found, please check spelling
+                    return message.channel.send('OOF! the book you typed hasn\'t been found in the database')
                 }
             }
         }
-        if (command == 'stockout'){
+        if (command.includes('&stockin')){ 
             const profiles = new db.table('profiles')
             
             content = command.split('|')
             for(i = 1; i < content.length; i++){
-                if(profiles.set(`profiles.${content}`,':x:')){
+                if(profiles.has(`profiles.${content}`)){
+                    profiles.set(`profiles.${content}`,':x:')
                     return message.channel.send('Yeay! the book has stocked out kek')
                 }else{
-                    //make the bot say that the book is not found, please check spelling
+                    return message.channel.send('OOF! the book you typed hasn\'t been found in the database')
                 }
             }
         }
