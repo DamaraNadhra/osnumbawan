@@ -354,7 +354,7 @@ client.on('message', async (message) => {
          }
     } else
     if (command.startsWith('stockin')){ 
-        if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+        if (!message.member.roles.cache.has(libraryGuardian) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
         finalMessage = "What book?? lbstockin|bookname or lbstockin|bookname.level2"
         
         const books = command.split('|') 
@@ -846,7 +846,7 @@ client.on('message', async (message) => {
             profiles.set(`profiles.${skillName}.library`, stock)
         } else 
         if (command.startsWith('stockout')){
-            if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``) 
+            if (!message.member.roles.cache.has(libraryGuardian) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``) 
             finalMessage = "What book???? lbstockout|bookname or lbstockout|bookname.level2"
             
             
