@@ -8,6 +8,7 @@ const prefix = '&'
 const db = require('quick.db');
 const giveaways = new db.table('giveaways')
 const profiles = new db.table('books')
+const aliases = {"chill": "chilling_radiance", "coloss": "colossal_reconstruction", "shield": "ice_shield", "chilling radiance": "chilling_radiance", "colossal reconstruction": "colossal_reconstruction", "ice shield": "ice_shield"}
 const config = require('./config.json');
 client.config = config;
 
@@ -822,20 +823,7 @@ client.on('message', async (message) => {
                     return message.channel.send('OOF! the book you typed hasn\'t been found in the database')
                 }
             }
-        }
-        if (command.includes('stockout')){ 
-            const profiles = new db.table('profiles')
-            
-            content = command.split('|')
-            for(i = 1; i < content.length; i++){
-                if(profiles.has(`profiles.${content}`)){
-                    profiles.set(`profiles.${content}`,':x:')
-                    return message.channel.send('Yeay! the book has stocked out kek')
-                }else{
-                    return message.channel.send('OOF! the book you typed hasn\'t been found in the database')
-                }
-            }
-        }
+        } else
         if (command === 'updatelibrary') {
             const profiles = new db.table('profiles')
             const skillName = args[0]
