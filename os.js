@@ -353,6 +353,7 @@ client.on('message', async (message) => {
          }
     } else
     if (command.startsWith('stockin')){ 
+        if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${gato.displayName} who can use this command \n\n\`Please ask ${gato.displayName}s to trigger this command\``)
         finalMessage = "What book?? lbstockin|bookname or lbstockin|bookname.level2"
         
         const books = command.split('|') 
@@ -415,193 +416,6 @@ client.on('message', async (message) => {
         }
         
         
-    } else 
-    if (command.startsWith('stockout')){ 
-        finalMessage = "What book???? lbstockout|bookname or lbstockout|bookname.level2"
-        
-        
-        const books = command.split('|')
-        for(i = 1; i < books.length; i++){
-            finalMessage=""
-            if(profiles.has(`books.${books[i]}`)){
-                if(books[i].includes('.')){
-                    profiles.set(`books.${books[i]}`,':x:')
-                    finalMessage+= `the book ${books[i]} is now out of stock\n`
-                }else{
-                    bookLevels = Object.keys(profiles.get(`books.${books[i]}`))
-                    for(var i=0; i<bookLevels.length;i++){
-                        profiles.set(`books.${books[i]}.${bookLevels[i]}`,':x:')
-                    }
-                    // profiles.set(`books.${books[i]}.level2`,':x:')
-                    // profiles.set(`books.${books[i]}.level3`,':x:')
-                    // profiles.set(`books.${books[i]}.level4`,':x:')
-                    // profiles.set(`books.${books[i]}.level5`,':x:')
-                    finalMessage+= `the book ${books[i]} is now out of stock\n`
-                }
-            }else{
-                finalMessage+= `the book ${books[i]} is not found in database\n`
-            }
-        }
-        
-        console.log(books[1])
-        
-        return message.channel.send(finalMessage)
-    }else if ( Object.keys(profiles.get('books')).includes(command) ) {
-        console.log(command)
-        console.log(profiles.get(`books.${command}`))
-
-        bookname = command.replace('_',' ')
-        bookname = bookname.split(' ');
-        for (var i = 0; i < bookname.length; i++) {
-            bookname[i] = bookname[i].charAt(0).toUpperCase() + bookname[i].slice(1); 
-        }
-        bookname = bookname.join(' ')
-        charType = profiles.get(`books.${command}.type`)
-        if(charType.toLowerCase() == 'shaman'){
-            charType += ' <:shaman:713463624450179212>'
-            charBook = '<:shamanbook:747474128923000993>'
-            colorBook = '0000ff'
-        }else if(charType.toLowerCase() == 'mage'){
-            charType += ' <:mage:713701096966717471>'
-            charBook = '<:magebook:747473707932582042>'
-            colorBook = '00f2ff'
-        }else if(charType.toLowerCase() == 'warrior'){
-            charType += ' <:warrior:713701040519905330>'
-            charBook = '<:warriorbook:747473472145326163>'
-            colorBook = 'ad3f17'
-        }else if(charType.toLowerCase() == 'archer'){
-            charType += ' <:archer:713701070714437722>'
-            charBook = '<:archerbook:747473966482063420>'
-            colorBook = '00ff00'
-        }
-        
-        const levels = Object.keys(profiles.get(`books.${command}`))
-        levelsString = ""
-        for(var i=0;i<levels.length;i++){
-            if(["type","color","picture"].includes(levels[i])){ 
-                continue
-            }
-            levelsString += charBook + " " + levels[i].charAt(0).toUpperCase() + levels[i].match('evel') + " " + levels[i].charAt(5) + " = " + profiles.get(`books.${command}.${levels[i]}`) +"\n"
-        }
-        // colorBook = profiles.get(`profiles.${command}.color`)
-        // console.log(profiles.get(`books.${command}.picture`))
-        
-        if(profiles.has(`books.${command}.picture`)){
-            mesEmbed = new Discord.MessageEmbed()
-            .setAuthor(`${bookname}`, `${profiles.get(`books.${command}.picture`)}`)
-            .setColor(`${colorBook}`) 
-            .addFields(
-                { name: `Type : ${charType}`, value: levelsString}
-            )
-            return message.channel.send(mesEmbed)
-        }else{
-            mesEmbed = new Discord.MessageEmbed()
-            .setAuthor(`${bookname}`)
-            .setColor(`${colorBook}`) 
-            .addFields(
-                { name: `Type : ${charType}`, value: levelsString}
-            )
-            return message.channel.send(mesEmbed)
-        }
-
-    }else if(Object.keys(aliases).includes(command)){
-        console.log(profiles.get(`books.${aliases[command]}`))
-
-        bookname = aliases[command].replace('_',' ')
-        bookname = bookname.split(' ');
-        for (var i = 0; i < bookname.length; i++) {
-            bookname[i] = bookname[i].charAt(0).toUpperCase() + bookname[i].slice(1); 
-        }
-        bookname = bookname.join(' ')
-        charType = profiles.get(`books.${aliases[command]}.type`)
-        if(charType.toLowerCase() == 'shaman'){
-            charType += ' <:shaman:713463624450179212>'
-            charBook = '<:shamanbook:747474128923000993>'
-            colorBook = '0000ff'
-        }else if(charType.toLowerCase() == 'mage'){
-            charType += ' <:mage:713701096966717471>'
-            charBook = '<:magebook:747473707932582042>'
-            colorBook = '00f2ff'
-        }else if(charType.toLowerCase() == 'warrior'){
-            charType += ' <:warrior:713701040519905330>'
-            charBook = '<:warriorbook:747473472145326163>'
-            colorBook = 'ad3f17'
-        }else if(charType.toLowerCase() == 'archer'){
-            charType += ' <:archer:713701070714437722>'
-            charBook = '<:archerbook:747473966482063420>'
-            colorBook = '00ff00'
-        }
-        
-        const levels = Object.keys(profiles.get(`books.${aliases[command]}`))
-        levelsString = ""
-        for(var i=0;i<levels.length;i++){
-            if(["type","color","picture"].includes(levels[i])){ 
-                continue
-            }
-            levelsString += charBook + " " + levels[i].charAt(0).toUpperCase() + levels[i].match('evel') + " " + levels[i].charAt(5) + " = " + profiles.get(`books.${command}.${levels[i]}`) +"\n"
-        }
-
-        colorBook = profiles.get(`books.${aliases[command]}.color`)
-        // console.log(colorBook)
-        
-        if(profiles.has(`books.${aliases[command]}.picture`)){
-            mesEmbed = new Discord.MessageEmbed()
-            .setAuthor(`${bookname}`, `${profiles.get(`books.${aliases[command]}.picture`)}`)
-            .setColor(`${colorBook}`) 
-            .addFields(
-                { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, 
-                value: levelsString}
-            )
-            return message.channel.send(mesEmbed)
-        }else{
-            mesEmbed = new Discord.MessageEmbed()
-            .setAuthor(`${bookname}`)
-            .setColor(`${colorBook}`) 
-            .addFields(
-                { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, 
-                value: levelsString}
-            )
-            return message.channel.send(mesEmbed)
-        }
-
-
-    }else if (command === 'checkbooks') {
-        let desc = profiles.get('books')
-        console.log(desc)
-    }else if (command === 'bookslist') {
-        let desc = profiles.get('books')
-        message.channel.send(Object.keys(desc))
-    }else if (command === 'checkdata') {
-        let desc = profiles.all()
-        console.log(desc)
-    }else if (command === 'addcolor') {
-        const skillName = args[0]
-        if (!profiles.has(`books.${skillName}.color`)) return message.reply('Sorry but I cannot find this book in the database')
-        const color = args[1];
-        profiles.set(`books.${skillName}.color`, color)
-        return message.channel.send('Succesful')
-    } else if (command === 'addemoji') {
-        const skillName = args[0]
-        if (!profiles.has(`books.${skillName}.emoji`)) return message.reply('Sorry but I cannot find this book in the database')
-        const emoji = args[1];
-        profiles.set(`books.${skillName}.emoji`, emoji)
-        return message.channel.send('Succesful')
-    } else if (command === 'addtype') {
-        const skillName = args[0]
-        if (!profiles.has(`books.${skillName}.type`)) return message.reply('Sorry but I cannot find this book in the database')
-        const type = args[1];
-        profiles.set(`books.${skillName}.type`, type)
-        return message.channel.send('Succesful')
-    } else if (command === 'deletebook') {
-        if (!profiles.has(`book.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
-        profiles.delete(`books.${args}`)
-        return message.channel.send('Succesful')
-    }  else if (command === 'addpicture') {
-        const skillName = args[0]
-        if (!profiles.has(`books.${skillName}`)) return message.reply('Sorry but I cannot find this book in the database')
-        const pic = args[1];
-        profiles.set(`books.${skillName}.picture`, pic)
-        return message.channel.send('Succesful')
     } else
     if (message.content.startsWith(prefix)) {
         if (command === 'osgmake') {
@@ -1029,6 +843,199 @@ client.on('message', async (message) => {
             if (!stock) return message.channel.send('Please provide me the conditions is it stocked? or not \n\n`Make sure you add :white_check_mark: or :x:`')
             if (!stock === '✅' || !stock === '❌') return message.channel.send('stock must be a emoji ✅ or ❌')
             profiles.set(`profiles.${skillName}.library`, stock)
+        } else 
+        if (command.startsWith('stockout')){
+            if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${gato.displayName} who can use this command \n\n\`Please ask ${gato.displayName}s to trigger this command\``) 
+            finalMessage = "What book???? lbstockout|bookname or lbstockout|bookname.level2"
+            
+            
+            const books = command.split('|')
+            for(i = 1; i < books.length; i++){
+                finalMessage=""
+                if(profiles.has(`books.${books[i]}`)){
+                    if(books[i].includes('.')){
+                        profiles.set(`books.${books[i]}`,':x:')
+                        finalMessage+= `the book ${books[i]} is now out of stock\n`
+                    }else{
+                        bookLevels = Object.keys(profiles.get(`books.${books[i]}`))
+                        for(var i=0; i<bookLevels.length;i++){
+                            profiles.set(`books.${books[i]}.${bookLevels[i]}`,':x:')
+                        }
+                        // profiles.set(`books.${books[i]}.level2`,':x:')
+                        // profiles.set(`books.${books[i]}.level3`,':x:')
+                        // profiles.set(`books.${books[i]}.level4`,':x:')
+                        // profiles.set(`books.${books[i]}.level5`,':x:')
+                        finalMessage+= `the book ${books[i]} is now out of stock\n`
+                    }
+                }else{
+                    finalMessage+= `the book ${books[i]} is not found in database\n`
+                }
+            }
+            
+            console.log(books[1])
+            
+            return message.channel.send(finalMessage)
+        }else if ( Object.keys(profiles.get('books')).includes(command) ) {
+            console.log(command)
+            console.log(profiles.get(`books.${command}`))
+    
+            bookname = command.replace('_',' ')
+            bookname = bookname.split(' ');
+            for (var i = 0; i < bookname.length; i++) {
+                bookname[i] = bookname[i].charAt(0).toUpperCase() + bookname[i].slice(1); 
+            }
+            bookname = bookname.join(' ')
+            charType = profiles.get(`books.${command}.type`)
+            if(charType.toLowerCase() == 'shaman'){
+                charType += ' <:shaman:713463624450179212>'
+                charBook = '<:shamanbook:747474128923000993>'
+                colorBook = '0000ff'
+            }else if(charType.toLowerCase() == 'mage'){
+                charType += ' <:mage:713701096966717471>'
+                charBook = '<:magebook:747473707932582042>'
+                colorBook = '00f2ff'
+            }else if(charType.toLowerCase() == 'warrior'){
+                charType += ' <:warrior:713701040519905330>'
+                charBook = '<:warriorbook:747473472145326163>'
+                colorBook = 'ad3f17'
+            }else if(charType.toLowerCase() == 'archer'){
+                charType += ' <:archer:713701070714437722>'
+                charBook = '<:archerbook:747473966482063420>'
+                colorBook = '00ff00'
+            }
+            
+            const levels = Object.keys(profiles.get(`books.${command}`))
+            levelsString = ""
+            for(var i=0;i<levels.length;i++){
+                if(["type","color","picture"].includes(levels[i])){ 
+                    continue
+                }
+                levelsString += charBook + " " + levels[i].charAt(0).toUpperCase() + levels[i].match('evel') + " " + levels[i].charAt(5) + " = " + profiles.get(`books.${command}.${levels[i]}`) +"\n"
+            }
+            // colorBook = profiles.get(`profiles.${command}.color`)
+            // console.log(profiles.get(`books.${command}.picture`))
+            
+            if(profiles.has(`books.${command}.picture`)){
+                mesEmbed = new Discord.MessageEmbed()
+                .setAuthor(`${bookname}`, `${profiles.get(`books.${command}.picture`)}`)
+                .setColor(`${colorBook}`) 
+                .addFields(
+                    { name: `Type : ${charType}`, value: levelsString}
+                )
+                return message.channel.send(mesEmbed)
+            }else{
+                mesEmbed = new Discord.MessageEmbed()
+                .setAuthor(`${bookname}`)
+                .setColor(`${colorBook}`) 
+                .addFields(
+                    { name: `Type : ${charType}`, value: levelsString}
+                )
+                return message.channel.send(mesEmbed)
+            }
+    
+        }else if(Object.keys(aliases).includes(command)){
+            console.log(profiles.get(`books.${aliases[command]}`))
+    
+            bookname = aliases[command].replace('_',' ')
+            bookname = bookname.split(' ');
+            for (var i = 0; i < bookname.length; i++) {
+                bookname[i] = bookname[i].charAt(0).toUpperCase() + bookname[i].slice(1); 
+            }
+            bookname = bookname.join(' ')
+            charType = profiles.get(`books.${aliases[command]}.type`)
+            if(charType.toLowerCase() == 'shaman'){
+                charType += ' <:shaman:713463624450179212>'
+                charBook = '<:shamanbook:747474128923000993>'
+                colorBook = '0000ff'
+            }else if(charType.toLowerCase() == 'mage'){
+                charType += ' <:mage:713701096966717471>'
+                charBook = '<:magebook:747473707932582042>'
+                colorBook = '00f2ff'
+            }else if(charType.toLowerCase() == 'warrior'){
+                charType += ' <:warrior:713701040519905330>'
+                charBook = '<:warriorbook:747473472145326163>'
+                colorBook = 'ad3f17'
+            }else if(charType.toLowerCase() == 'archer'){
+                charType += ' <:archer:713701070714437722>'
+                charBook = '<:archerbook:747473966482063420>'
+                colorBook = '00ff00'
+            }
+            
+            const levels = Object.keys(profiles.get(`books.${aliases[command]}`))
+            levelsString = ""
+            for(var i=0;i<levels.length;i++){
+                if(["type","color","picture"].includes(levels[i])){ 
+                    continue
+                }
+                levelsString += charBook + " " + levels[i].charAt(0).toUpperCase() + levels[i].match('evel') + " " + levels[i].charAt(5) + " = " + profiles.get(`books.${command}.${levels[i]}`) +"\n"
+            }
+    
+            colorBook = profiles.get(`books.${aliases[command]}.color`)
+            // console.log(colorBook)
+            
+            if(profiles.has(`books.${aliases[command]}.picture`)){
+                mesEmbed = new Discord.MessageEmbed()
+                .setAuthor(`${bookname}`, `${profiles.get(`books.${aliases[command]}.picture`)}`)
+                .setColor(`${colorBook}`) 
+                .addFields(
+                    { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, 
+                    value: levelsString}
+                )
+                return message.channel.send(mesEmbed)
+            }else{
+                mesEmbed = new Discord.MessageEmbed()
+                .setAuthor(`${bookname}`)
+                .setColor(`${colorBook}`) 
+                .addFields(
+                    { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, 
+                    value: levelsString}
+                )
+                return message.channel.send(mesEmbed)
+            }
+    
+    
+        }else if (command === 'checkbooks') {
+            let desc = profiles.get('books')
+            console.log(desc)
+        }else if (command === 'bookslist') {
+            let desc = profiles.get('books')
+            message.channel.send(Object.keys(desc))
+        }else if (command === 'checkdata') {
+            let desc = profiles.all()
+            console.log(desc)
+        }else if (command === 'addcolor') {
+            if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${gato.displayName} who can use this command \n\n\`Please ask ${gato.displayName}s to trigger this command\``)
+            const skillName = args[0]
+            if (!profiles.has(`books.${skillName}.color`)) return message.reply('Sorry but I cannot find this book in the database')
+            const color = args[1];
+            profiles.set(`books.${skillName}.color`, color)
+            return message.channel.send('Succesful')
+        } else if (command === 'addemoji') {
+            if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${gato.displayName} who can use this command \n\n\`Please ask ${gato.displayName}s to trigger this command\``)
+            const skillName = args[0]
+            if (!profiles.has(`books.${skillName}.emoji`)) return message.reply('Sorry but I cannot find this book in the database')
+            const emoji = args[1];
+            profiles.set(`books.${skillName}.emoji`, emoji)
+            return message.channel.send('Succesful')
+        } else if (command === 'addtype') {
+            if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${gato.displayName} who can use this command \n\n\`Please ask ${gato.displayName}s to trigger this command\``)
+            const skillName = args[0]
+            if (!profiles.has(`books.${skillName}.type`)) return message.reply('Sorry but I cannot find this book in the database')
+            const type = args[1];
+            profiles.set(`books.${skillName}.type`, type)
+            return message.channel.send('Succesful')
+        } else if (command === 'deletebook') {
+            if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${gato.displayName} who can use this command \n\n\`Please ask ${gato.displayName}s to trigger this command\``)
+            if (!profiles.has(`book.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
+            profiles.delete(`books.${args}`)
+            return message.channel.send('Succesful')
+        }  else if (command === 'addpicture') {
+            if (!message.member.roles.cache.has(gato) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${gato.displayName} who can use this command \n\n\`Please ask ${gato.displayName}s to trigger this command\``)
+            const skillName = args[0]
+            if (!profiles.has(`books.${skillName}`)) return message.reply('Sorry but I cannot find this book in the database')
+            const pic = args[1];
+            profiles.set(`books.${skillName}.picture`, pic)
+            return message.channel.send('Succesful')
         }
     }
 
