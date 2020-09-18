@@ -14,7 +14,7 @@ client.config = config;
 const { GiveawaysManager } = require('discord-giveaways');
 
 client.giveawayManager = new GiveawaysManager(client, {
-    storage: giveaways.push('giveaways.data'),
+    storage: './giveaways.json',
     updateCountdownEvery: 5000,
     default: {
         botsCanWin: false,
