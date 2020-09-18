@@ -355,7 +355,7 @@ client.on('message', async (message) => {
          }
     } else
     if (command.startsWith('stockin')){ 
-        if (!message.member.roles.cache.has(`${libraryGuardian.id}`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+        if (!message.member.roles.cache.has(`756468980176388158`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
         finalMessage = "What book?? lbstockin|bookname or lbstockin|bookname.level2"
         
         const books = command.split('|') 
@@ -809,20 +809,6 @@ client.on('message', async (message) => {
                 })
             })
             
-        } else 
-        if (command.includes('stockin')){ 
-            const profiles = new db.table('profiles')
-            content = command.split('|')
-            
-            for(i = 1; i < content.length; i++){
-                return message.channel.send(db.get(`profiles.${content}`))
-                if(profiles.has(`profiles.${content}`)){
-                    profiles.set(`profiles.${content}`,':white_check_mark:')
-                    return message.channel.send('Yeay! the book is back in stock')
-                }else{
-                    return message.channel.send('OOF! the book you typed hasn\'t been found in the database')
-                }
-            }
         } else
         if (command === 'updatelibrary') {
             const profiles = new db.table('profiles')
@@ -834,7 +820,7 @@ client.on('message', async (message) => {
             profiles.set(`profiles.${skillName}.library`, stock)
         } else 
         if (command.startsWith('stockout')){
-            if (!message.member.roles.cache.has(`${libraryGuardian.id}`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``) 
+            if (!message.member.roles.cache.has(`756468980176388158`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``) 
             finalMessage = "What book???? lbstockout|bookname or lbstockout|bookname.level2"
             
             
@@ -993,33 +979,33 @@ client.on('message', async (message) => {
             let desc = profiles.all()
             console.log(desc)
         }else if (command === 'addcolor') {
-            if (!message.member.roles.cache.has(`${libraryGuardian.id}`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+            if (!message.member.roles.cache.has(`756468980176388158`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
             const skillName = args[0]
             if (!profiles.has(`books.${skillName}.color`)) return message.reply('Sorry but I cannot find this book in the database')
             const color = args[1];
             profiles.set(`books.${skillName}.color`, color)
             return message.channel.send('Succesful')
         } else if (command === 'addemoji') {
-            if (!message.member.roles.cache.has(`${libraryGuardian.id}`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+            if (!message.member.roles.cache.has(`756468980176388158`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
             const skillName = args[0]
             if (!profiles.has(`books.${skillName}.emoji`)) return message.reply('Sorry but I cannot find this book in the database')
             const emoji = args[1];
             profiles.set(`books.${skillName}.emoji`, emoji)
             return message.channel.send('Succesful')
         } else if (command === 'addtype') {
-            if (!message.member.roles.cache.has(`${libraryGuardian.id}`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+            if (!message.member.roles.cache.has(`756468980176388158`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
             const skillName = args[0]
             if (!profiles.has(`books.${skillName}.type`)) return message.reply('Sorry but I cannot find this book in the database')
             const type = args[1];
             profiles.set(`books.${skillName}.type`, type)
             return message.channel.send('Succesful')
         } else if (command === 'deletebook') {
-            if (!message.member.roles.cache.has(`${libraryGuardian.id}`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+            if (!message.member.roles.cache.has(`756468980176388158`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
             if (!profiles.has(`book.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
             profiles.delete(`books.${args}`)
             return message.channel.send('Succesful')
         }  else if (command === 'addpicture') {
-            if (!message.member.roles.cache.has(`${libraryGuardian.id}`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+            if (!message.member.roles.cache.has(`756468980176388158`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
             const skillName = args[0]
             if (!profiles.has(`books.${skillName}`)) return message.reply('Sorry but I cannot find this book in the database')
             const pic = args[1];
