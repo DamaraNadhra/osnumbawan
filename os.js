@@ -355,7 +355,7 @@ client.on('message', async (message) => {
          }
     } else
     if (command.startsWith('stockin')){ 
-        if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+        if (!message.member.roles.cache.has(`756468980176388158`) || !message.member.hasPermission('ADMINISTRATOR')) return message.reply('pepega')
         finalMessage = "What book?? lbstockin|bookname or lbstockin|bookname.level2"
         
         const books = command.split('|') 
@@ -416,7 +416,7 @@ client.on('message', async (message) => {
                     }
                 })
             }
-        }
+        
         
         
     } else
