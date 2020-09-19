@@ -839,7 +839,7 @@ client.on('message', async (message) => {
                 }
             } else if (command === 'deletebook') {
                 if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
-                    if (!profiles.has(`book.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
+                    if (!profiles.has(`books.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
                     profiles.delete(`books.${args}`)
                     return message.channel.send(`SUccesfully deleted **${args}** book`)
                 } else {
