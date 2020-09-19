@@ -807,7 +807,7 @@ client.on('message', async (message) => {
                                     await message.channel.awaitMessages(filter, {time: 60000, max: 1})
                                     .then(collects => {
                                         let alias = collects.first().content;
-                                        profiles.set(`books.aliases.${alias}`, `${books[i]}`)// OH pog idea
+                                        profiles.set(`books.aliases.${alias.replace(/\s/g, "")}`, `${books[i]}`)// OH pog idea
                                         console.log(alias)
                                         message.channel.send(`The books has been updated in database! you can check it by typing **${prefix}${books[i]}** or **${prefix}${alias}**`)
                                     })
@@ -887,7 +887,7 @@ client.on('message', async (message) => {
             } else if (command === 'checkdb') {
                 console.log(profiles.all())
                 return message.channel.send('Please see the log console!')
-            }else if ( Object.keys(profiles.get('books')).includes(command) ) {
+            }else if ( Object.keys(profiles.get('books')).includes(message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")) ) {
                 console.log(command)
                 console.log(profiles.get(`books.${command}`))
         
@@ -946,15 +946,15 @@ client.on('message', async (message) => {
                 }
         
             } else if(Object.keys(aliases).includes(command)){
-                console.log(profiles.get(`books.aliases.${aliases[command]}`))
+                console.log(profiles.get(`books.aliases.${aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")]}`))
         
-                bookname = aliases[command].replace('_',' ')
+                bookname = aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")].replace('_',' ')
                 bookname = bookname.split(' ');
                 for (var i = 0; i < bookname.length; i++) {
                     bookname[i] = bookname[i].charAt(0).toUpperCase() + bookname[i].slice(1); 
                 }
                 bookname = bookname.join(' ')
-                charType = profiles.get(`books.${aliases[command]}.type`)
+                charType = profiles.get(`books.${aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")]}.type`)
                 if(charType.toLowerCase() == 'shaman'){
                     charType += ' <:shaman:713463624450179212>'
                     charBook = '<:shamanbook:747474128923000993>'
@@ -973,20 +973,20 @@ client.on('message', async (message) => {
                     colorBook = '00ff00'
                 }
                 
-                const levels = Object.keys(profiles.get(`books.${aliases[command]}`))
+                const levels = Object.keys(profiles.get(`books.${aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")]}`))
                 levelsString = ""
                 for(var i=0;i<levels.length;i++){
                     if(["type","color","picture"].includes(levels[i])){ 
                         continue
                     }
-                    levelsString += charBook + " " + levels[i] + " = " + profiles.get(`books.${aliases[command]}.${levels[i]}`) +"\n"
+                    levelsString += charBook + " " + levels[i] + " = " + profiles.get(`books.${aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")]}.${levels[i]}`) +"\n"
                 }
         
                 // console.log(colorBook)
                 
-                if(profiles.has(`books.${aliases[command]}.picture`)){ //boon I made some different 
+                if(profiles.has(`books.${aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")]}.picture`)){ //boon I made some different 
                     mesEmbed = new Discord.MessageEmbed()
-                    .setAuthor(`${bookname}`, `${profiles.get(`books.${aliases[command]}.picture`)}`)
+                    .setAuthor(`${bookname}`, `${profiles.get(`books.${aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")]}.picture`)}`)
                     .setColor(`${colorBook}`) 
                     .addFields(
                         { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, 
