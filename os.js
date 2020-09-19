@@ -710,9 +710,6 @@ client.on('message', async (message) => {
             message.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})
             .then(async collected => {
                 const skillName = collected.first().content
-                const regex = !/[^a-zA-Z0-9]+/g.test(skillName)
-    
-                if (!regex) return message.channel.send('Your name can only contain numbers and alphabets')
                 console.log(skillName)
     
                 await message.channel.send("what level? \n\n`example: level1, level2, level3 etc`")
@@ -728,13 +725,13 @@ client.on('message', async (message) => {
                     .then(collector => {
                         if (collector.first().emoji.name === '✅') {
                             let stocked = collector.get('✅');
-                            profiles.set(`profiles.${skillName}.${name}`, ':white_check_mark:')
+                            profiles.set(`books.${skillName}.${name}`, ':white_check_mark:')
                             
                             return message.channel.send(`Alright **${skillName} ${name}** has been set to :white_check_mark: `)
                         } else 
                         if (collector.first().emoji.name === '❌') {
                             let notStocked = collector.get('❌')
-                            profiles.set(`profiles.${skillName}.${name}`, ':x:')
+                            profiles.set(`books.${skillName}.${name}`, ':x:')
 
                             return message.channel.send(`Alright **${skillName} ${name}}** has been set yo :x:`)
                         }
