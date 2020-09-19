@@ -887,7 +887,7 @@ client.on('message', async (message) => {
             } else if (command === 'checkdb') {
                 console.log(profiles.all())
                 return message.channel.send('Please see the log console!')
-            }else if ( Object.keys(profiles.get('books')).includes(message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")) ) {
+            }else if ( Object.keys(profiles.get('books')).includes(command) ) {
                 console.log(command)
                 console.log(profiles.get(`books.${command}`))
         
@@ -945,7 +945,7 @@ client.on('message', async (message) => {
                     return message.channel.send(mesEmbed)
                 }
         
-            } else if(Object.keys(aliases).includes(command)){
+            } else if(Object.keys(aliases).includes(message.content.toLowerCase().slice(prefix.length).replace(/\s/g, ""))){
                 console.log(profiles.get(`books.aliases.${aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")]}`))
         
                 bookname = aliases[message.content.toLowerCase().slice(prefix.length).replace(/\s/g, "")].replace('_',' ')
