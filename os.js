@@ -928,8 +928,10 @@ client.on('message', async (message) => {
             const emoji = args[1];
             profiles.set(`books.${skillName}.emoji`, emoji)
             return message.channel.send('Succesful')
+            }
         } else
         if (command.startsWith('stockin')){ 
+            if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
             finalMessage = "What book?? lbstockin|bookname or lbstockin|bookname.level2"
             
             const books = command.split('|') 
