@@ -25,8 +25,13 @@ client.giveawayManager = new GiveawaysManager(client, {
 });
 
 client.on('message', async (message) => {
-    
-        if (message.channel.type === 'dm') return;
+    if(!profiles.has('books.aliases')){
+        profiles.set('books.aliases','')
+
+    }
+    aliases = profiles.get('books.aliases')
+        // console.log(profiles.all())
+    if (message.channel.type === 'dm') return;
 
         let sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
         let misteree = message.guild.members.cache.find(ee => ee.id === '632506405370200084')
@@ -119,95 +124,45 @@ client.on('message', async (message) => {
             }
         
         } else 
-        if (message.content.toLowerCase() === (`${prefix}kos`)) {
-
+        if (message.content.toLowerCase().startsWith(`${prefix}shaman library`)|| message.content.toLowerCase().startsWith(`${prefix}warrior library`)||message.content.toLowerCase().startsWith(`${prefix}archer library`)||message.content.toLowerCase().startsWith(`${prefix}mage library`)) {
             if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-            
-                message.channel.send(kosList)
-            
-            
-            } else {
-                message.reply('You don\'t have permission U PEPEGA <:Yikes:718741173035859999>')
-            }
+                shamanBooks = []
+                warriorBooks = []
+                mageBooks = []
+                archerBooks = []
+                books = profiles.get('books')
+                Object.keys(books).forEach(function(val, key){
+                    if(books[val].type == 'Shaman'){
+                        availability= (books[val].level2 == '✅'?"2":"") + (books[val].level3 == '✅'?", 3":"") +(books[val].level4 == '✅'?", 4":"") + (books[val].level5 == '✅'?", 5 ":"")
+                        shamanBooks[val] = availability
+                    }else if(books[val].type == 'Mage'){
+                        availability= (books[val].level2 == '✅'?"2":"") + (books[val].level3 == '✅'?", 3":"") +(books[val].level4 == '✅'?", 4":"") + (books[val].level5 == '✅'?", 5 ":"")
+                        mageBooks[val] = availability
+                    } else if (books[val].type == 'Acher'){
+                        availability= (books[val].level2 == '✅'?"2":"") + (books[val].level3 == '✅'?", 3":"") +(books[val].level4 == '✅'?", 4":"") + (books[val].level5 == '✅'?", 5":"")
+                        archerBooks[val] = availability
+                    }else if(books[val].type == 'Warrior'){
+                        availability= (books[val].level2 == '✅'?"2":"") + (books[val].level3 == '✅'?", 3":"") +(books[val].level4 == '✅'?", 4":"") + (books[val].level5 == '✅'?", 5":"")
+                        warriorBooks[val] = availability
+                        
+                    }
 
-            
-        } else 
-        if (message.content.toLowerCase().startsWith(`${prefix}warrior library`)) {
-            if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-                const profiles = new db.table('profiles')
-                const slash = profiles.get(`profiles.slash.library`)
-                const crescent = profiles.get(`profiles.crescentswipe.library`)
-                const bulkwark = profiles.get(`profiles.bulkwark.library`)
-                const taunt = profiles.get(`profiles.taunt.library`)
-                const unholy = profiles.get(`profiles.unholywarcry.library`)
-                const crusader = profiles.get(`profiles.crusadercourage.library`)
-                const armor = profiles.get(`profiles.armorreinforcement.library`)
-                const centrifugal = profiles.get(`profiles.centrifugallaceration.library`)
-                const colossal = profiles.get(`profiles.colossalreconstruction.library`)
-                const warriorLibrary = new Discord.MessageEmbed()
-                .setTitle('Warrior Library <:warrior:713701040519905330>')
-                .setColor('ad3f17 ')
-                .setDescription('This is ~OS~ clan\'s personal `warrior library`')
-                .addFields(
-                    { name: `Sazgr's warrior books:`, value: `<:warriorbook:747473472145326163> Colossal Reconstruction = ${colossal}
-                    <:warriorbook:747473472145326163> Slash = ${slash} 
-                    <:warriorbook:747473472145326163> Crescent Swipe = ${crescent}
-                    <:warriorbook:747473472145326163> Bulkwark = ${bulkwark} 
-                    <:warriorbook:747473472145326163> Taunt = ${taunt}
-                    <:warriorbook:747473472145326163> Crusader's Courage = ${crusader}
-                    <:warriorbook:747473472145326163> Unholy Warcry = ${unholy}
-                    <:warriorbook:747473472145326163> Centrifugal Laceration = ${centrifugal}
-                    <:warriorbook:747473472145326163> Armor Reinforcement = ${armor}
-                    pls dm <@${sazgr.user.id}> to obtain the books
-                    type \`${prefix}[name of books]\` for detailed information `}
-                )
+                })
+                console.log(warriorBooks)
+                console.log(archerBooks)
+                console.log(mageBooks)
+                console.log(shamanBooks)//not push? because shamanbooks etc declared as empty array, Oh kk
+                // message.channel.send(shamanLibrary)
                 
-                message.channel.send(warriorLibrary)
-            } else {
-                message.reply(`You don't have permission to use this command`)
-            }
-        } else 
-        if (message.content.toLowerCase().startsWith(`${prefix}mage library`)) {
-            if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-                const profiles = new db.table('profiles')
-                const orb = profiles.get(`profiles.icicleorb.library`)
-                const chill = profiles.get(`profiles.chillingradiance.library`)
-                const bolt = profiles.get(`profiles.bolt.library`)
-                const hypo = profiles.get(`profiles.hypothermicfrenzy.library`)
-                const shield = profiles.get(`profiles.iceshield.library`)
-                const enchant = profiles.get(`profiles.enchantment.library`)
-                const arctic = profiles.get(`profiles.arcticaura.library`)
-                let mageLibrary = new Discord.MessageEmbed()
-                .setTitle('Mage Library <:mage:713701096966717471>')
-                .setColor('00f2ff ')
-                .setDescription('This is ~OS~ clan\'s personal `mage library`')
-                .addFields(
-                    { name: ` Sazgr's and ExNihilo's mage books:`, value : `<:magebook:747473707932582042> Icicle Orb = ${orb}
-                    <:magebook:747473707932582042> Chilling Radiance = ${chill}
-                    <:magebook:747473707932582042> Ice Bolt = ${bolt}
-                    <:magebook:747473707932582042> Hypotermic Frenzy = ${hypo}
-                    <:magebook:747473707932582042> Ice Shield = ${shield}
-                    <:magebook:747473707932582042> Enchantment = ${enchant}
-                    <:magebook:747473707932582042> Arctic Aura = ${arctic}
-                    pls dm <@${sazgr.user.id}> and <@${nihilo.user.id}> to obtain the books `}
-                )
-                message.channel.send(mageLibrary)
-
-            } else {
-                message.reply(`You dont have permission to use this command`)
-            }
-        } else 
-        if (message.content.toLowerCase().startsWith(`${prefix}shaman library`)) {
-            if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-                const profiles = new db.table('profiles')
-                const decay = profiles.get(`profiles.decay.library`)
-                const revitalize = profiles.get(`profiles.revitalize.library`)
-                const mend = profiles.get(`profiles.mend.library`)
-                const spirit = profiles.get(`profiles.spiritanimal.library`)
-                const soul = profiles.get(`profiles.soulharvest.library`)
-                const plague = profiles.get(`profiles.plaguespreader.library`)
-                const agonize = profiles.get(`profiles.agonize.library`)
-                const totem = profiles.get(`profiles.healingtotem.library`)
+                const decay = profiles.get(`books.decay.library`)
+                const revitalize = profiles.get(`books.revitalize.library`)
+                const mend = profiles.get(`books.mend.library`)
+                const spirit = profiles.get(`books.spiritanimal.library`)
+                const soul = profiles.get(`books.soulharvest.library`)
+                const plague = profiles.get(`books.plaguespreader.library`)
+                const agonize = profiles.get(`books.agonize.library`)
+                const totem = profiles.get(`books.healingtotem.library`)
+                
                 const shamanLibrary = new Discord.MessageEmbed()
                 .setTitle('Shaman Library <:shaman:713463624450179212>')
                 .setColor('0000ff ')
@@ -216,12 +171,12 @@ client.on('message', async (message) => {
                     { name: `MisterEE/UltraMarine's and ExNihilo's shaman books:`, value: `<:shamanbook:747474128923000993> Decay = ${decay}
                     <:shamanbook:747474128923000993> Revitalize = ${revitalize}
                     <:shamanbook:747474128923000993> Mend = ${mend}
-                    <:shamanbook:747474128923000993> Spirit Animal = ${spirit}
+                    <:shamanbook:747474128923000993> Spirit Animal = ${spirit} 
                     <:shamanbook:747474128923000993> Soul Harvest = ${soul}
                     <:shamanbook:747474128923000993> Plague Spreader = ${plague}
                     <:shamanbook:747474128923000993> Agonize = ${agonize}
                     <:shamanbook:747474128923000993> Healing Totem = ${totem}
-                    pls dm <@${misteree.user.id}> or <@${nihilo.user.id}> to obtain the books  `}
+                    pls dm <@${misteree.user.id}> or <@${nihilo.user.id}> to obtain the books  `} 
                 )
                 message.channel.send(shamanLibrary)
             } else {
@@ -230,7 +185,7 @@ client.on('message', async (message) => {
         } else
         if (message.content.toLowerCase().startsWith(`${prefix}archer library`)) {
             if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-                const profiles = new db.table('profiles')
+                
                 const swift = profiles.get(`profiles.swiftshot.library`)
                 const preciseshot = profiles.get(`profiles.preciseshot.library`)
                 const invig = profiles.get(`profiles.invigorate.library`)
@@ -259,28 +214,6 @@ client.on('message', async (message) => {
                 message.channel.send(kos2)
             } else {
                 message.reply(`You don't have permission to use this command`)
-            }
-        } else
-        if (message.content.toLowerCase().startsWith(`${prefix}colossal reconstruction`) || message.content.toLowerCase().startsWith(`${prefix}coloss`)) {
-            if (message.member.roles.cache.has('712346176220954664') || message.member.roles.cache.has('712346843849424926') || message.member.roles.cache.has('712346899209781338')) {
-                const profiles = new db.table('profiles')
-                const level1 = profiles.get(`profiles.colossalreconstruction.level1`)
-                const level2 = profiles.get(`profiles.colossalreconstruction.level2`)
-                const level3 = profiles.get(`profiles.colossalreconstruction.level3`)
-                const level4 = profiles.get(`profiles.colossalreconstruction.level4`)
-                const level5 = profiles.get(`profiles.colossalreconstruction.level5`)
-                const coloss = new Discord.MessageEmbed()
-                .setTitle('Colossal Reconstruction')
-                .setColor('ad3f17 ') 
-                .addFields(
-                    { name: `Type : Warrior <:warrior:713701040519905330> \nName: Colossal Reconstruction <:warriorbook:747473472145326163>`, value: `<:warriorbook:747473472145326163> Level 2 = ${level2}
-                    <:warriorbook:747473472145326163> Level 3 = ${level3} 
-                    <:warriorbook:747473472145326163> Level 4 = ${level4}
-                    This data according to <@${sazgr.user.id}> [databooks](https://docs.google.com/spreadsheets/d/1GkIJUAhlCBJGlCxbzN0Wb8g9i6if591rJZiKepejh10/edit#gid=0)  `}
-                )
-                message.channel.send(coloss)
-            } else {
-                message.reply(`You're not even in OS clan lmaoo`)
             }
         } else
         if (message.content.toLowerCase() == `${prefix}shaman apprentice`) {
@@ -668,7 +601,7 @@ client.on('message', async (message) => {
                 }
             } else 
             if (command === 'update') {
-                const profiles = new db.table('profiles')
+                
                 const skillName = args[0];
                 const level = args[1];
                 const stock = args.slice(2).join(' ')
@@ -682,7 +615,7 @@ client.on('message', async (message) => {
                 
             } else
             if (command === 'updateall') {
-                const profiles = new db.table('profiles')
+                
                 const skillName = args[0];
                 const stock = args[1]
                 if (!skillName) return message.channel.send('Please provide me a skill name \n\n`examples: chillingradiance, temporaldilation, icebolt`')
@@ -695,7 +628,7 @@ client.on('message', async (message) => {
                 return message.channel.send(`**${skillName}** has been set to ${stock}`)
             } else
             if (command === 'restock') {
-                const profiles = new db.table('profiles')
+                
 
                 const reactionFilter = (reaction, user) => {
                     return (reaction.emoji.name === '✅' || reaction.emoji.name === '❌') && user.id === message.author.id 
@@ -740,14 +673,17 @@ client.on('message', async (message) => {
                 })
                 
             } else
-            if (command === 'updatelibrary') {
-                const profiles = new db.table('profiles')
+            if (command === 'updatelibrary') { 
+                
                 const skillName = args[0]
                 const stock = args[1];
                 if (!skillName) return message.channel.send('Please provide me a skill name to update \n\n`examples: chillingradiance, temporaldilation, icebolt`')
                 if (!stock) return message.channel.send('Please provide me the conditions is it stocked? or not \n\n`Make sure you add :white_check_mark: or :x:`')
                 if (!stock === '✅' || !stock === '❌') return message.channel.send('stock must be a emoji ✅ or ❌')
-                profiles.set(`profiles.${skillName}.library`, stock)
+                for (var i=0; i<skillName;i++){
+
+                }
+                profiles.set(`books.${skillName}.library`, stock)
                 console.log(stock)
                 message.channel.send('succesfull')
             }  else 
@@ -781,6 +717,173 @@ client.on('message', async (message) => {
                 console.log(books[1])
                 
                 return message.channel.send(finalMessage)
+            }else if (command === 'checkbooks') {
+                let desc = profiles.get('books')
+                console.log(desc)
+            }else if (command === 'deletedb') {
+                let desc = profiles.delete('books')
+                console.log(desc)
+            }else if (command === 'bookslist') {
+                let desc = profiles.get('books')
+                message.channel.send(Object.keys(desc))
+            }else if (command === 'checkdata') {
+                let desc = profiles.all()
+                console.log(desc)
+            }else if (command === 'addcolor') {
+                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+                    const skillName = args[0]
+                    if (!profiles.has(`books.${skillName}.color`)) return message.reply('Sorry but I cannot find this book in the database')
+                    const color = args[1];
+                    profiles.set(`books.${skillName}.color`, color)
+                    return message.channel.send('Succesful')
+                } else {
+                    return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+                }
+            } else if (command === 'addemoji') {
+                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+                const skillName = args[0]
+                if (!profiles.has(`books.${skillName}.emoji`)) return message.reply('Sorry but I cannot find this book in the database')
+                const emoji = args[1];
+                profiles.set(`books.${skillName}.emoji`, emoji)
+                return message.channel.send('Succesful')
+                }
+            } else if (command.startsWith('stockin')){ 
+                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+                    finalMessage = "What book?? lbstockin|bookname or lbstockin|bookname.level2"
+                    
+                    const books = command.split('|') 
+                    for(i = 1; i < books.length; i++){
+                        finalMessage = ""
+                        if(profiles.has(`books.${books[i]}`)) {
+                            if(books[i].includes('.')){
+                                const bookName = books[i].split('.')
+                                bookname = bookName[0].replace('_', ' ')
+                                bookname = bookname.split(' ')
+                                for (var j = 0; j < bookname.length; j++) {
+                                    bookname[j] = bookname[j].charAt(0).toUpperCase() + bookname[j].slice(1); 
+                                }
+                                bookname = bookname.join(' ')
+                                profiles.set(`profiles.${books[i]}`,'✅') 
+                                message.channel.send(`Okay the book **${bookname}** **${bookName[1].match('level')} ${bookName[1].charAt(5)}** has been stocked`)
+                            } else {
+                                bookLevels = Object.keys(profiles.get(`books.${books[i]}`))
+                                for(var j=0; j<bookLevels.length;j++){
+                                    curbook = `books.${books[i]}.${bookLevels[j]}`
+                                    profiles.set(curbook,'✅')
+                                }
+                                message.channel.send(`Okay the book **${books[i]}** has been stocked`)
+                            }
+                        } else {
+                            await message.channel.send(`the book **${books[i]}** is not found in database, but I can add this into database, should I add this unknown book into database?\n\n\`answer with yes or no\``)
+                            const filter = m => m.author.id === message.author.id
+                            const skillFilter = m =>  m.author.id === message.author.id 
+                            await message.channel.awaitMessages(filter, {time: 60000, max: 1, errors: ['time']})
+                            .then(async collected => {
+                                if (collected.first().content.toLowerCase() === 'yes') {
+                                    // console.log(books[i])
+                                    if(books[i].includes('.')){
+                                        profiles.set(`books.${books[i]}`,'✅')
+                                        return message.channel.send(`The books has been updated in database! you can check it by typing **${prefix}${books[i]}** or **${prefix}${alias}**`)
+                                    }
+                                    await message.channel.send('Alright so you decided to add that book into database, now let\'s talk about the levels \n\n`please insert the levels (min:2,max: 5), examples: 2 or 3 `')
+                                    await message.channel.awaitMessages(filter, {time:60000, max:1, errors:['time']})
+                                    .then(collector=>{
+                                        let maxLevel = collector.first().content;
+                                        for(var j=2;j<=maxLevel;j++){
+                                            profiles.set(`books.${books[i]}.level${j}`,'✅')
+                                        }
+                                    })
+                                    await message.channel.send('Alright the book ' + books[i]+ ' has been added into database, next what type is this book? \n\n`Answer with: Warrior, Mage, Archer, Shaman WARNING: IF U CHOSE OTHER THAN THOSE IT WILL ERROR!`')
+                                    await message.channel.awaitMessages(filter, {time: 60000, max: 1, errors: ['time']})
+                                    .then(collector => {
+                                        let bookType = collector.first().content;//dont lowercase
+            
+                                        profiles.set(`books.${books[i]}.type`, bookType)
+                                    })
+                                    await message.channel.send('Okie! the book\'s type has been declared, do you need aliases? \n\n`if you need just input the aliases, and if you don\'t just say no`');
+                                    await message.channel.awaitMessages(filter, {time: 60000, max: 1})
+                                    .then(collects => {
+                                        let alias = collects.first().content;
+                                        profiles.set(`books.aliases.${alias}`, `${books[i]}`)// OH pog idea
+                                        console.log(alias)
+                                        message.channel.send(`The books has been updated in database! you can check it by typing **${prefix}${books[i]}** or **${prefix}${alias}**`)
+                                    })
+                                    // console.log(books[i])
+                                    
+                                } else
+                                if (collected.first().content.toLowerCase() === 'no') {
+                                    message.channel.send('Uhhh okay then I will not add the book to the database')
+                                } else {
+                                    message.reply('I\'m sorry but that is an invalid answer, please answer with yes or no')
+                                }
+                            })
+                        }
+                    }
+                
+                
+                } else {
+                    return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+                }
+            } else if (command === 'addtype') {
+                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+                    const skillName = args[0]
+                    if (!profiles.has(`books.${skillName}.type`)) return message.reply('Sorry but I cannot find this book in the database')
+                    const type = args[1];
+                    profiles.set(`books.${skillName}.type`, type)
+                    return message.channel.send('Succesful')
+                } else {
+                    return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+                }
+            } else if (command === 'deletebook') {
+                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+                    if (!profiles.has(`book.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
+                    profiles.delete(`books.${args}`)
+                    return message.channel.send('Succesful')
+                } else {
+                    return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+                }
+            }  else if (command === 'addpicture') {
+                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+                    const filter = m => m.author.id === message.author.id
+                    await message.channel.send('Okay what skill do you want to add picture with?');
+                    await message.channel.awaitMessages(filter, {time: 60000, max: 1})
+                    .then(async collected => {
+                        let skillName = collected.first().content;
+                        
+                        if(Object.keys(aliases).includes(skillName)){
+                            skillName = aliases[skillName]
+                        } else if(Object.keys(profiles.get('books')).includes(skillName)){
+                        } else {
+                            return message.channel.send('Oof I cannot find that books inside the database')
+                        }
+                        await message.channel.send('Please insert the picture link or just upload the image!');
+                        await message.channel.awaitMessages(filter, {max: 1, time: 60000})
+                        .then(collect => {
+                            let pictureLog = collect.first()
+                            const attachment = pictureLog.attachments.first()
+                            const pictureLink = pictureLog.content;
+                            // if (attachment) {
+                                // profiles.set(`books.${skillName}.picture`, attachment.url)//this 
+                            // }
+                            
+                            profiles.set(`books.${skillName}.picture`, Boolean(attachment) ? attachment.url : pictureLink )//WORKED POGGG
+                            message.channel.send('Successfully added the picture')
+                        })
+                    }).catch(() => {
+                        message.reply('Oof you ran out of time! please restart from the beginning')
+                    })
+                } else {
+                    return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
+                }
+            } else if (command === 'deletedb') {
+                if (message.member.hasPermission('ADMINISTRATOR')) {
+                    profiles.delete('books')
+                } else {
+                    return message.reply('you do not have permission to use this command')
+                }
+            } else if (command === 'checkdb') {
+                console.log(profiles.all())
+                return message.channel.send('Please see the log console!')
             }else if ( Object.keys(profiles.get('books')).includes(command) ) {
                 console.log(command)
                 console.log(profiles.get(`books.${command}`))
@@ -826,7 +929,7 @@ client.on('message', async (message) => {
                     .setAuthor(`${bookname}`, `${profiles.get(`books.${command}.picture`)}`)
                     .setColor(`${colorBook}`) 
                     .addFields(
-                        { name: `Type : ${charType}`, value: `${levelsString} Please DM the ${libraryGuardian} to obtain the books`}
+                        { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, value: `${levelsString} Please DM the ${libraryGuardian} to obtain the books`}
                     )
                     return message.channel.send(mesEmbed)
                 }else{
@@ -834,7 +937,7 @@ client.on('message', async (message) => {
                     .setAuthor(`${bookname}`)
                     .setColor(`${colorBook}`) 
                     .addFields(
-                        { name: `Type : ${charType}`, value: `${levelsString} Please DM the ${libraryGuardian} to obtain the books`}
+                        { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, value: `${levelsString} Please DM the ${libraryGuardian} to obtain the books`}
                     )
                     return message.channel.send(mesEmbed)
                 }
@@ -876,7 +979,6 @@ client.on('message', async (message) => {
                     levelsString += charBook + " " + levels[i] + " = " + profiles.get(`books.${aliases[command]}.${levels[i]}`) +"\n"
                 }
         
-                colorBook = profiles.get(`books.${aliases[command]}.color`)
                 // console.log(colorBook)
                 
                 if(profiles.has(`books.${aliases[command]}.picture`)){ //boon I made some different 
@@ -885,7 +987,7 @@ client.on('message', async (message) => {
                     .setColor(`${colorBook}`) 
                     .addFields(
                         { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, 
-                        value: levelsString}
+                        value:  `${levelsString} Please DM the ${libraryGuardian} to obtain the books`}
                     )
                     return message.channel.send(mesEmbed)
                 }else{
@@ -894,149 +996,46 @@ client.on('message', async (message) => {
                     .setColor(`${colorBook}`) 
                     .addFields(
                         { name: `Type : ${charType} \nName: ${bookname} ${charBook}`, 
-                        value: levelsString}
+                        value:  `${levelsString} Please DM the ${libraryGuardian} to obtain the books`} 
                     )
                     return message.channel.send(mesEmbed)
                 }
         
         
-            }else if (command === 'checkbooks') {
-                let desc = profiles.get('books')
-                console.log(desc)
-            }else if (command === 'bookslist') {
-                let desc = profiles.get('books')
-                message.channel.send(Object.keys(desc))
-            }else if (command === 'checkdata') {
-                let desc = profiles.all()
-                console.log(desc)
-            }else if (command === 'addcolor') {
-                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
-                const skillName = args[0]
-                if (!profiles.has(`books.${skillName}.color`)) return message.reply('Sorry but I cannot find this book in the database')
-                const color = args[1];
-                profiles.set(`books.${skillName}.color`, color)
-                return message.channel.send('Succesful')
-            } else {
-                return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
-            }
-            } else if (command === 'addemoji') {
-                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
-                const skillName = args[0]
-                if (!profiles.has(`books.${skillName}.emoji`)) return message.reply('Sorry but I cannot find this book in the database')
-                const emoji = args[1];
-                profiles.set(`books.${skillName}.emoji`, emoji)
-                return message.channel.send('Succesful')
-                }
-            } else if (command.startsWith('stockin')){ 
-                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
-                finalMessage = "What book?? lbstockin|bookname or lbstockin|bookname.level2"
-                
-                const books = command.split('|') 
-                for(i = 1; i < books.length; i++){
-                    finalMessage = ""
-                    if(profiles.has(`books.${books[i]}`)) {
-                        if(books[i].includes('.')){
-                            const bookName = books[i].split('.')
-                            bookname = bookName[0].replace('_', ' ')
-                            bookname = bookname.split(' ')
-                            for (var j = 0; j < bookname.length; j++) {
-                                bookname[j] = bookname[j].charAt(0).toUpperCase() + bookname[j].slice(1); 
-                            }
-                            bookname = bookname.join(' ')
-                            profiles.set(`profiles.${books[i]}`,'✅') 
-                            message.channel.send(`Okay the book **${bookname}** **${bookName[1].match('level')} ${bookName[1].charAt(5)}** has been stocked`)
-                        } else {
-                            bookLevels = Object.keys(profiles.get(`books.${books[i]}`))
-                            for(var j=0; j<bookLevels.length;j++){
-                                curbook = `books.${books[i]}.${bookLevels[j]}`
-                                profiles.set(curbook,'✅')
-                            }
-                            message.channel.send(`Okay the book **${books[i]}** has been stocked`)
-                        }
-                    } else {
-                        await message.channel.send(`the book **${books[i]}** is not found in database, but I can add this into database, should I add this unknown book into database?\n\n\`answer with yes or no\``)
-                        const filter = m => m.author.id === message.author.id
-                        const skillFilter = m =>  m.author.id === message.author.id 
-                        await message.channel.awaitMessages(filter, {time: 60000, max: 1, errors: ['time']})
-                        .then(async collected => {
-                            if (collected.first().content.toLowerCase() === 'yes') {
-                                // console.log(books[i])
-                                await message.channel.send('Alright so you decided to add that book into database, now let\'s talk about the levels \n\n`please insert the levels (min:2,max: 5), examples: 2 or 3 `')
-                                await message.channel.awaitMessages(filter, {time:60000, max:1, errors:['time']})
-                                .then(collector=>{
-                                    let maxLevel = collector.first().content;
-                                    for(var j=2;j<=maxLevel;j++){
-                                        profiles.set(`books.${books[i]}.level${j}`,'✅')
-                                    }
-                                })
-                                await message.channel.send('Alright the book ' + books[i]+ ' has been added into database, next what type is this book? \n\n`Answer with: Warrior, Mage, Archer, Shaman WARNING: IF U CHOSE OTHER THAN THOSE IT WILL ERROR!`')
-                                await message.channel.awaitMessages(filter, {time: 60000, max: 1, errors: ['time']})
-                                .then(collector => {
-                                    let bookType = collector.first().content;//dont lowercase
-        
-                                    profiles.set(`books.${books[i]}.type`, bookType)
-                                })
-                                await message.channel.send('Okie! the book\'s type has been declared, do you need aliases? \n\n`if you need just input the aliases, and if you don\'t just say no`');
-                                await message.channel.awaitMessages(filter, {time: 60000, max: 1})
-                                .then(collects => {
-                                    let alias = collects.first().content;
-                                    profiles.set(`books.aliases.${alias}`, `${books[i]}`)// OH pog idea
-                                    console.log(alias)
-                                    message.channel.send(`The books has been updated in database! you can check it by typing **${prefix}${books[i]}** or **${prefix}${alias}**`)
-                                })
-                                // console.log(books[i])
-                                
-                            } else
-                            if (collected.first().content.toLowerCase() === 'no') {
-                                message.channel.send('Uhhh okay then I will not add the book to the database')
-                            } else {
-                                message.reply('I\'m sorry but that is an invalid answer, please answer with yes or no')
-                            }
-                        })
+            } else if (command === 'checkaliases') {
+                console.log(aliases)
+            } else if (command === 'addalias') {
+                const filter = m => m.author.id === message.author.id;
+                await message.channel.send('Alright what is the skill? \n\n`example: chilling_radiance, temporal_dilation, agonize`')
+                await message.channel.awaitMessages(filter, {time: 60000, max: 1})
+                .then(async collected => {
+                    let skillName = collected.first().content;
+                    if (!profiles.has(`books.${skillName}`)) return message.reply('Umm, I cannot find this this book for entire database, try to add this book into database and try again')
+                    await message.channel.send('Alright, what is the alias name?')
+                    await message.channel.awaitMessages(filter, {time: 60000, max: 1})
+                    .then(collect => {
+                        let aliasName = collect.first().content;
+                        profiles.set(`books.aliases.${aliasName}`, `${skillName}`)
+                        console.log(aliasName)
+                        console.log(skillName)
+                        message.channel.send('Succesfull')
+                    }).catch(() => {
+                        message.reply('Oof looks like you ran out of time, please restart from the beginning')
+                    })
+                }).catch(() => {
+                    message.channel.send(`Oof you ran out of time, please restart from the beginning`)
+                })
+            } else if (command === 'addp') {
+                const filter = m => m.author.id === message.author.id
+                await message.channel.awaitMessages(filter, {time: 60000, max: 1})
+                .then(collected => {
+                    let pictureLog = collected.first();
+                    const Attachment = pictureLog.attachments.first();
+
+                    if (Attachment) {
+                        console.log(Attachment.url)//boon this function will get the image url
                     }
-                }
-                
-                
-            } else {
-                return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
-            }
-            } else if (command === 'addtype') {
-                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
-                    const skillName = args[0]
-                    if (!profiles.has(`books.${skillName}.type`)) return message.reply('Sorry but I cannot find this book in the database')
-                    const type = args[1];
-                    profiles.set(`books.${skillName}.type`, type)
-                    return message.channel.send('Succesful')
-                } else {
-                    return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
-                }
-            } else if (command === 'deletebook') {
-                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
-                    if (!profiles.has(`book.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
-                    profiles.delete(`books.${args}`)
-                    return message.channel.send('Succesful')
-                } else {
-                    return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
-                }
-            }  else if (command === 'addpicture') {
-                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
-                    const skillName = args[0]
-                    if (!profiles.has(`books.${skillName}`)) return message.reply('Sorry but I cannot find this book in the database')
-                    const pic = args[1];
-                    profiles.set(`books.${skillName}.picture`, pic)
-                    return message.channel.send('Succesful')
-                } else {
-                    return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
-                }
-            } else if (command === 'deletedb') {
-                if (message.member.hasPermission('ADMINISTRATOR')) {
-                    profiles.delete('books')
-                } else {
-                    return message.reply('you do not have permission to use this command')
-                }
-            } else if (command === 'checkdb') {
-                console.log(profiles.all())
-                return message.channel.send('Please see the log console!')
+                })
             }
         } 
 
@@ -1045,8 +1044,6 @@ client.on('message', async (message) => {
 })
 client.on('message', (message) => {
     try{
-        
-
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
