@@ -839,9 +839,9 @@ client.on('message', async (message) => {
                 }
             } else if (command === 'deletebook') {
                 if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
-                    if (!profiles.has(`books.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
-                    profiles.delete(`books.${args}`)
-                    return message.channel.send(`SUccesfully deleted **${args}** book`)
+                    if (!profiles.has(`books.${args[0]}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
+                    profiles.delete(`books.${args[0]}`)
+                    return message.channel.send(`SUccesfully deleted **${args[0]}** book`)
                 } else {
                     return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
                 }
