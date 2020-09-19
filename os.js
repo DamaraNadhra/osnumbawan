@@ -629,48 +629,49 @@ client.on('message', async (message) => {
             } else
             if (command === 'restock') {
                 
-
-                const reactionFilter = (reaction, user) => {
-                    return (reaction.emoji.name === '✅' || reaction.emoji.name === '❌') && user.id === message.author.id 
-                }
-        
-                message.channel.send('What skill do you want to restock? \n\n`chillingradiance, temporaldilation, icebolt [all in lower case and no spaces!]`')
-        
-                const filter = (user) => {
-                    return user.author.id === message.author.id
-                }
-                message.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})
-                .then(async collected => {
-                    const skillName = collected.first().content
-                    console.log(skillName)
-        
-                    await message.channel.send("what level? \n\n`example: level1, level2, level3 etc`")
-                    message.channel.awaitMessages(filter, {time: 60000, max: 1, errors: ['time']})
-                    .then(async collects => {
-                        const name = collects.first().content;
-                        console.log(name)
-        
-                        let msr = await message.channel.send('Stocked or not?')
-                        await msr.react('✅')
-                        await msr.react('❌')
-                        msr.awaitReactions(reactionFilter, {time: 60000, max: 1, errors: ['time']})
-                        .then(collector => {
-                            if (collector.first().emoji.name === '✅') {
-                                let stocked = collector.get('✅');
-                                profiles.set(`books.${skillName}.${name}`, ':white_check_mark:')
-                                
-                                return message.channel.send(`Alright **${skillName} ${name}** has been set to :white_check_mark: `)
-                            } else 
-                            if (collector.first().emoji.name === '❌') {
-                                let notStocked = collector.get('❌')
-                                profiles.set(`books.${skillName}.${name}`, ':x:')
-
-                                return message.channel.send(`Alright **${skillName} ${name}}** has been set yo :x:`)
-                            }
+                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+                    const reactionFilter = (reaction, user) => {
+                        return (reaction.emoji.name === '✅' || reaction.emoji.name === '❌') && user.id === message.author.id 
+                    }
+            
+                    message.channel.send('What skill do you want to restock? \n\n`chillingradiance, temporaldilation, icebolt [all in lower case and no spaces!]`')
+            
+                    const filter = (user) => {
+                        return user.author.id === message.author.id
+                    }
+                    message.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time']})
+                    .then(async collected => {
+                        const skillName = collected.first().content
+                        console.log(skillName)
+            
+                        await message.channel.send("what level? \n\n`example: level1, level2, level3 etc`")
+                        message.channel.awaitMessages(filter, {time: 60000, max: 1, errors: ['time']})
+                        .then(async collects => {
+                            const name = collects.first().content;
+                            console.log(name)
+            
+                            let msr = await message.channel.send('Stocked or not?')
+                            await msr.react('✅')
+                            await msr.react('❌')
+                            msr.awaitReactions(reactionFilter, {time: 60000, max: 1, errors: ['time']})
+                            .then(collector => {
+                                if (collector.first().emoji.name === '✅') {
+                                    let stocked = collector.get('✅');
+                                    profiles.set(`books.${skillName}.${name}`, ':white_check_mark:')
+                                    
+                                    return message.channel.send(`Alright **${skillName} ${name}** has been set to :white_check_mark: `)
+                                } else 
+                                if (collector.first().emoji.name === '❌') {
+                                    let notStocked = collector.get('❌')
+                                    profiles.set(`books.${skillName}.${name}`, ':x:')
+    
+                                    return message.channel.send(`Alright **${skillName} ${name}}** has been set yo :x:`)
+                                }
+                            })
+            
                         })
-        
                     })
-                })
+                }
                 
             } else
             if (command === 'updatelibrary') { 
@@ -688,7 +689,8 @@ client.on('message', async (message) => {
                 message.channel.send('succesfull')
             }  else 
             if (command.startsWith('stockout')){ 
-                finalMessage = "What book???? lbstockout|bookname or lbstockout|bookname.level2"
+                if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
+                    finalMessage = "What book???? lbstockout|bookname or lbstockout|bookname.level2"
                 
                 
                 const books = command.split('|')
@@ -717,6 +719,7 @@ client.on('message', async (message) => {
                 console.log(books[1])
                 
                 return message.channel.send(finalMessage)
+                }
             }else if (command === 'checkbooks') {
                 let desc = profiles.get('books')
                 console.log(desc)
@@ -830,7 +833,7 @@ client.on('message', async (message) => {
                     if (!profiles.has(`books.${skillName}.type`)) return message.reply('Sorry but I cannot find this book in the database')
                     const type = args[1];
                     profiles.set(`books.${skillName}.type`, type)
-                    return message.channel.send('Succesful')
+                    return message.channel.send(`Succesfully changed this **${skillName}** book to **${type}**`)
                 } else {
                     return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
                 }
@@ -838,7 +841,7 @@ client.on('message', async (message) => {
                 if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
                     if (!profiles.has(`book.${args}`)) return message.reply('Hmmmm, seems that book is not exist in the Database!')
                     profiles.delete(`books.${args}`)
-                    return message.channel.send('Succesful')
+                    return message.channel.send(`SUccesfully deleted **${args}** book`)
                 } else {
                     return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
                 }
@@ -1005,7 +1008,8 @@ client.on('message', async (message) => {
             } else if (command === 'checkaliases') {
                 console.log(aliases)
             } else if (command === 'addalias') {
-                const filter = m => m.author.id === message.author.id;
+                if (message.member.roles.cache.has('756468980176388158') || message.member.hasPermission('ADMINISTRATOR')) {
+                    const filter = m => m.author.id === message.author.id;
                 await message.channel.send('Alright what is the skill? \n\n`example: chilling_radiance, temporal_dilation, agonize`')
                 await message.channel.awaitMessages(filter, {time: 60000, max: 1})
                 .then(async collected => {
@@ -1025,18 +1029,10 @@ client.on('message', async (message) => {
                 }).catch(() => {
                     message.channel.send(`Oof you ran out of time, please restart from the beginning`)
                 })
-            } else if (command === 'addp') {
-                const filter = m => m.author.id === message.author.id
-                await message.channel.awaitMessages(filter, {time: 60000, max: 1})
-                .then(collected => {
-                    let pictureLog = collected.first();
-                    const Attachment = pictureLog.attachments.first();
-
-                    if (Attachment) {
-                        console.log(Attachment.url)//boon this function will get the image url
-                    }
-                })
-            }
+                } else {
+                    return message.reply('Oof You don\'t have permission to use this command')
+                }
+            } 
         } 
 
 
