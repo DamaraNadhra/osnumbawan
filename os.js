@@ -1034,6 +1034,9 @@ client.on('message', async (message) => {
                 } else {
                     return message.reply('you do not have permission to use this command')
                 }
+            } else if (command === 'checkdb') {
+                console.log(profiles.all())
+                return message.channel.send('Please see the log console!')
             }
         } 
 
@@ -1046,6 +1049,7 @@ client.on('message', (message) => {
 
         const args = message.content.slice(prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
+
 
         if (command === 'kick'){
             if (message.member.hasPermission('KICK_MEMBERS')) {
