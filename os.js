@@ -1030,8 +1030,14 @@ client.on('message', async (message) => {
         } else {
             return message.reply(`Oof only ${libraryGuardian.name} who can use this command \n\n\`Please ask ${libraryGuardian.name}s to trigger this command\``)
         }
+        } else if (command === 'deletedb') {
+            if (message.member.hasPermission('ADMINISTRATOR')) {
+                profiles.delete('books')
+            } else {
+                return message.reply('you do not have permission to use this command')
+            }
         }
-    }
+    } 
 
 })
 client.on('message', (message) => {
