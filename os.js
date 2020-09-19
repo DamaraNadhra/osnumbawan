@@ -25,7 +25,7 @@ client.giveawayManager = new GiveawaysManager(client, {
 });
 
 client.on('message', async (message) => {
-    try{
+    
         if (message.channel.type === 'dm') return;
 
         let sazgr = message.guild.members.cache.find(saz => saz.id === '688052882129682499')
@@ -1038,9 +1038,7 @@ client.on('message', async (message) => {
         } 
 
 
-    }catch(err){
-        message.reply(error)
-    }
+    
 })
 client.on('message', (message) => {
     try{
