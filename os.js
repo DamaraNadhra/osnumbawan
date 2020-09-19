@@ -752,6 +752,8 @@ client.on('message', async (message) => {
             if (!stock) return message.channel.send('Please provide me the conditions is it stocked? or not \n\n`Make sure you add :white_check_mark: or :x:`')
             if (!stock === '✅' || !stock === '❌') return message.channel.send('stock must be a emoji ✅ or ❌')
             profiles.set(`profiles.${skillName}.library`, stock)
+            console.log(stock)
+            message.channel.send('succesfull')
         }  else 
         if (command.startsWith('stockout')){ 
             finalMessage = "What book???? lbstockout|bookname or lbstockout|bookname.level2"
