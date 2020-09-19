@@ -931,15 +931,13 @@ client.on('message', async (message) => {
             profiles.set(`books.${skillName}.emoji`, emoji)
             return message.channel.send('Succesful')
             }
-        } else
-        if (command.startsWith('stockin')){ 
+        } else if (command.startsWith('stockin')){ 
             if (message.member.roles.cache.has(`756468980176388158`) || message.member.hasPermission('ADMINISTRATOR')) {
             finalMessage = "What book?? lbstockin|bookname or lbstockin|bookname.level2"
             
             const books = command.split('|') 
             for(i = 1; i < books.length; i++){
                 finalMessage = ""
-                console.log(profiles.get('books'))
                 if(profiles.has(`books.${books[i]}`)){
                     if(books[i].includes('.')){
                         const bookName = books[i].split('.')
